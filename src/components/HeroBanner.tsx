@@ -94,33 +94,43 @@ export function HeroBanner({
     <section aria-label="Главный баннер" className="bg-background">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-16">
         <div className="max-w-xl">
-          <span className="border-border text-muted-foreground inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase">
-            <span className="bg-brand-green size-1.5 rounded-full" aria-hidden="true" />
-            {eyebrow}
-          </span>
-          <h1 className="text-foreground mt-6 text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
-            {title}
-          </h1>
-          <p className="text-muted-foreground mt-5 text-lg leading-relaxed sm:text-xl">
-            {subtitle}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <Reveal>
+            <span className="border-border text-muted-foreground inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase">
+              <span
+                className="bg-brand-green animate-shimmer-pulse size-1.5 rounded-full"
+                aria-hidden="true"
+              />
+              {eyebrow}
+            </span>
+          </Reveal>
+          <Reveal delay={90}>
+            <h1 className="text-foreground mt-6 text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
+              {title}
+            </h1>
+          </Reveal>
+          <Reveal delay={180}>
+            <p className="text-muted-foreground mt-5 text-lg leading-relaxed sm:text-xl">
+              {subtitle}
+            </p>
+          </Reveal>
+          <Reveal delay={270} className="mt-8 flex flex-wrap gap-3">
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-accent text-accent-foreground rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90 sm:text-lg"
+              className="gradient-accent text-accent-foreground rounded-xl px-7 py-4 text-base font-bold shadow-[0_14px_34px_-16px_color-mix(in_oklab,var(--brand-terracotta)_75%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:text-lg"
             >
               Записаться на приём
             </a>
             <a
               href={secondaryHref}
-              className="border-border text-foreground hover:border-foreground rounded-md border px-7 py-4 text-base font-semibold transition-colors sm:text-lg"
+              className="border-border text-foreground hover:border-brand-green hover:text-brand-green rounded-xl border px-7 py-4 text-base font-semibold transition-colors sm:text-lg"
             >
               {secondaryLabel}
             </a>
-          </div>
+          </Reveal>
         </div>
+
 
         <div className="relative">
           <div className="overflow-hidden rounded-lg" ref={emblaRef}>
