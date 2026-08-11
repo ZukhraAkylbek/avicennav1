@@ -17,9 +17,12 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
           >
             <p className="text-foreground text-4xl leading-none font-extrabold tabular-nums sm:text-5xl">
               <CountUp value={stat.value} />
-              {stat.suffix && (
-                <span className="mt-1 block text-lg font-bold sm:text-xl">{stat.suffix}</span>
-              )}
+              {stat.suffix &&
+                (stat.suffix.trim().length <= 2 ? (
+                  <span>{stat.suffix}</span>
+                ) : (
+                  <span className="mt-1 block text-lg font-bold sm:text-xl">{stat.suffix}</span>
+                ))}
             </p>
             <p className="text-muted-foreground mt-2 text-sm font-medium sm:text-base">
               {stat.label}
