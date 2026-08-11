@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
 
@@ -29,6 +30,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
+  id: '/napravleniya/',
+  path: '/napravleniya/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NapravleniyaSlugRoute = NapravleniyaSlugRouteImport.update({
   id: '/napravleniya/$slug',
   path: '/napravleniya/$slug',
@@ -44,12 +50,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
 }
 export interface FileRoutesById {
@@ -58,19 +66,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/napravleniya/$slug' | '/admin/hero'
+  fullPaths:
+    '/' | '/auth' | '/napravleniya/$slug' | '/napravleniya/' | '/admin/hero'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/napravleniya/$slug' | '/admin/hero'
+  to: '/' | '/auth' | '/napravleniya/$slug' | '/napravleniya' | '/admin/hero'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/napravleniya/$slug'
+    | '/napravleniya/'
     | '/_authenticated/admin/hero'
   fileRoutesById: FileRoutesById
 }
@@ -79,6 +90,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
+  NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +114,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/napravleniya/': {
+      id: '/napravleniya/'
+      path: '/napravleniya'
+      fullPath: '/napravleniya/'
+      preLoaderRoute: typeof NapravleniyaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/$slug': {
@@ -137,6 +156,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
+  NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
