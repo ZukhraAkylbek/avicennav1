@@ -39,6 +39,24 @@ export const Route = createFileRoute("/sitemap.xml")({
           console.error(error);
         }
 
+        try {
+          const { listPublishedPages } = await import("@/lib/pages.server");
+          const pages = await listPublishedPages();
+          for (const page of pages) {
+            const entry: SitemapEntry = {
+              path: page.path,
+              changefreq: "monthly",
+              priority: "0.7",
+            };
+            if (page.updated_at) {
+              entry.lastmod = new Date(page.updated_at).toISOString();
+            }
+            entries.push(entry);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+
         const urls = entries.map((e) =>
           [
             `  <url>`,
