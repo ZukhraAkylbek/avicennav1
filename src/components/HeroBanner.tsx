@@ -71,18 +71,18 @@ export function HeroBanner() {
                   {...(index === 0 ? {} : { loading: "lazy" as const })}
                   className="h-full w-full object-cover"
                 />
-                <div className="from-brand-black/70 via-brand-black/25 absolute inset-0 bg-gradient-to-r to-transparent" />
+                <div className="from-brand-black/65 via-brand-black/20 absolute inset-0 bg-gradient-to-r to-transparent" />
                 {(slide.title || slide.subtitle) && (
                   <div className="absolute inset-0 flex items-center">
-                    <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
-                      <div className="max-w-xl">
+                    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+                      <div className="max-w-2xl">
                         {slide.title && (
-                          <h1 className="text-brand-white text-2xl leading-tight font-semibold sm:text-4xl lg:text-5xl">
+                          <h1 className="bg-brand-green-dark text-brand-white inline-block rounded-3xl px-5 py-3 text-3xl leading-tight font-extrabold sm:px-7 sm:py-4 sm:text-5xl lg:text-6xl">
                             {slide.title}
                           </h1>
                         )}
                         {slide.subtitle && (
-                          <p className="text-brand-white/85 mt-2 text-sm sm:mt-4 sm:text-lg">
+                          <p className="text-brand-white mt-3 text-lg font-semibold sm:mt-5 sm:text-2xl">
                             {slide.subtitle}
                           </p>
                         )}
@@ -90,6 +90,7 @@ export function HeroBanner() {
                     </div>
                   </div>
                 )}
+
               </div>
             </div>
           ))}
