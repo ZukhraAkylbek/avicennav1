@@ -25,14 +25,15 @@ export const Route = createFileRoute("/sitemap.xml")({
         try {
           const specialties = await listActiveSpecialties();
           for (const specialty of specialties) {
-            entries.push({
+            const entry: SitemapEntry = {
               path: `/napravleniya/${specialty.slug}`,
-              lastmod: specialty.updated_at
-                ? new Date(specialty.updated_at).toISOString()
-                : undefined,
               changefreq: "monthly",
               priority: "0.8",
-            });
+            };
+            if (specialty.updated_at) {
+              entry.lastmod = new Date(specialty.updated_at).toISOString();
+            }
+            entries.push(entry);
           }
         } catch (error) {
           console.error(error);

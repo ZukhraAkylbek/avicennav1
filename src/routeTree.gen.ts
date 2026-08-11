@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
@@ -28,6 +29,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -49,6 +55,7 @@ const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
@@ -56,6 +63,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
@@ -65,6 +73,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
@@ -72,14 +81,26 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/napravleniya/$slug' | '/napravleniya/' | '/admin/hero'
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/napravleniya/$slug'
+    | '/napravleniya/'
+    | '/admin/hero'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/napravleniya/$slug' | '/napravleniya' | '/admin/hero'
+  to:
+    | '/'
+    | '/auth'
+    | '/sitemap.xml'
+    | '/napravleniya/$slug'
+    | '/napravleniya'
+    | '/admin/hero'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/sitemap.xml'
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/_authenticated/admin/hero'
@@ -89,6 +110,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
@@ -114,6 +136,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -155,6 +184,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
