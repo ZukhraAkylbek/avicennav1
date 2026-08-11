@@ -36,32 +36,50 @@ function SpecialtiesPage() {
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <h1 className="text-brand-green-dark text-4xl font-extrabold sm:text-5xl">
-          Направления клиники «Авиценна»
-        </h1>
-        <p className="text-muted-foreground mt-4 max-w-3xl text-xl">
-          Выберите направление, чтобы узнать о врачах, диагностике и записаться на приём.
-        </p>
+      <main>
+        <section className="border-border border-b">
+          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+            <p className="eyebrow">Направления</p>
+            <h1 className="text-foreground mt-3 max-w-3xl text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-6xl">
+              Направления клиники «Авиценна»
+            </h1>
+            <p className="text-muted-foreground mt-5 max-w-2xl text-lg sm:text-xl">
+              Выберите направление, чтобы узнать о врачах, диагностике и записаться на приём.
+            </p>
+          </div>
+        </section>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {specialties.map((item) => (
-            <Link
-              key={item.slug}
-              to="/napravleniya/$slug"
-              params={{ slug: item.slug }}
-              className={`${item.tile_color} group flex flex-col gap-3 rounded-3xl p-6 transition-transform hover:-translate-y-1`}
-            >
-              <span className="bg-brand-green-dark text-brand-white inline-flex w-fit items-center gap-2 rounded-2xl px-5 py-3 text-xl font-bold sm:text-2xl">
-                {item.name}
-                <ChevronRight className="size-6" aria-hidden="true" />
-              </span>
-              <span className="text-brand-green-dark/90 text-lg">{item.h1_title}</span>
-            </Link>
-          ))}
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+          <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-3">
+            {specialties.map((item, index) => (
+              <Link
+                key={item.slug}
+                to="/napravleniya/$slug"
+                params={{ slug: item.slug }}
+                className="group border-border hover:bg-surface-soft flex flex-col gap-6 border p-6 transition-colors sm:p-7"
+              >
+                <span className="text-muted-foreground text-xs font-semibold">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>
+                  <span className="text-foreground group-hover:text-brand-green block text-xl font-bold transition-colors sm:text-2xl">
+                    {item.name}
+                  </span>
+                  <span className="text-muted-foreground mt-2 block text-base">
+                    {item.h1_title}
+                  </span>
+                  <span className="text-brand-green mt-4 inline-flex items-center gap-1 text-sm font-semibold">
+                    Подробнее
+                    <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
       <SiteFooter />
     </div>
   );
 }
+
