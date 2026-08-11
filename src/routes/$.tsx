@@ -11,7 +11,7 @@ export const Route = createFileRoute("/$")({
     const path = `/${params._splat ?? ""}`.replace(/\/+$/, "") || "/";
     const page = await context.queryClient.ensureQueryData(pageQueryOptions(path));
     if (!page) throw notFound();
-    return { path };
+    return { path, page };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -19,8 +19,24 @@ export const Route = createFileRoute("/$")({
         meta: [{ title: "Страница не найдена" }, { name: "robots", content: "noindex" }],
       };
     }
-    return { links: [{ rel: "canonical", href: absoluteUrl(loaderData.path) || loaderData.path }] };
+    const { page, path } = loaderData;
+    const title = page.meta_title || `${page.title} — Клиника «Авиценна», Бишкек`;
+    const description =
+      page.meta_description ||
+      `${page.h1_title ?? page.title} в клинике «Авиценна» в Бишкеке. Онлайн-запись на приём.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [{ rel: "canonical", href: absoluteUrl(path) || path }],
+    };
   },
+
   errorComponent: () => <PageShell title="Не удалось загрузить страницу" />,
   notFoundComponent: () => <PageShell title="Страница не найдена" />,
   component: CustomPage,
