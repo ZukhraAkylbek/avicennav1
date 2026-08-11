@@ -62,11 +62,24 @@
 
   /* Brand palette */
   --color-brand-green: var(--brand-green);
+  --color-brand-green-dark: var(--brand-green-dark);
+  --color-brand-green-light: var(--brand-green-light);
   --color-brand-terracotta: var(--brand-terracotta);
   --color-brand-black: var(--brand-black);
   --color-brand-white: var(--brand-white);
   --color-brand-gray: var(--brand-gray);
+
+  /* Яркие плитки услуг */
+  --color-tile-mint: var(--tile-mint);
+  --color-tile-peach: var(--tile-peach);
+  --color-tile-cream: var(--tile-cream);
+  --color-tile-sky: var(--tile-sky);
+  --color-tile-pink: var(--tile-pink);
+  --color-tile-sand: var(--tile-sand);
+  --color-tile-lilac: var(--tile-lilac);
+  --color-tile-gray: var(--tile-gray);
 }
+
 
 :root {
   --radius: 0.625rem;
