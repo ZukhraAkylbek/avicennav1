@@ -2,11 +2,27 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchActiveHeroSlides } from "@/lib/hero-slides";
+import photoSurgery from "@/assets/image.webp.asset.json";
+import photoNurse from "@/assets/image.png.asset.json";
+import photoXray from "@/assets/image-2.png.asset.json";
+import { fetchActiveHeroSlides, type HeroSlideWithUrl } from "@/lib/hero-slides";
 import { BOOKING_URL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 const AUTOPLAY_MS = 6000;
+
+/** Фолбэк-слайды из фотографий клиники, если в админке ещё нет слайдов. */
+const FALLBACK_SLIDES: HeroSlideWithUrl[] = [
+  { id: "f1", image_url: photoSurgery.url, title: "Хирургия", subtitle: null },
+  { id: "f2", image_url: photoNurse.url, title: "Наши специалисты", subtitle: null },
+  { id: "f3", image_url: photoXray.url, title: "Диагностика", subtitle: null },
+].map((s) => ({
+  ...s,
+  sort_order: 0,
+  is_active: true,
+  displayUrl: s.image_url,
+}));
+
 
 type HeroBannerProps = {
   eyebrow?: string;
