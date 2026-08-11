@@ -2,6 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
+import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
@@ -27,11 +28,11 @@ export function ServiceTiles() {
 
         <div className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-4">
           {specialties.map((tile, index) => (
+            <Reveal key={tile.slug} delay={(index % 4) * 80}>
             <Link
-              key={tile.slug}
               to="/napravleniya/$slug"
               params={{ slug: tile.slug }}
-              className="group border-border hover:bg-surface-soft flex flex-col justify-between gap-8 border p-6 transition-colors sm:p-7"
+              className="group card-lift border-border hover:border-brand-green hover:bg-surface-green flex h-full flex-col justify-between gap-8 border p-6 sm:p-7"
             >
               <span className="text-muted-foreground text-xs font-semibold">
                 {String(index + 1).padStart(2, "0")}
@@ -51,6 +52,7 @@ export function ServiceTiles() {
                 </span>
               </span>
             </Link>
+            </Reveal>
           ))}
         </div>
       </div>

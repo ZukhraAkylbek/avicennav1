@@ -122,6 +122,9 @@ function AdminHero() {
           </div>
           <div className="flex gap-2">
             <Button variant="outline" asChild>
+              <Link to="/admin/content">Тексты</Link>
+            </Button>
+            <Button variant="outline" asChild>
               <Link to="/">На сайт</Link>
             </Button>
             <Button variant="ghost" onClick={signOut}>

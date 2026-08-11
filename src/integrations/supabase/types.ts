@@ -159,6 +159,27 @@ export type Database = {
           },
         ]
       }
+      site_content: {
+        Row: {
+          image_path: string | null
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          image_path?: string | null
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          image_path?: string | null
+          key?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           body_font: string

@@ -1,19 +1,33 @@
-type Stat = { value: string; label: string };
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
+
+export type Stat = { value: string; suffix?: string; label: string };
 
 export function StatsBand({ stats }: { stats: Stat[] }) {
-  const tones = ["bg-surface-green", "bg-surface-red", "bg-surface-soft"];
+  const tones = ["bg-surface-green", "bg-surface-red", "bg-surface-soft", "bg-surface-green"];
 
   return (
     <section aria-label="Клиника в цифрах" className="border-border border-y">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
-          <div
+          <Reveal
             key={stat.label}
-            className={`${tones[index % tones.length]} border-border px-6 py-8 text-center sm:border-l sm:first:border-l-0`}
+            delay={index * 90}
+            className={`${tones[index % tones.length]} border-border card-lift border-t px-5 py-9 text-center sm:px-6 sm:py-11 lg:border-t-0 lg:border-l lg:first:border-l-0`}
           >
-            <p className="text-foreground text-3xl font-extrabold sm:text-4xl">{stat.value}</p>
-            <p className="text-muted-foreground mt-1 text-sm sm:text-base">{stat.label}</p>
-          </div>
+            <p className="text-foreground text-4xl leading-none font-extrabold tabular-nums sm:text-5xl">
+              <CountUp value={stat.value} />
+              {stat.suffix &&
+                (stat.suffix.trim().length <= 2 ? (
+                  <span>{stat.suffix}</span>
+                ) : (
+                  <span className="mt-1 block text-lg font-bold sm:text-xl">{stat.suffix}</span>
+                ))}
+            </p>
+            <p className="text-muted-foreground mt-2 text-sm font-medium sm:text-base">
+              {stat.label}
+            </p>
+          </Reveal>
         ))}
       </div>
     </section>

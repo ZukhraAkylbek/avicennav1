@@ -174,6 +174,9 @@ function AdminPages() {
               <Link to="/admin/hero">Слайды баннера</Link>
             </Button>
             <Button variant="outline" asChild>
+              <Link to="/admin/content">Тексты и картинки</Link>
+            </Button>
+            <Button variant="outline" asChild>
               <Link to="/">На сайт</Link>
             </Button>
           </div>

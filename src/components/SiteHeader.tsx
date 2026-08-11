@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { BOOKING_URL } from "@/lib/site-config";
 import { CLINIC } from "@/lib/clinic";
+import { useSiteContent } from "@/lib/site-content";
 
 const NAV = [
   { label: "Направления", to: "/napravleniya" as const },
@@ -17,10 +18,13 @@ const NAV_ANCHORS = [
   { label: "О нас", href: "/#faq" },
 ];
 
-const phoneHuman = "+996 779 909 009";
+
 
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
+  const { t } = useSiteContent();
+  const phoneHuman = t("header.phone");
+  const ctaLabel = t("header.cta");
 
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
@@ -77,9 +81,9 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-accent text-accent-foreground hidden rounded-md px-5 py-2.5 text-[15px] font-semibold transition-opacity hover:opacity-90 sm:inline-flex"
+            className="gradient-accent text-accent-foreground hidden rounded-xl px-5 py-2.5 text-[15px] font-bold transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:inline-flex"
           >
-            Записаться
+            {ctaLabel}
           </a>
           <button
             type="button"
@@ -126,9 +130,9 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-accent text-accent-foreground rounded-md px-5 py-3 text-base font-semibold"
+                className="gradient-accent text-accent-foreground rounded-xl px-5 py-3 text-base font-bold"
               >
-                Записаться
+                {ctaLabel}
               </a>
             </div>
           </nav>

@@ -12,6 +12,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StatsBand } from "@/components/StatsBand";
 import { WhyUs } from "@/components/WhyUs";
 import { absoluteUrl, medicalClinicJsonLd } from "@/lib/clinic";
+import { useSiteContent } from "@/lib/site-content";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 const TITLE = "Авиценна — сеть многопрофильных клиник в Бишкеке";
@@ -48,25 +49,27 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { t } = useSiteContent();
+
   return (
     <div className="bg-background min-h-screen">
       <SiteHeader />
       <main>
         <HeroBanner
-          title="Медицинская помощь, которой можно доверять"
-          subtitle="Сеть многопрофильных клиник «Авиценна» в Бишкеке: приём специалистов, диагностика, хирургия, травмпункт и стационар — круглосуточно."
-          eyebrow="Клиники «Авиценна» · Бишкек"
-          statValue="15+ лет"
-          statLabel="заботимся о здоровье пациентов"
+          title={t("hero.title")}
+          subtitle={t("hero.subtitle")}
+          eyebrow={t("hero.eyebrow")}
+          statValue={t("hero.stat_value")}
+          statLabel={t("hero.stat_label")}
           secondaryLabel="Все направления"
           secondaryHref="#napravleniya"
         />
         <StatsBand
-          stats={[
-            { value: "9 направлений", label: "от терапии до хирургии" },
-            { value: "24/7", label: "травмпункт и стационар" },
-            { value: "2 филиала", label: "в Бишкеке" },
-          ]}
+          stats={[1, 2, 3, 4].map((n) => ({
+            value: t(`stats.${n}_value`),
+            suffix: t(`stats.${n}_suffix`),
+            label: t(`stats.${n}_label`),
+          }))}
         />
         <QuickAccess />
         <ServiceTiles />
