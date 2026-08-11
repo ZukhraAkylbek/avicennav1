@@ -2,8 +2,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ChevronRight, Phone } from "lucide-react";
 
+import { ConsultCta } from "@/components/ConsultCta";
+import { FaqAccordion } from "@/components/FaqAccordion";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WhyUs } from "@/components/WhyUs";
 import { CLINIC, absoluteUrl, faqPageJsonLd, physicianJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { specialtyQueryOptions } from "@/lib/specialties.queries";
@@ -90,13 +95,13 @@ export const Route = createFileRoute("/napravleniya/$slug")({
     <div className="bg-background min-h-screen">
       <SiteHeader />
       <main className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <h1 className="text-brand-green-dark text-4xl font-extrabold">Направление не найдено</h1>
+        <h1 className="text-foreground text-4xl font-extrabold">Направление не найдено</h1>
         <p className="text-muted-foreground mt-4 text-lg">
           Возможно, страница переехала. Посмотрите все направления клиники.
         </p>
         <Link
           to="/napravleniya"
-          className="bg-brand-terracotta text-brand-white mt-8 inline-flex rounded-full px-8 py-4 text-lg font-bold"
+          className="bg-accent text-accent-foreground mt-8 inline-flex rounded-md px-7 py-4 text-base font-semibold"
         >
           Все направления
         </Link>
@@ -115,83 +120,106 @@ function SpecialtyPage() {
     <div className="bg-background min-h-screen">
       <SiteHeader />
       <main>
-        <section className="bg-tile-mint py-10 sm:py-14">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <nav aria-label="Хлебные крошки" className="text-brand-green-dark/80 text-base">
-              <Link to="/" className="hover:underline">
-                Главная
-              </Link>
-              <span className="mx-2">/</span>
-              <Link to="/napravleniya" className="hover:underline">
-                Направления
-              </Link>
-            </nav>
-            <h1 className="text-brand-green-dark mt-4 text-4xl font-extrabold sm:text-5xl lg:text-6xl">
-              {data.h1_title}
-            </h1>
-            {data.intro && (
-              <p className="text-brand-green-dark/90 mt-5 max-w-3xl text-xl sm:text-2xl">
-                {data.intro}
-              </p>
-            )}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href={BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-brand-terracotta text-brand-white rounded-full px-8 py-4 text-lg font-bold sm:text-xl"
-              >
-                Записаться онлайн
-              </a>
-              <a
-                href={`tel:${CLINIC.phones[0]}`}
-                className="bg-brand-green-dark text-brand-white inline-flex items-center gap-2 rounded-full px-8 py-4 text-lg font-bold"
-              >
-                <Phone className="size-5" aria-hidden="true" />
-                {CLINIC.phones[0]}
-              </a>
+        <section className="border-border border-b">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.3fr_1fr] lg:py-16">
+            <div>
+              <nav aria-label="Хлебные крошки" className="text-muted-foreground text-sm">
+                <Link to="/" className="hover:text-foreground">
+                  Главная
+                </Link>
+                <span className="mx-2">/</span>
+                <Link to="/napravleniya" className="hover:text-foreground">
+                  Направления
+                </Link>
+                <span className="mx-2">/</span>
+                <span className="text-foreground">{data.name}</span>
+              </nav>
+              <h1 className="text-foreground mt-5 text-4xl leading-[1.08] font-extrabold sm:text-5xl lg:text-6xl">
+                {data.h1_title}
+              </h1>
+              {data.intro && (
+                <p className="text-muted-foreground mt-5 max-w-2xl text-lg leading-relaxed sm:text-xl">
+                  {data.intro}
+                </p>
+              )}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-accent text-accent-foreground rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90"
+                >
+                  Записаться на приём
+                </a>
+                <a
+                  href={`tel:${CLINIC.phones[0]}`}
+                  className="border-border text-foreground hover:border-foreground inline-flex items-center gap-2 rounded-md border px-7 py-4 text-base font-semibold transition-colors"
+                >
+                  <Phone className="size-4" aria-hidden="true" />
+                  +996 779 909 009
+                </a>
+              </div>
             </div>
+
+            <dl className="border-border grid content-start gap-px self-start border sm:grid-cols-2 lg:grid-cols-1">
+              {[
+                { term: "Врачей направления", value: String(data.doctors.length || "—") },
+                { term: "Приём", value: "По записи, без очереди" },
+                { term: "Филиалы", value: "2 в Бишкеке" },
+              ].map((item) => (
+                <div key={item.term} className="border-border border p-5">
+                  <dt className="text-muted-foreground text-xs font-semibold tracking-[0.12em] uppercase">
+                    {item.term}
+                  </dt>
+                  <dd className="text-foreground mt-2 text-lg font-bold">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
         {data.body && (
-          <section className="py-10 sm:py-14">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6">
-              <h2 className="text-brand-green-dark text-3xl font-extrabold sm:text-4xl">
-                Что мы делаем
+          <section className="border-border border-b py-14 sm:py-20">
+            <div className="mx-auto max-w-3xl px-4 sm:px-6">
+              <p className="eyebrow">О направлении</p>
+              <h2 className="text-foreground mt-3 text-3xl font-extrabold sm:text-4xl">
+                Что мы лечим
               </h2>
-              <p className="text-foreground mt-4 text-lg leading-relaxed sm:text-xl">{data.body}</p>
+              <p className="text-muted-foreground mt-5 text-lg leading-relaxed">{data.body}</p>
             </div>
           </section>
         )}
 
         {data.doctors.length > 0 && (
-          <section className="bg-tile-sky/40 py-10 sm:py-14">
+          <section className="border-border border-b py-14 sm:py-20">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">
-              <h2 className="text-brand-green-dark text-3xl font-extrabold sm:text-4xl">Врачи</h2>
-              <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <SectionHeading eyebrow="Специалисты" title="Врачи направления" />
+              <div className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-3">
                 {data.doctors.map((doctor) => (
                   <article
                     key={doctor.slug}
-                    className="bg-background rounded-3xl p-6 shadow-sm"
+                    className="border-border hover:bg-surface-soft border p-6 transition-colors"
                     itemScope
                     itemType="https://schema.org/Physician"
                   >
-                    <h3 className="text-brand-green-dark text-2xl font-bold" itemProp="name">
+                    <h3 className="text-foreground text-xl font-bold" itemProp="name">
                       {doctor.full_name}
                     </h3>
                     {doctor.job_title && (
-                      <p className="text-muted-foreground mt-1 text-lg" itemProp="jobTitle">
+                      <p className="text-brand-green mt-1 text-sm font-semibold" itemProp="jobTitle">
                         {doctor.job_title}
                       </p>
                     )}
                     {doctor.experience_years != null && (
-                      <p className="text-foreground mt-2 text-base">
+                      <p className="text-muted-foreground mt-3 text-sm">
                         Стаж: {doctor.experience_years} лет
                       </p>
                     )}
                     {doctor.bio && (
-                      <p className="text-foreground mt-3 text-base" itemProp="description">
+                      <p
+                        className="text-muted-foreground mt-3 text-base leading-relaxed"
+                        itemProp="description"
+                      >
                         {doctor.bio}
                       </p>
                     )}
@@ -202,34 +230,19 @@ function SpecialtyPage() {
           </section>
         )}
 
-        {data.faqs.length > 0 && (
-          <section className="py-10 sm:py-14">
-            <div className="mx-auto max-w-4xl px-4 sm:px-6">
-              <h2 className="text-brand-green-dark text-3xl font-extrabold sm:text-4xl">
-                Частые вопросы
-              </h2>
-              <dl className="mt-8 space-y-5">
-                {data.faqs.map((faq) => (
-                  <div key={faq.question} className="bg-tile-cream rounded-3xl p-6">
-                    <dt className="text-brand-green-dark text-xl font-bold sm:text-2xl">
-                      {faq.question}
-                    </dt>
-                    <dd className="text-foreground mt-3 text-lg">{faq.answer}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </section>
-        )}
+        <ProcessSteps title={`Как проходит приём: ${data.name.toLowerCase()}`} />
+        <WhyUs />
+        <FaqAccordion faqs={data.faqs} />
+        <ConsultCta defaultSlug={slug} />
 
-        <section className="pb-14">
+        <section className="border-border border-t py-10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <Link
               to="/napravleniya"
-              className="text-brand-green-dark inline-flex items-center gap-2 text-xl font-bold hover:underline"
+              className="text-foreground hover:text-brand-green inline-flex items-center gap-2 text-lg font-bold"
             >
               Все направления
-              <ChevronRight className="size-6" aria-hidden="true" />
+              <ChevronRight className="size-5" aria-hidden="true" />
             </Link>
           </div>
         </section>
@@ -238,3 +251,4 @@ function SpecialtyPage() {
     </div>
   );
 }
+

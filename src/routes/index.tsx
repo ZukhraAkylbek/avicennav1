@@ -1,11 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { ConsultCta } from "@/components/ConsultCta";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { HeroBanner } from "@/components/HeroBanner";
+import { ProcessSteps } from "@/components/ProcessSteps";
 import { QuickAccess } from "@/components/QuickAccess";
 import { QuickLinksAndBranches } from "@/components/QuickLinksAndBranches";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { StatsBand } from "@/components/StatsBand";
+import { WhyUs } from "@/components/WhyUs";
 import { absoluteUrl, medicalClinicJsonLd } from "@/lib/clinic";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
@@ -47,10 +52,29 @@ function Index() {
     <div className="bg-background min-h-screen">
       <SiteHeader />
       <main>
-        <HeroBanner />
+        <HeroBanner
+          title="Медицинская помощь, которой можно доверять"
+          subtitle="Сеть многопрофильных клиник «Авиценна» в Бишкеке: приём специалистов, диагностика, хирургия, травмпункт и стационар — круглосуточно."
+          eyebrow="Клиники «Авиценна» · Бишкек"
+          statValue="15+ лет"
+          statLabel="заботимся о здоровье пациентов"
+          secondaryLabel="Все направления"
+          secondaryHref="#napravleniya"
+        />
+        <StatsBand
+          stats={[
+            { value: "9 направлений", label: "от терапии до хирургии" },
+            { value: "24/7", label: "травмпункт и стационар" },
+            { value: "2 филиала", label: "в Бишкеке" },
+          ]}
+        />
         <QuickAccess />
         <ServiceTiles />
+        <WhyUs />
+        <ProcessSteps />
         <QuickLinksAndBranches />
+        <FaqAccordion />
+        <ConsultCta />
       </main>
       <SiteFooter />
     </div>

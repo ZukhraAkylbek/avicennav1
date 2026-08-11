@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowUpRight } from "lucide-react";
 
 import { fetchActiveHeroSlides } from "@/lib/hero-slides";
 import { BOOKING_URL } from "@/lib/site-config";
@@ -9,7 +8,25 @@ import { cn } from "@/lib/utils";
 
 const AUTOPLAY_MS = 6000;
 
-export function HeroBanner() {
+type HeroBannerProps = {
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  statValue?: string;
+  statLabel?: string;
+};
+
+export function HeroBanner({
+  eyebrow = "Клиника «Авиценна», Бишкек",
+  title,
+  subtitle,
+  secondaryLabel = "Выбрать направление",
+  secondaryHref = "/napravleniya",
+  statValue = "15+",
+  statLabel = "лет медицинской практики",
+}: HeroBannerProps) {
   const { data: slides } = useQuery({
     queryKey: ["hero-slides", "active"],
     queryFn: fetchActiveHeroSlides,
@@ -34,7 +51,6 @@ export function HeroBanner() {
     };
   }, [emblaApi, onSelect]);
 
-  // Автопрокрутка (останавливается при взаимодействии с указателем)
   useEffect(() => {
     if (!emblaApi || count < 2) return;
     let paused = false;
@@ -57,85 +73,85 @@ export function HeroBanner() {
   }, [emblaApi, count]);
 
   return (
-    <section aria-label="Главный баннер" className="relative bg-muted">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y">
-          {(slides ?? []).map((slide, index) => (
-            <div key={slide.id} className="relative min-w-0 flex-[0_0_100%]">
-              <div className="relative h-[260px] w-full sm:h-[380px] lg:h-[520px]">
-                <img
-                  src={slide.displayUrl}
-                  alt={slide.title ?? "Слайд баннера"}
-                  width={1920}
-                  height={1088}
-                  {...(index === 0 ? {} : { loading: "lazy" as const })}
-                  className="h-full w-full object-cover"
-                />
-                <div className="from-brand-black/65 via-brand-black/20 absolute inset-0 bg-gradient-to-r to-transparent" />
-                {(slide.title || slide.subtitle) && (
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-                      <div className="max-w-2xl">
-                        {slide.title && (
-                          <h1 className="text-brand-white text-3xl leading-tight font-extrabold drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] sm:text-5xl lg:text-6xl">
-                            {slide.title}
-                          </h1>
-                        )}
-                        {slide.subtitle && (
-                          <p className="text-brand-white mt-3 text-lg font-semibold sm:mt-5 sm:text-2xl">
-                            {slide.subtitle}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
+    <section aria-label="Главный баннер" className="bg-background">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-16">
+        <div className="max-w-xl">
+          <span className="border-border text-muted-foreground inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] font-bold tracking-[0.14em] uppercase">
+            <span className="bg-brand-green size-1.5 rounded-full" aria-hidden="true" />
+            {eyebrow}
+          </span>
+          <h1 className="text-foreground mt-6 text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
+            {title}
+          </h1>
+          <p className="text-muted-foreground mt-5 text-lg leading-relaxed sm:text-xl">
+            {subtitle}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-accent text-accent-foreground rounded-md px-7 py-4 text-base font-semibold transition-opacity hover:opacity-90 sm:text-lg"
+            >
+              Записаться на приём
+            </a>
+            <a
+              href={secondaryHref}
+              className="border-border text-foreground hover:border-foreground rounded-md border px-7 py-4 text-base font-semibold transition-colors sm:text-lg"
+            >
+              {secondaryLabel}
+            </a>
+          </div>
+        </div>
 
-              </div>
+        <div className="relative">
+          <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+            <div className="flex touch-pan-y">
+              {(slides ?? []).map((slide, index) => (
+                <div key={slide.id} className="relative min-w-0 flex-[0_0_100%]">
+                  <img
+                    src={slide.displayUrl}
+                    alt={slide.title ?? "Клиника «Авиценна»"}
+                    width={1200}
+                    height={900}
+                    {...(index === 0 ? {} : { loading: "lazy" as const })}
+                    className="h-[280px] w-full object-cover sm:h-[420px] lg:h-[520px]"
+                  />
+                </div>
+              ))}
+              {count === 0 && (
+                <div className="bg-surface-soft h-[280px] min-w-0 flex-[0_0_100%] sm:h-[420px] lg:h-[520px]" />
+              )}
             </div>
-          ))}
-          {count === 0 && (
-            <div className="min-w-0 flex-[0_0_100%]">
-              <div className="h-[260px] w-full sm:h-[380px] lg:h-[520px]" />
+          </div>
+
+          <div className="bg-background border-border absolute bottom-4 left-4 max-w-[70%] rounded-lg border p-4 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.4)] sm:bottom-6 sm:left-6 sm:p-5">
+            <p className="text-foreground text-2xl font-extrabold sm:text-3xl">{statValue}</p>
+            <p className="text-muted-foreground mt-0.5 text-sm">{statLabel}</p>
+          </div>
+
+          {count > 1 && (
+            <div className="absolute right-4 bottom-4 flex gap-2 sm:right-6 sm:bottom-6">
+              {(slides ?? []).map((slide, index) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Слайд ${index + 1}`}
+                  aria-current={index === selected}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                  className={cn(
+                    "rounded-full transition-all duration-200",
+                    "size-3.5 sm:size-2.5",
+                    index === selected
+                      ? "bg-brand-white w-8 sm:w-6"
+                      : "bg-brand-white/60 hover:bg-brand-white",
+                  )}
+                />
+              ))}
             </div>
           )}
         </div>
       </div>
-
-      {/* CTA поверх слайдера */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-14 flex justify-center sm:bottom-16 lg:inset-x-auto lg:right-10 lg:bottom-20 lg:justify-end">
-        <a
-          href={BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-brand-terracotta text-brand-white pointer-events-auto inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold tracking-wide uppercase shadow-[0_12px_30px_-10px_rgba(0,0,0,0.55)] transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-105 focus-visible:ring-4 focus-visible:ring-white/70 focus-visible:outline-none sm:px-9 sm:py-5 sm:text-lg"
-        >
-          Записаться онлайн
-          <ArrowUpRight className="size-5" aria-hidden="true" />
-        </a>
-      </div>
-
-      {/* Точки-индикаторы */}
-      {count > 1 && (
-        <div className="absolute inset-x-0 bottom-4 flex justify-center gap-3 sm:bottom-5">
-          {(slides ?? []).map((slide, index) => (
-            <button
-              key={slide.id}
-              type="button"
-              aria-label={`Слайд ${index + 1}`}
-              aria-current={index === selected}
-              onClick={() => emblaApi?.scrollTo(index)}
-              className={cn(
-                "rounded-full transition-all duration-200",
-                "size-4 sm:size-3",
-                index === selected
-                  ? "bg-brand-white w-10 sm:w-8"
-                  : "bg-brand-white/50 hover:bg-brand-white/80",
-              )}
-            />
-          ))}
-        </div>
-      )}
     </section>
   );
 }

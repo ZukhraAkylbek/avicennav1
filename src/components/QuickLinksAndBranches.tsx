@@ -1,46 +1,41 @@
-import { ArrowRight } from "lucide-react";
-
-const LINKS = [
-  { label: "Специалисты", bg: "bg-tile-mint" },
-  { label: "Диагностика", bg: "bg-tile-sky" },
-  { label: "Анализы", bg: "bg-tile-cream" },
-  { label: "Заболевания", bg: "bg-tile-peach" },
-  { label: "Симптомы", bg: "bg-tile-lilac" },
-  { label: "Цены", bg: "bg-tile-sand" },
-];
+import { SectionHeading } from "@/components/SectionHeading";
+import { CLINIC } from "@/lib/clinic";
 
 export function QuickLinksAndBranches() {
   return (
-    <section id="patients" className="bg-background py-10 sm:py-14">
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-2">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {LINKS.map((link) => (
-            <a
-              key={link.label}
-              href="#services"
-              className={`${link.bg} group flex items-center justify-between gap-3 rounded-3xl p-6`}
-            >
-              <span className="text-brand-green-dark text-2xl font-extrabold">
-                {link.label}
-              </span>
-              <span className="bg-brand-green text-brand-white flex size-11 items-center justify-center rounded-full transition-transform group-hover:translate-x-1">
-                <ArrowRight className="size-5" aria-hidden="true" />
-              </span>
-            </a>
-          ))}
-        </div>
+    <section id="filialy" className="border-border border-t py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <SectionHeading
+          eyebrow="Филиалы"
+          title="Найти клинику рядом"
+          description="Приём в двух филиалах Бишкека. Травмпункт и стационар работают круглосуточно."
+        />
 
-        <div id="contacts" className="relative overflow-hidden rounded-3xl">
-          <iframe
-            title="Филиалы клиники Авиценна в Бишкеке"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=74.52%2C42.80%2C74.68%2C42.90&amp;layer=mapnik"
-            loading="lazy"
-            className="h-[320px] w-full border-0 sm:h-full sm:min-h-[420px]"
-          />
-          <div className="absolute top-5 left-5">
-            <span className="bg-brand-green-dark text-brand-white rounded-2xl px-6 py-4 text-2xl font-extrabold">
-              Найти филиал
-            </span>
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+          <ul className="space-y-4">
+            {CLINIC.branches.map((branch) => (
+              <li key={branch.name} className="border-border rounded-lg border p-6">
+                <p className="text-foreground text-lg font-bold">{branch.name}</p>
+                <p className="text-muted-foreground mt-1 text-base">
+                  {branch.city}, {branch.street}
+                </p>
+                <a
+                  href={`tel:${CLINIC.phones[0]}`}
+                  className="text-brand-green mt-3 inline-block text-base font-semibold"
+                >
+                  +996 779 909 009
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="border-border overflow-hidden rounded-lg border">
+            <iframe
+              title="Филиалы клиники «Авиценна» в Бишкеке"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=74.52%2C42.80%2C74.68%2C42.90&amp;layer=mapnik"
+              loading="lazy"
+              className="h-[300px] w-full border-0 lg:h-full lg:min-h-[380px]"
+            />
           </div>
         </div>
       </div>

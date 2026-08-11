@@ -1,37 +1,55 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
+import { SectionHeading } from "@/components/SectionHeading";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
 export function ServiceTiles() {
   const { data: specialties } = useSuspenseQuery(specialtiesQueryOptions());
 
   return (
-    <section id="services" className="bg-background py-10 sm:py-14">
+    <section id="napravleniya" className="border-border border-t py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-brand-green-dark text-3xl font-extrabold sm:text-4xl">
-          Сеть многопрофильных клиник «Авиценна»
-        </h2>
-        <p className="text-muted-foreground mt-3 max-w-2xl text-lg sm:text-xl">
-          Полный цикл помощи: от приёма терапевта до операций и стационара.
-        </p>
+        <SectionHeading
+          eyebrow="Направления"
+          title="Медицинские направления клиники"
+          description="Полный цикл помощи: от приёма терапевта до операций и стационара — в сети клиник «Авиценна»."
+          action={
+            <Link
+              to="/napravleniya"
+              className="text-foreground hover:text-brand-green text-base font-semibold whitespace-nowrap"
+            >
+              Все направления →
+            </Link>
+          }
+        />
 
-        <div className="mt-8 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-          {specialties.map((tile) => (
+        <div className="mt-10 grid gap-px sm:grid-cols-2 lg:grid-cols-4">
+          {specialties.map((tile, index) => (
             <Link
               key={tile.slug}
               to="/napravleniya/$slug"
               params={{ slug: tile.slug }}
-              className="group border-border flex items-center justify-between gap-3 border-b py-4 transition-colors hover:border-brand-green"
+              className="group border-border hover:bg-surface-soft flex flex-col justify-between gap-8 border p-6 transition-colors sm:p-7"
             >
-              <span className="text-foreground group-hover:text-brand-green-dark text-xl font-bold sm:text-2xl">
-                {tile.name}
+              <span className="text-muted-foreground text-xs font-semibold">
+                {String(index + 1).padStart(2, "0")}
               </span>
-              <ChevronRight
-                className="text-brand-green size-7 shrink-0 transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              />
+              <span>
+                <span className="text-foreground group-hover:text-brand-green block text-xl font-bold transition-colors sm:text-2xl">
+                  {tile.name}
+                </span>
+                {tile.intro && (
+                  <span className="text-muted-foreground mt-2 line-clamp-2 block text-sm">
+                    {tile.intro}
+                  </span>
+                )}
+                <span className="text-brand-green mt-4 inline-flex items-center gap-1 text-sm font-semibold">
+                  Подробнее
+                  <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </span>
             </Link>
           ))}
         </div>
