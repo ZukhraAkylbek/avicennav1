@@ -2,11 +2,27 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchActiveHeroSlides } from "@/lib/hero-slides";
+import photoSurgery from "@/assets/image.webp.asset.json";
+import photoNurse from "@/assets/image.png.asset.json";
+import photoXray from "@/assets/image-2.png.asset.json";
+import { fetchActiveHeroSlides, type HeroSlideWithUrl } from "@/lib/hero-slides";
 import { BOOKING_URL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 const AUTOPLAY_MS = 6000;
+
+/** Фолбэк-слайды из фотографий клиники, если в админке ещё нет слайдов. */
+const FALLBACK_SLIDES: HeroSlideWithUrl[] = [
+  { id: "f1", image_url: photoSurgery.url, title: "Хирургия", subtitle: null },
+  { id: "f2", image_url: photoNurse.url, title: "Наши специалисты", subtitle: null },
+  { id: "f3", image_url: photoXray.url, title: "Диагностика", subtitle: null },
+].map((s) => ({
+  ...s,
+  sort_order: 0,
+  is_active: true,
+  displayUrl: s.image_url,
+}));
+
 
 type HeroBannerProps = {
   eyebrow?: string;
@@ -27,14 +43,16 @@ export function HeroBanner({
   statValue = "15+",
   statLabel = "лет медицинской практики",
 }: HeroBannerProps) {
-  const { data: slides } = useQuery({
+  const { data } = useQuery({
     queryKey: ["hero-slides", "active"],
     queryFn: fetchActiveHeroSlides,
   });
+  const slides = data && data.length > 0 ? data : FALLBACK_SLIDES;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
-  const count = slides?.length ?? 0;
+  const count = slides.length;
+
 
   const onSelect = useCallback(() => {
     if (emblaApi) setSelected(emblaApi.selectedScrollSnap());
@@ -107,7 +125,7 @@ export function HeroBanner({
         <div className="relative">
           <div className="overflow-hidden rounded-lg" ref={emblaRef}>
             <div className="flex touch-pan-y">
-              {(slides ?? []).map((slide, index) => (
+              {slides.map((slide, index) => (
                 <div key={slide.id} className="relative min-w-0 flex-[0_0_100%]">
                   <img
                     src={slide.displayUrl}
@@ -132,7 +150,7 @@ export function HeroBanner({
 
           {count > 1 && (
             <div className="absolute right-4 bottom-4 flex gap-2 sm:right-6 sm:bottom-6">
-              {(slides ?? []).map((slide, index) => (
+              {slides.map((slide, index) => (
                 <button
                   key={slide.id}
                   type="button"

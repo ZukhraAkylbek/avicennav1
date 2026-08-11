@@ -63,7 +63,9 @@
   /* Typography */
   --font-sans:
     "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Montserrat", "Futura", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
+
 
   /* Brand palette */
   --color-brand-green: var(--brand-green);
@@ -85,19 +87,20 @@
 :root {
   --radius: 0.625rem;
 
-  /* Brand palette */
-  --brand-green: oklch(0.579 0.152 150.817);
-  --brand-green-dark: oklch(0.38 0.11 152);
-  --brand-green-light: oklch(0.72 0.16 152);
-  --brand-terracotta: oklch(0.592 0.142 27.948);
+  /* Brand palette — ярче, ближе к СМ-Клинике */
+  --brand-green: oklch(0.63 0.168 152);
+  --brand-green-dark: oklch(0.45 0.13 152);
+  --brand-green-light: oklch(0.78 0.16 152);
+  --brand-terracotta: oklch(0.65 0.17 32);
   --brand-black: oklch(0 0 0);
   --brand-white: oklch(1 0 0);
   --brand-gray: oklch(0.551 0.023 264.366);
 
   /* Мягкие фоны секций */
-  --surface-soft: oklch(0.975 0.002 250);
-  --surface-green: oklch(0.965 0.025 155);
-  --surface-red: oklch(0.965 0.02 25);
+  --surface-soft: oklch(0.968 0.003 250);
+  --surface-green: oklch(0.945 0.05 155);
+  --surface-red: oklch(0.95 0.04 32);
+
 
 
 
@@ -188,8 +191,10 @@
   h2,
   h3 {
     font-family: var(--font-display);
+    font-weight: 800;
     letter-spacing: -0.02em;
   }
+
 }
 
 /* Надзаголовок секции (ОТДЕЛЕНИЯ, ПРЕИМУЩЕСТВА и т.д.) */
