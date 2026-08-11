@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const ADVANTAGES = [
@@ -25,13 +26,13 @@ export function WhyUs({ title }: { title?: string }) {
         />
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {ADVANTAGES.map((item, index) => (
-            <div key={item.title} className="border-border border-t pt-6">
+            <Reveal key={item.title} delay={index * 100} className="border-border border-t pt-6">
               <p className="text-muted-foreground text-sm font-semibold">
                 0{index + 1}
               </p>
               <h3 className="text-foreground mt-3 text-xl font-bold sm:text-2xl">{item.title}</h3>
               <p className="text-muted-foreground mt-3 text-base leading-relaxed">{item.text}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
