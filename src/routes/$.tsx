@@ -1,0 +1,87 @@
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+import { absoluteUrl } from "@/lib/clinic";
+import { pageQueryOptions } from "@/lib/pages.queries";
+
+export const Route = createFileRoute("/$")({
+  loader: async ({ params, context }) => {
+    const path = `/${params._splat ?? ""}`.replace(/\/+$/, "") || "/";
+    const page = await context.queryClient.ensureQueryData(pageQueryOptions(path));
+    if (!page) throw notFound();
+    return { path };
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return {
+        meta: [{ title: "Страница не найдена" }, { name: "robots", content: "noindex" }],
+      };
+    }
+    return { links: [{ rel: "canonical", href: absoluteUrl(loaderData.path) || loaderData.path }] };
+  },
+  errorComponent: () => <PageShell title="Не удалось загрузить страницу" />,
+  notFoundComponent: () => <PageShell title="Страница не найдена" />,
+  component: CustomPage,
+});
+
+function PageShell({ title, children }: { title: string; children?: React.ReactNode }) {
+  return (
+    <div className="bg-background min-h-screen">
+      <SiteHeader />
+      <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+        <h1 className="text-foreground text-4xl leading-tight font-extrabold sm:text-5xl">
+          {title}
+        </h1>
+        {children}
+        {!children && (
+          <Link to="/" className="text-primary mt-6 inline-block font-semibold">
+            На главную
+          </Link>
+        )}
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
+
+function CustomPage() {
+  const { path } = Route.useLoaderData();
+  const { data: page } = useSuspenseQuery(pageQueryOptions(path));
+  if (!page) return <PageShell title="Страница не найдена" />;
+
+  const paragraphs = (page.body ?? "")
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  return (
+    <PageShell title={page.h1_title ?? page.title}>
+      <div className="mt-8 space-y-5">
+        {paragraphs.map((text, index) => (
+          <p key={index} className="text-muted-foreground text-lg leading-relaxed">
+            {text}
+          </p>
+        ))}
+      </div>
+
+      {page.children.length > 0 && (
+        <div className="mt-12">
+          <h2 className="text-foreground text-2xl font-extrabold">Подразделы</h2>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {page.children.map((child) => (
+              <a
+                key={child.path}
+                href={child.path}
+                className="bg-surface-green text-foreground hover:bg-surface-soft rounded-xl px-5 py-4 text-lg font-bold transition-colors"
+              >
+                {child.title}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </PageShell>
+  );
+}
