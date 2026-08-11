@@ -125,7 +125,7 @@ export function HeroBanner({
         <div className="relative">
           <div className="overflow-hidden rounded-lg" ref={emblaRef}>
             <div className="flex touch-pan-y">
-              {(slides ?? []).map((slide, index) => (
+              {slides.map((slide, index) => (
                 <div key={slide.id} className="relative min-w-0 flex-[0_0_100%]">
                   <img
                     src={slide.displayUrl}
@@ -150,7 +150,7 @@ export function HeroBanner({
 
           {count > 1 && (
             <div className="absolute right-4 bottom-4 flex gap-2 sm:right-6 sm:bottom-6">
-              {(slides ?? []).map((slide, index) => (
+              {slides.map((slide, index) => (
                 <button
                   key={slide.id}
                   type="button"
