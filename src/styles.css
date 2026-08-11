@@ -63,7 +63,9 @@
   /* Typography */
   --font-sans:
     "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Montserrat", "Futura", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
+
 
   /* Brand palette */
   --color-brand-green: var(--brand-green);
