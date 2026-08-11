@@ -2,8 +2,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ChevronRight, Phone } from "lucide-react";
 
+import { ConsultCta } from "@/components/ConsultCta";
+import { FaqAccordion } from "@/components/FaqAccordion";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { SectionHeading } from "@/components/SectionHeading";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WhyUs } from "@/components/WhyUs";
 import { CLINIC, absoluteUrl, faqPageJsonLd, physicianJsonLd } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 import { specialtyQueryOptions } from "@/lib/specialties.queries";
