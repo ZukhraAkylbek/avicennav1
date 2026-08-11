@@ -77,7 +77,7 @@ export function HeroBanner() {
                     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
                       <div className="max-w-2xl">
                         {slide.title && (
-                          <h1 className="bg-brand-green-dark text-brand-white inline-block rounded-3xl px-5 py-3 text-3xl leading-tight font-extrabold sm:px-7 sm:py-4 sm:text-5xl lg:text-6xl">
+                          <h1 className="text-brand-white text-3xl leading-tight font-extrabold drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)] sm:text-5xl lg:text-6xl">
                             {slide.title}
                           </h1>
                         )}
