@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
+import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,6 +58,11 @@ const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
   path: '/admin/hero',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminPagesRoute = AuthenticatedAdminPagesRouteImport.update({
+  id: '/admin/pages',
+  path: '/admin/pages',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/pages': typeof AuthenticatedAdminPagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/pages': typeof AuthenticatedAdminPagesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/admin/hero'
+    | '/admin/pages'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya'
     | '/admin/hero'
+    | '/admin/pages'
   id:
     | '__root__'
     | '/'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/_authenticated/admin/hero'
+    | '/_authenticated/admin/pages'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -186,15 +198,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminHeroRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/pages': {
+      id: '/_authenticated/admin/pages'
+      path: '/admin/pages'
+      fullPath: '/admin/pages'
+      preLoaderRoute: typeof AuthenticatedAdminPagesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
+  AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
+  AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
