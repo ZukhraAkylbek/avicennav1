@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const LINKS = [
   { label: "Специалисты", bg: "bg-tile-mint" },
