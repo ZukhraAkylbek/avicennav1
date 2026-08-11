@@ -103,6 +103,89 @@ export type Database = {
         }
         Relationships: []
       }
+      pages: {
+        Row: {
+          body: string | null
+          created_at: string
+          h1_title: string | null
+          id: string
+          is_published: boolean
+          meta_description: string | null
+          meta_title: string | null
+          parent_id: string | null
+          path: string
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          h1_title?: string | null
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          parent_id?: string | null
+          path: string
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          h1_title?: string | null
+          id?: string
+          is_published?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          parent_id?: string | null
+          path?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pages_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      site_settings: {
+        Row: {
+          body_font: string
+          created_at: string
+          font_scale: number
+          heading_font: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          body_font?: string
+          created_at?: string
+          font_scale?: number
+          heading_font?: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          body_font?: string
+          created_at?: string
+          font_scale?: number
+          heading_font?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       specialties: {
         Row: {
           body: string | null
