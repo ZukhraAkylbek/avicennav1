@@ -43,14 +43,16 @@ export function HeroBanner({
   statValue = "15+",
   statLabel = "лет медицинской практики",
 }: HeroBannerProps) {
-  const { data: slides } = useQuery({
+  const { data } = useQuery({
     queryKey: ["hero-slides", "active"],
     queryFn: fetchActiveHeroSlides,
   });
+  const slides = data && data.length > 0 ? data : FALLBACK_SLIDES;
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
-  const count = slides?.length ?? 0;
+  const count = slides.length;
+
 
   const onSelect = useCallback(() => {
     if (emblaApi) setSelected(emblaApi.selectedScrollSnap());
