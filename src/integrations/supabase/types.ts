@@ -14,6 +14,62 @@ export type Database = {
   }
   public: {
     Tables: {
+      doctors: {
+        Row: {
+          bio: string | null
+          created_at: string
+          education: string | null
+          experience_years: number | null
+          full_name: string
+          id: string
+          is_active: boolean
+          job_title: string | null
+          photo_url: string | null
+          slug: string
+          sort_order: number
+          specialty_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          education?: string | null
+          experience_years?: number | null
+          full_name: string
+          id?: string
+          is_active?: boolean
+          job_title?: string | null
+          photo_url?: string | null
+          slug: string
+          sort_order?: number
+          specialty_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          education?: string | null
+          experience_years?: number | null
+          full_name?: string
+          id?: string
+          is_active?: boolean
+          job_title?: string | null
+          photo_url?: string | null
+          slug?: string
+          sort_order?: number
+          specialty_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "doctors_specialty_id_fkey"
+            columns: ["specialty_id"]
+            isOneToOne: false
+            referencedRelation: "specialties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       hero_slides: {
         Row: {
           created_at: string
@@ -46,6 +102,92 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      specialties: {
+        Row: {
+          body: string | null
+          created_at: string
+          h1_title: string
+          id: string
+          intro: string | null
+          is_active: boolean
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          slug: string
+          sort_order: number
+          tile_color: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          h1_title: string
+          id?: string
+          intro?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          slug: string
+          sort_order?: number
+          tile_color?: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          h1_title?: string
+          id?: string
+          intro?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          slug?: string
+          sort_order?: number
+          tile_color?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      specialty_faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          id: string
+          question: string
+          sort_order: number
+          specialty_id: string
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          id?: string
+          question: string
+          sort_order?: number
+          specialty_id: string
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          id?: string
+          question?: string
+          sort_order?: number
+          specialty_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "specialty_faqs_specialty_id_fkey"
+            columns: ["specialty_id"]
+            isOneToOne: false
+            referencedRelation: "specialties"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
