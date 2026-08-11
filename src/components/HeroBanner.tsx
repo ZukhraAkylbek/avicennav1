@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
 
+import { Reveal } from "@/components/Reveal";
 import photoSurgery from "@/assets/image.webp.asset.json";
 import photoNurse from "@/assets/image.png.asset.json";
 import photoXray from "@/assets/image-2.png.asset.json";
