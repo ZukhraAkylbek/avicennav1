@@ -84,6 +84,12 @@ export function SiteHeader() {
             aria-label="Главное меню"
             className="flex items-center gap-5 overflow-x-auto py-1"
           >
+            <Link
+              to="/napravleniya"
+              className="text-foreground hover:text-brand-green text-base font-semibold whitespace-nowrap transition-colors sm:text-lg"
+            >
+              Направления
+            </Link>
             {NAV.map((item) => (
               <a
                 key={item.href}
