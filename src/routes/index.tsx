@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { HeroBanner } from "@/components/HeroBanner";
+import { QuickAccess } from "@/components/QuickAccess";
 import { QuickLinksAndBranches } from "@/components/QuickLinksAndBranches";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -47,6 +48,7 @@ function Index() {
       <SiteHeader />
       <main>
         <HeroBanner />
+        <QuickAccess />
         <ServiceTiles />
         <QuickLinksAndBranches />
       </main>
