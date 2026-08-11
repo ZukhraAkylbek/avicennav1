@@ -15,8 +15,11 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
             delay={index * 90}
             className={`${tones[index % tones.length]} border-border card-lift border-t px-5 py-9 text-center sm:px-6 sm:py-11 lg:border-t-0 lg:border-l lg:first:border-l-0`}
           >
-            <p className="text-foreground text-4xl font-extrabold tabular-nums sm:text-5xl">
-              <CountUp value={stat.value} suffix={stat.suffix ?? ""} />
+            <p className="text-foreground text-4xl leading-none font-extrabold tabular-nums sm:text-5xl">
+              <CountUp value={stat.value} />
+              {stat.suffix && (
+                <span className="mt-1 block text-lg font-bold sm:text-xl">{stat.suffix}</span>
+              )}
             </p>
             <p className="text-muted-foreground mt-2 text-sm font-medium sm:text-base">
               {stat.label}
