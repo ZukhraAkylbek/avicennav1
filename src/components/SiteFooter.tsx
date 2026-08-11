@@ -1,41 +1,64 @@
-import { Clock, MapPin, Phone } from "lucide-react";
-
+import { CLINIC } from "@/lib/clinic";
 import { BOOKING_URL, SITE_NAME } from "@/lib/site-config";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-brand-green-dark text-brand-white mt-6">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3">
+    <footer id="contacts" className="border-border border-t">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <p className="text-3xl font-extrabold">{SITE_NAME}</p>
-          <p className="mt-3 text-lg opacity-90">
-            Сеть многопрофильных клиник в Бишкеке. Работаем круглосуточно.
+          <div className="flex items-center gap-2">
+            <span className="bg-brand-green text-brand-white grid size-8 place-items-center rounded-full text-sm font-extrabold">
+              A
+            </span>
+            <span className="text-foreground text-lg font-extrabold">{SITE_NAME}</span>
+          </div>
+          <p className="text-muted-foreground mt-4 max-w-sm text-base">
+            Сеть многопрофильных клиник в Бишкеке. Травмпункт и стационар — круглосуточно.
           </p>
-        </div>
-        <ul className="space-y-3 text-lg">
-          <li className="flex items-center gap-3">
-            <Phone className="size-5" aria-hidden="true" />
-            <a href="tel:+996779909009" className="font-bold">
-              +996 779 909 009
-            </a>
-          </li>
-          <li className="flex items-center gap-3">
-            <MapPin className="size-5" aria-hidden="true" />
-            г. Бишкек, ул. Медицинская 1
-          </li>
-          <li className="flex items-center gap-3">
-            <Clock className="size-5" aria-hidden="true" />
-            Травмпункт и стационар — 24/7
-          </li>
-        </ul>
-        <div className="lg:text-right">
           <a
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-brand-terracotta text-brand-white inline-flex rounded-full px-8 py-4 text-lg font-bold"
+            className="bg-accent text-accent-foreground mt-6 inline-flex rounded-md px-6 py-3.5 text-base font-semibold transition-opacity hover:opacity-90"
           >
             Записаться онлайн
+          </a>
+        </div>
+
+        <div>
+          <p className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
+            Контакты
+          </p>
+          <ul className="mt-4 space-y-2 text-base">
+            <li>
+              <a href={`tel:${CLINIC.phones[0]}`} className="text-foreground font-semibold">
+                +996 779 909 009
+              </a>
+            </li>
+            <li className="text-muted-foreground">{CLINIC.email}</li>
+            <li className="text-muted-foreground">Пн–Пт: 8:00–20:00 · Сб–Вс: 9:00–18:00</li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-muted-foreground text-sm font-semibold tracking-wide uppercase">
+            Филиалы
+          </p>
+          <ul className="mt-4 space-y-2 text-base">
+            {CLINIC.branches.map((branch) => (
+              <li key={branch.name} className="text-muted-foreground">
+                {branch.city}, {branch.street}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-border border-t">
+        <div className="text-muted-foreground mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm sm:px-6">
+          <span>© {new Date().getFullYear()} Медицинская клиника «Авиценна», Бишкек</span>
+          <a href="#faq" className="hover:text-foreground">
+            Политика конфиденциальности
           </a>
         </div>
       </div>
