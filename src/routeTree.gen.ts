@@ -15,10 +15,13 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
+import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
+import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authenticated/admin/checkups'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
 import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
 import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
@@ -59,6 +62,16 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
+  id: '/chekapy/',
+  path: '/chekapy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChekapySlugRoute = ChekapySlugRouteImport.update({
+  id: '/chekapy/$slug',
+  path: '/chekapy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
   id: '/napravleniya/',
   path: '/napravleniya/',
@@ -78,6 +91,12 @@ const AuthenticatedAdminBranchesRoute =
   AuthenticatedAdminBranchesRouteImport.update({
     id: '/branches',
     path: '/branches',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCheckupsRoute =
+  AuthenticatedAdminCheckupsRouteImport.update({
+    id: '/checkups',
+    path: '/checkups',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminContentRoute =
@@ -143,9 +162,12 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -163,9 +185,12 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/chekapy': typeof ChekapyIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -186,9 +211,12 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -209,9 +237,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/sitemap.xml'
     | '/admin'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/chekapy/'
     | '/napravleniya/'
     | '/admin/branches'
+    | '/admin/checkups'
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
@@ -229,9 +260,12 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/chekapy'
     | '/napravleniya'
     | '/admin/branches'
+    | '/admin/checkups'
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
@@ -251,9 +285,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/chekapy/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
+    | '/_authenticated/admin/checkups'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/diagnostics'
     | '/_authenticated/admin/doctors'
@@ -273,7 +310,9 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ChekapySlugRoute: typeof ChekapySlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
+  ChekapyIndexRoute: typeof ChekapyIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
 
@@ -321,6 +360,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/chekapy/': {
+      id: '/chekapy/'
+      path: '/chekapy'
+      fullPath: '/chekapy/'
+      preLoaderRoute: typeof ChekapyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chekapy/$slug': {
+      id: '/chekapy/$slug'
+      path: '/chekapy/$slug'
+      fullPath: '/chekapy/$slug'
+      preLoaderRoute: typeof ChekapySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/napravleniya/': {
       id: '/napravleniya/'
       path: '/napravleniya'
@@ -347,6 +400,13 @@ declare module '@tanstack/react-router' {
       path: '/branches'
       fullPath: '/admin/branches'
       preLoaderRoute: typeof AuthenticatedAdminBranchesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/checkups': {
+      id: '/_authenticated/admin/checkups'
+      path: '/checkups'
+      fullPath: '/admin/checkups'
+      preLoaderRoute: typeof AuthenticatedAdminCheckupsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/content': {
@@ -424,6 +484,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBranchesRoute: typeof AuthenticatedAdminBranchesRoute
+  AuthenticatedAdminCheckupsRoute: typeof AuthenticatedAdminCheckupsRoute
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
   AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
@@ -440,6 +501,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminBranchesRoute: AuthenticatedAdminBranchesRoute,
+    AuthenticatedAdminCheckupsRoute: AuthenticatedAdminCheckupsRoute,
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
     AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
     AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
@@ -475,19 +537,11 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ChekapySlugRoute: ChekapySlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
+  ChekapyIndexRoute: ChekapyIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
