@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { BranchesMap } from "@/components/BranchesMap";
 import { ConsultCta } from "@/components/ConsultCta";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HeroBanner } from "@/components/HeroBanner";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { QuickAccess } from "@/components/QuickAccess";
-import { QuickLinksAndBranches } from "@/components/QuickLinksAndBranches";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -14,6 +14,7 @@ import { WhyUs } from "@/components/WhyUs";
 import { absoluteUrl, medicalClinicJsonLd } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
+
 
 const TITLE = "Авиценна — сеть многопрофильных клиник в Бишкеке";
 const DESCRIPTION =
