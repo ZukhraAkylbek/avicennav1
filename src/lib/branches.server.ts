@@ -64,7 +64,13 @@ async function geocodeOne(branch: BranchInput): Promise<BranchGeo> {
     throw new Error(`Geocoding error for ${branch.address}: ${data.status ?? "UNKNOWN"} ${data.error_message ?? ""}`);
   }
 
-  const { lat, lng } = data.results[0].geometry.location;
+  const result = data.results?.[0];
+  if (!result) {
+    throw new Error(`Geocoding error for ${branch.address}: ${data.status ?? "UNKNOWN"} ${data.error_message ?? ""}`);
+  }
+
+  const { lat, lng } = result.geometry.location;
+
   return { name: branch.name, address: branch.address, latitude: lat, longitude: lng };
 }
 
