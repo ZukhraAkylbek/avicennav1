@@ -77,73 +77,96 @@ function CheckupsPage() {
         {/* Флагманские чекапы — баннер с карточками */}
         <section id="flagship" className="border-border border-b">
           <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
-            <p className="eyebrow">Программы</p>
-            <h2 className="text-foreground mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              {flagship?.title ?? "Флагманские чекапы"}
-            </h2>
-            {flagship?.subtitle && (
-              <p className="text-muted-foreground mt-3 max-w-2xl text-[16px] leading-relaxed">
-                {flagship.subtitle}
-              </p>
-            )}
+            <div className="bg-surface-soft rounded-[2rem] px-4 py-10 sm:px-8 lg:px-10 lg:py-14">
+              <h2 className="text-foreground text-center text-3xl font-extrabold tracking-tight sm:text-[42px]">
+                {(() => {
+                  const title = flagship?.title ?? "Флагманские чекапы";
+                  const words = title.split(" ");
+                  const last = words.pop();
+                  return (
+                    <>
+                      {words.join(" ")}{" "}
+                      <span className="bg-surface-red text-foreground inline-block rounded-full px-4 py-1">
+                        {last}
+                      </span>
+                    </>
+                  );
+                })()}
+              </h2>
+              {flagship?.subtitle && (
+                <p className="text-muted-foreground mx-auto mt-4 max-w-2xl text-center text-[16px] leading-relaxed">
+                  {flagship.subtitle}
+                </p>
+              )}
 
-            <div className="mt-8 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {cards.map((card, index) => (
-                <Reveal key={card.id} className="h-full">
-                  <Link
-                    to="/chekapy/$slug"
-                    params={{ slug: card.slug }}
-                    className="border-border bg-card hover:border-primary/40 group flex h-full flex-col overflow-hidden rounded-3xl border transition-all hover:shadow-lg"
-                  >
-                    <div className="bg-muted relative aspect-[16/10] w-full overflow-hidden">
-                      {card.image_url ? (
-                        <img
-                          src={card.image_url}
-                          alt={card.title}
-                          loading="lazy"
-                          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              <div className="mt-10 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-6">
+                {cards.map((card, index) => {
+                  const wide = index < 2;
+                  const arcRed = index % 2 === 1;
+                  return (
+                    <Reveal
+                      key={card.id}
+                      className={`h-full ${wide ? "lg:col-span-3" : "lg:col-span-2"}`}
+                    >
+                      <Link
+                        to="/chekapy/$slug"
+                        params={{ slug: card.slug }}
+                        className="group bg-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-6 transition-shadow hover:shadow-xl sm:p-7"
+                      >
+                        {/* декоративная дуга */}
+                        <span
+                          aria-hidden
+                          className={`pointer-events-none absolute bottom-[-30%] left-[8%] size-[70%] rounded-full border-[26px] ${
+                            arcRed ? "border-surface-red" : "border-brand-green/25"
+                          }`}
                         />
-                      ) : (
-                        <span className="text-muted-foreground grid size-full place-items-center text-[13px] font-semibold">
-                          Фото программы
-                        </span>
-                      )}
-                      <span className="text-primary bg-background/95 absolute top-4 left-4 rounded-full px-3 py-1 text-[12px] font-extrabold">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 flex-col p-5">
-                      {card.badge && (
-                        <span className="text-primary bg-primary/10 mb-3 w-fit rounded-full px-3 py-1 text-[12px] font-bold">
-                          {card.badge}
-                        </span>
-                      )}
-                      <h3 className="text-foreground text-[20px] leading-snug font-extrabold break-words">
-                        {card.title}
-                      </h3>
-                      {card.subtitle && (
-                        <p className="text-muted-foreground mt-2 text-[14px] leading-relaxed">
-                          {card.subtitle}
-                        </p>
-                      )}
-                      <span className="mt-auto flex items-center justify-between gap-3 pt-5">
-                        {card.price && (
-                          <span className="text-foreground text-[18px] font-extrabold">
-                            {card.price}
-                          </span>
-                        )}
-                        <span className="text-primary flex items-center gap-1.5 text-[14px] font-bold">
-                          Подробнее
-                          <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                        </span>
-                      </span>
-                    </div>
-                  </Link>
-                </Reveal>
-              ))}
+
+                        <div className="relative flex flex-1 gap-4">
+                          <div className="flex min-w-0 flex-1 flex-col">
+                            <h3 className="text-foreground text-[24px] leading-[1.1] font-extrabold tracking-tight break-words sm:text-[28px]">
+                              {card.title}
+                            </h3>
+                            {card.subtitle && (
+                              <p className="text-muted-foreground mt-3 text-[14px] leading-snug font-semibold">
+                                {card.subtitle}
+                              </p>
+                            )}
+                            {card.price && (
+                              <p className="text-foreground mt-2 text-[15px] font-extrabold">
+                                {card.price}
+                              </p>
+                            )}
+                            <span className="mt-6 flex flex-wrap items-center gap-3 pt-2">
+                              {card.badge && (
+                                <span className="text-muted-foreground text-[13px] font-semibold">
+                                  {card.badge}
+                                </span>
+                              )}
+                              <span className="bg-brand-green-dark text-brand-white inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-[13px] font-extrabold transition-transform group-hover:-translate-y-0.5">
+                                Подробнее
+                                <ArrowRight className="size-4" strokeWidth={2.4} />
+                              </span>
+                            </span>
+                          </div>
+
+                          {card.image_url && (
+                            <img
+                              src={card.image_url}
+                              alt={card.title}
+                              loading="lazy"
+                              className="relative -mr-2 -mb-8 hidden w-[42%] max-w-[220px] self-end object-contain sm:block"
+                            />
+                          )}
+                        </div>
+                      </Link>
+                    </Reveal>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
+
 
         {/* Остальные разделы страницы */}
         <section>
