@@ -76,9 +76,10 @@ function Index() {
         <ServiceTiles />
         <WhyUs />
         <ProcessSteps />
-        <QuickLinksAndBranches />
+        <BranchesMap />
         <FaqAccordion />
         <ConsultCta />
+
       </main>
       <SiteFooter />
     </div>
