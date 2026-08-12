@@ -167,6 +167,20 @@ export function faqPageJsonLd(faqs: { question: string; answer: string }[]) {
   };
 }
 
+export function googleMapsUrl(latitude: number, longitude: number, label?: string) {
+  const query = label ? `${label}, ${latitude}, ${longitude}` : `${latitude},${longitude}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+export function googleMapsDirectionsUrl(latitude: number, longitude: number) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+}
+
+export function doubleGisSearchUrl(address: string) {
+  return `https://2gis.kg/bishkek/search/${encodeURIComponent(address)}`;
+}
+
+
 export function physicianJsonLd(doctor: {
   full_name: string;
   job_title: string | null;
