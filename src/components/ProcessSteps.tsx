@@ -1,3 +1,4 @@
+import { Editable } from "@/components/live-edit/LiveEdit";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const STEPS = [
@@ -13,7 +14,7 @@ export function ProcessSteps({ title }: { title?: string }) {
   return (
     <section id="process" className="border-border border-t py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow="Процесс" title={title ?? "Как проходит лечение"} />
+        <SectionHeading ekey="process" eyebrow="Процесс" title={title ?? "Как проходит лечение"} />
 
         <ol className="mt-10 space-y-0">
           {STEPS.map((step, index) => (
@@ -26,8 +27,21 @@ export function ProcessSteps({ title }: { title?: string }) {
                 0{index + 1}
               </span>
               <div className="min-w-0">
-                <h3 className="text-foreground text-lg font-bold sm:text-xl">{step.title}</h3>
-                <p className="text-muted-foreground mt-1 text-base">{step.text}</p>
+                <Editable
+                  ekey={`process.${index + 1}_title`}
+                  label={`Шаг ${index + 1} — заголовок`}
+                  fallback={step.title}
+                  as="h3"
+                  className="text-foreground block text-lg font-bold sm:text-xl"
+                />
+                <Editable
+                  ekey={`process.${index + 1}_text`}
+                  label={`Шаг ${index + 1} — текст`}
+                  fallback={step.text}
+                  multiline
+                  as="p"
+                  className="text-muted-foreground mt-1 text-base"
+                />
               </div>
             </li>
           ))}
