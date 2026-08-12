@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@tanstack/react-query";
 
+import { Editable } from "@/components/live-edit/LiveEdit";
 import { Reveal } from "@/components/Reveal";
 import photoSurgery from "@/assets/image.webp.asset.json";
 import photoNurse from "@/assets/image.png.asset.json";
@@ -101,18 +102,28 @@ export function HeroBanner({
                 className="bg-brand-green animate-shimmer-pulse size-1.5 rounded-full"
                 aria-hidden="true"
               />
-              {eyebrow}
+              <Editable ekey="hero.eyebrow" label="Надзаголовок баннера" fallback={eyebrow} />
             </span>
           </Reveal>
           <Reveal delay={90}>
-            <h1 className="text-foreground mt-6 text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl">
-              {title}
-            </h1>
+            <Editable
+              ekey="hero.title"
+              label="Заголовок баннера"
+              fallback={title}
+              multiline
+              as="h1"
+              className="text-foreground mt-6 block text-4xl leading-[1.05] font-extrabold sm:text-5xl lg:text-6xl"
+            />
           </Reveal>
           <Reveal delay={180}>
-            <p className="text-muted-foreground mt-5 text-lg leading-relaxed sm:text-xl">
-              {subtitle}
-            </p>
+            <Editable
+              ekey="hero.subtitle"
+              label="Подзаголовок баннера"
+              fallback={subtitle}
+              multiline
+              as="p"
+              className="text-muted-foreground mt-5 text-lg leading-relaxed sm:text-xl"
+            />
           </Reveal>
           <Reveal delay={270} className="mt-8 flex flex-wrap gap-3">
             <a
@@ -121,13 +132,13 @@ export function HeroBanner({
               rel="noopener noreferrer"
               className="gradient-accent text-accent-foreground rounded-xl px-7 py-4 text-base font-bold shadow-[0_14px_34px_-16px_color-mix(in_oklab,var(--brand-terracotta)_75%,transparent)] transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:text-lg"
             >
-              Записаться на приём
+              <Editable ekey="hero.cta" label="Кнопка баннера" fallback="Записаться на приём" />
             </a>
             <a
               href={secondaryHref}
               className="border-border text-foreground hover:border-brand-green hover:text-brand-green rounded-xl border px-7 py-4 text-base font-semibold transition-colors sm:text-lg"
             >
-              {secondaryLabel}
+              <Editable ekey="hero.secondary_cta" label="Вторая кнопка баннера" fallback={secondaryLabel} />
             </a>
           </Reveal>
         </div>
@@ -155,8 +166,20 @@ export function HeroBanner({
           </div>
 
           <div className="bg-background border-border absolute bottom-4 left-4 max-w-[70%] rounded-lg border p-4 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.4)] sm:bottom-6 sm:left-6 sm:p-5">
-            <p className="text-foreground text-2xl font-extrabold sm:text-3xl">{statValue}</p>
-            <p className="text-muted-foreground mt-0.5 text-sm">{statLabel}</p>
+            <Editable
+              ekey="hero.stat_value"
+              label="Цифра на фото"
+              fallback={statValue}
+              as="p"
+              className="text-foreground text-2xl font-extrabold sm:text-3xl"
+            />
+            <Editable
+              ekey="hero.stat_label"
+              label="Подпись к цифре"
+              fallback={statLabel}
+              as="p"
+              className="text-muted-foreground mt-0.5 text-sm"
+            />
           </div>
 
           {count > 1 && (
