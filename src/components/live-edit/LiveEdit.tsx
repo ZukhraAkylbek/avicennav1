@@ -11,7 +11,7 @@ import {
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Type, X, Eye, Save } from "lucide-react";
 
-import { useHydrated } from "@/hooks/use-hydrated";
+
 import { supabase } from "@/integrations/supabase/client";
 import {
   fetchSiteContent,
