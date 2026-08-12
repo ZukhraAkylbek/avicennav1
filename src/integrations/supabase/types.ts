@@ -163,18 +163,21 @@ export type Database = {
         Row: {
           image_path: string | null
           key: string
+          style_json: Json | null
           updated_at: string
           value: string | null
         }
         Insert: {
           image_path?: string | null
           key: string
+          style_json?: Json | null
           updated_at?: string
           value?: string | null
         }
         Update: {
           image_path?: string | null
           key?: string
+          style_json?: Json | null
           updated_at?: string
           value?: string | null
         }
