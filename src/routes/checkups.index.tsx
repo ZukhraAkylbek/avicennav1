@@ -13,7 +13,7 @@ const TITLE = "Чекапы — комплексные программы обс
 const DESCRIPTION =
   "Чекапы в клинике «Авиценна» в Бишкеке: мужской, женский, детский чекап и программы по диабету. Комплексная диагностика, результаты в день обращения.";
 
-export const Route = createFileRoute("/chekapy/")({
+export const Route = createFileRoute("/checkups/")({
   loader: ({ context }) => {
     void context.queryClient.ensureQueryData(checkupPageQueryOptions());
   },
@@ -24,10 +24,10 @@ export const Route = createFileRoute("/chekapy/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: absoluteUrl("/chekapy") || "/chekapy" },
+      { property: "og:url", content: absoluteUrl("/checkups") || "/checkups" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: absoluteUrl("/chekapy") || "/chekapy" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/checkups") || "/checkups" }],
   }),
   component: CheckupsPage,
 });
@@ -109,7 +109,7 @@ function CheckupsPage() {
                       className={`h-full ${wide ? "lg:col-span-3" : "lg:col-span-2"}`}
                     >
                       <Link
-                        to="/chekapy/$slug"
+                        to="/checkups/$slug"
                         params={{ slug: card.slug }}
                         className="group bg-card relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-6 transition-shadow hover:shadow-xl sm:p-7"
                       >

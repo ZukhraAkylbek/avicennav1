@@ -8,7 +8,7 @@ import { absoluteUrl } from "@/lib/clinic";
 import { checkupCardQueryOptions } from "@/lib/checkups.queries";
 import { BOOKING_URL } from "@/lib/site-config";
 
-export const Route = createFileRoute("/chekapy/$slug")({
+export const Route = createFileRoute("/checkups/$slug")({
   loader: async ({ context, params }) => {
     const card = await context.queryClient.ensureQueryData(checkupCardQueryOptions(params.slug));
     if (!card) throw notFound();
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/chekapy/$slug")({
     const description =
       loaderData.card.subtitle ??
       "Комплексная программа обследования в клинике «Авиценна» в Бишкеке.";
-    const url = absoluteUrl(`/chekapy/${loaderData.card.slug}`) || `/chekapy/${loaderData.card.slug}`;
+    const url = absoluteUrl(`/checkups/${loaderData.card.slug}`) || `/checkups/${loaderData.card.slug}`;
     return {
       meta: [
         { title },
@@ -49,7 +49,7 @@ function CheckupFallback({ text }: { text: string }) {
       <SiteHeader />
       <main className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
         <h1 className="text-foreground text-3xl font-extrabold">{text}</h1>
-        <Link to="/chekapy" className="text-primary mt-5 inline-block text-[15px] font-bold">
+        <Link to="/checkups" className="text-primary mt-5 inline-block text-[15px] font-bold">
           Все чекапы
         </Link>
       </main>
@@ -76,7 +76,7 @@ function CheckupCardPage() {
                   Главная
                 </Link>
                 <ChevronRight className="size-3.5" />
-                <Link to="/chekapy" className="hover:text-foreground">
+                <Link to="/checkups" className="hover:text-foreground">
                   Чекапы
                 </Link>
                 <ChevronRight className="size-3.5" />
