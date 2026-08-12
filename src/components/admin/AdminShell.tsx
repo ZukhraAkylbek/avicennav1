@@ -10,6 +10,7 @@ import {
   MapPin,
   Images,
   Search,
+  ClipboardList,
   Settings,
   Menu,
   X,
