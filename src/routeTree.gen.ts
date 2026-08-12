@@ -19,6 +19,7 @@ import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.ind
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
+import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
 import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
 import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
@@ -75,6 +76,12 @@ const AuthenticatedAdminContentRoute =
     path: '/content',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminDiagnosticsRoute =
+  AuthenticatedAdminDiagnosticsRouteImport.update({
+    id: '/diagnostics',
+    path: '/diagnostics',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminDoctorsRoute =
   AuthenticatedAdminDoctorsRouteImport.update({
     id: '/doctors',
@@ -113,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
@@ -128,6 +136,7 @@ export interface FileRoutesByTo {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
@@ -146,6 +155,7 @@ export interface FileRoutesById {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
+  '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/admin/content'
+    | '/admin/diagnostics'
     | '/admin/doctors'
     | '/admin/hero'
     | '/admin/napravleniya'
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya'
     | '/admin/content'
+    | '/admin/diagnostics'
     | '/admin/doctors'
     | '/admin/hero'
     | '/admin/napravleniya'
@@ -196,6 +208,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/_authenticated/admin/content'
+    | '/_authenticated/admin/diagnostics'
     | '/_authenticated/admin/doctors'
     | '/_authenticated/admin/hero'
     | '/_authenticated/admin/napravleniya'
@@ -286,6 +299,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/diagnostics': {
+      id: '/_authenticated/admin/diagnostics'
+      path: '/diagnostics'
+      fullPath: '/admin/diagnostics'
+      preLoaderRoute: typeof AuthenticatedAdminDiagnosticsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/doctors': {
       id: '/_authenticated/admin/doctors'
       path: '/doctors'
@@ -326,6 +346,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
+  AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
   AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
   AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
@@ -337,6 +358,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
+    AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
     AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
     AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
     AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
