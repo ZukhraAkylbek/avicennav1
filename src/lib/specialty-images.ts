@@ -24,5 +24,5 @@ const IMAGES: Record<string, string> = {
 const FALLBACKS = [kardio.url, nevro.url, gastro.url, travma.url];
 
 export function specialtyImage(slug: string, index = 0): string {
-  return IMAGES[slug] ?? FALLBACKS[index % FALLBACKS.length];
+  return IMAGES[slug] ?? FALLBACKS[index % FALLBACKS.length] ?? kardio.url;
 }
