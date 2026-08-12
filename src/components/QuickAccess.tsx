@@ -55,9 +55,10 @@ export function QuickAccess() {
           />
         </Reveal>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-8 grid auto-rows-fr grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {ITEMS.map((item, index) => (
-            <Reveal key={item.label} delay={index * 60}>
+            <Reveal key={item.label} delay={index * 60} className="h-full">
+
               {item.slug ? (
                 <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className={CLASS}>
                   <Inner label={item.label} index={index} />
