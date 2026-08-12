@@ -104,8 +104,11 @@ function AdminContent() {
           <div>
             <h1 className="text-foreground text-2xl font-semibold">Тексты и картинки</h1>
             <p className="text-muted-foreground mt-1 text-sm">
-              Меняйте любые надписи, цифры счётчиков и изображения — сайт обновится сразу.
+              Меняйте любые надписи, цифры счётчиков и изображения — сайт обновится сразу. Или
+              откройте сайт и нажмите «Режим редактирования» внизу слева: наводите на любой текст,
+              кликайте и меняйте текст, шрифт, размер и цвет прямо на странице.
             </p>
+
           </div>
           <div className="flex flex-wrap gap-2">
             <Button variant="outline" asChild>
