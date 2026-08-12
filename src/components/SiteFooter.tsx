@@ -1,4 +1,5 @@
 import logo from "@/assets/logo-avicenna.png.asset.json";
+import { Editable } from "@/components/live-edit/LiveEdit";
 import { CLINIC } from "@/lib/clinic";
 import { BOOKING_URL } from "@/lib/site-config";
 
@@ -16,16 +17,21 @@ export function SiteFooter() {
             className="h-11 w-auto"
           />
 
-          <p className="text-muted-foreground mt-4 max-w-sm text-base">
-            Сеть многопрофильных клиник в Бишкеке. Травмпункт и стационар — круглосуточно.
-          </p>
+          <Editable
+            ekey="footer.tagline"
+            label="Текст в подвале"
+            fallback="Сеть многопрофильных клиник в Бишкеке. Травмпункт и стационар — круглосуточно."
+            multiline
+            as="p"
+            className="text-muted-foreground mt-4 max-w-sm text-base"
+          />
           <a
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-accent text-accent-foreground mt-6 inline-flex rounded-md px-6 py-3.5 text-base font-semibold transition-opacity hover:opacity-90"
           >
-            Записаться онлайн
+            <Editable ekey="footer.cta" label="Кнопка в подвале" fallback="Записаться онлайн" />
           </a>
         </div>
 

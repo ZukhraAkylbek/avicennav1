@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { SiteTypography } from "@/components/SiteTypography";
 import appCss from "../styles.css?url";
 
@@ -132,8 +133,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SiteTypography />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LiveEditProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </LiveEditProvider>
     </QueryClientProvider>
   );
 }

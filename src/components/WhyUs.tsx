@@ -1,3 +1,4 @@
+import { Editable } from "@/components/live-edit/LiveEdit";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
@@ -21,6 +22,7 @@ export function WhyUs({ title }: { title?: string }) {
     <section id="preimushchestva" className="border-border border-t py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
+          ekey="why"
           eyebrow="Преимущества"
           title={title ?? "Почему пациенты выбирают «Авиценну»"}
         />
@@ -30,8 +32,21 @@ export function WhyUs({ title }: { title?: string }) {
               <p className="text-muted-foreground text-sm font-semibold">
                 0{index + 1}
               </p>
-              <h3 className="text-foreground mt-3 text-xl font-bold sm:text-2xl">{item.title}</h3>
-              <p className="text-muted-foreground mt-3 text-base leading-relaxed">{item.text}</p>
+              <Editable
+                ekey={`why.${index + 1}_title`}
+                label={`Преимущество ${index + 1} — заголовок`}
+                fallback={item.title}
+                as="h3"
+                className="text-foreground mt-3 block text-xl font-bold sm:text-2xl"
+              />
+              <Editable
+                ekey={`why.${index + 1}_text`}
+                label={`Преимущество ${index + 1} — текст`}
+                fallback={item.text}
+                multiline
+                as="p"
+                className="text-muted-foreground mt-3 text-base leading-relaxed"
+              />
             </Reveal>
           ))}
         </div>

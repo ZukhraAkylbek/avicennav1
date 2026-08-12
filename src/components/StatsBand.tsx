@@ -1,4 +1,5 @@
 import { CountUp } from "@/components/CountUp";
+import { Editable } from "@/components/live-edit/LiveEdit";
 import { Reveal } from "@/components/Reveal";
 
 export type Stat = { value: string; suffix?: string; label: string };
@@ -24,9 +25,13 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
                   <span className="mt-1 block text-lg font-bold sm:text-xl">{stat.suffix}</span>
                 ))}
             </p>
-            <p className="text-muted-foreground mt-2 text-sm font-medium sm:text-base">
-              {stat.label}
-            </p>
+            <Editable
+              ekey={`stats.${index + 1}_label`}
+              label={`Счётчик ${index + 1} — подпись`}
+              fallback={stat.label}
+              as="p"
+              className="text-muted-foreground mt-2 text-sm font-medium sm:text-base"
+            />
           </Reveal>
         ))}
       </div>
