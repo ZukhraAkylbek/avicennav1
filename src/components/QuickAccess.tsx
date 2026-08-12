@@ -18,20 +18,21 @@ const ITEMS: QuickItem[] = [
 ];
 
 const CLASS =
-  "group card-lift bg-surface-soft hover:bg-surface-green flex min-h-[104px] items-end justify-between gap-3 rounded-2xl p-5 text-[21px] leading-tight font-bold sm:text-[22px]";
+  "group card-lift bg-surface-soft hover:bg-surface-green grid min-h-[104px] grid-cols-[minmax(0,1fr)_auto] items-end gap-2 rounded-2xl p-4 text-[18px] leading-tight font-bold sm:gap-3 sm:p-5 sm:text-[21px]";
 
 function Inner({ label }: { label: string }) {
   return (
     <>
-      <span className="text-foreground group-hover:text-brand-green transition-colors">
+      <span className="text-foreground group-hover:text-brand-green min-w-0 transition-colors">
         {label}
       </span>
-      <span className="bg-brand-green text-brand-white grid size-9 shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5">
+      <span className="bg-brand-green text-brand-white grid size-8 shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 sm:size-9">
         <ArrowRight className="size-4" />
       </span>
     </>
   );
 }
+
 
 export function QuickAccess() {
   return (
