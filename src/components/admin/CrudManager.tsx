@@ -90,12 +90,19 @@ export function CrudManager({
       const id = payload["id"] as string | undefined;
       delete payload["id"];
       if (id) {
-        const { error } = await supabase.from(table).update(payload).eq("id", id);
-        if (error) throw error;
+        const update = supabase.from(table).update as unknown as (
+          v: unknown,
+        ) => { eq: (c: string, v: string) => Promise<{ error: { message: string } | null }> };
+        const { error } = await update(payload).eq("id", id);
+        if (error) throw new Error(error.message);
       } else {
-        const { error } = await supabase.from(table).insert(payload as never);
-        if (error) throw error;
+        const insert = supabase.from(table).insert as unknown as (
+          v: unknown,
+        ) => Promise<{ error: { message: string } | null }>;
+        const { error } = await insert(payload);
+        if (error) throw new Error(error.message);
       }
+
     },
     onSuccess: () => {
       toast.success("Сохранено");
