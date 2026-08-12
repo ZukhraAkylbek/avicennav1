@@ -97,6 +97,7 @@ export function BranchesMap() {
 
     loadGoogleMapsScript()
       .then((maps) => {
+        console.log("[BranchesMap] maps loaded", !!maps);
         if (cancelled || !mapRef.current) return;
 
         const center = { lat: 42.858, lng: 74.607 };
@@ -143,7 +144,7 @@ export function BranchesMap() {
       })
       .catch((err) => {
         clearTimeout(timeoutId);
-        console.error("Google Maps error:", err);
+        console.error("[BranchesMap] Google Maps error:", err);
         setStatus("error");
         setErrorMessage("Карта временно недоступна. Используйте список адресов слева.");
       });
