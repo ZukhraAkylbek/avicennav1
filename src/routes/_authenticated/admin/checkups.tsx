@@ -385,7 +385,7 @@ function AdminCheckups() {
                   >
                     <p className="truncate text-[15px] font-bold">{card.title}</p>
                     <p className="text-admin-muted truncate text-[12px]">
-                      {card.price ?? "цена не указана"} · /chekapy/{card.slug}
+                      {card.price ?? "цена не указана"} · /checkups/{card.slug}
                     </p>
                   </button>
                   <div className="flex shrink-0 items-center gap-1">

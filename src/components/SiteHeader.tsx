@@ -11,12 +11,12 @@ import { useSiteContent } from "@/lib/site-content";
 
 const NAV = [
   { label: "Направления", to: "/napravleniya" as const },
+  { label: "Чекапы", to: "/checkups" as const },
 ];
 
 const NAV_ANCHORS = [
   { label: "Поликлиника", href: "/#napravleniya" },
   { label: "Услуги", href: "/#uslugi" },
-  { label: "Чекапы", href: "/#process" },
   { label: "Диагностика", href: "/#preimushchestva" },
   { label: "О нас", href: "/#faq" },
 ];

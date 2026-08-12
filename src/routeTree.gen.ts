@@ -15,6 +15,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
+import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
 import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
 import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
@@ -61,6 +63,16 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const CheckupsIndexRoute = CheckupsIndexRouteImport.update({
+  id: '/checkups/',
+  path: '/checkups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckupsSlugRoute = CheckupsSlugRouteImport.update({
+  id: '/checkups/$slug',
+  path: '/checkups/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
   id: '/chekapy/',
@@ -162,8 +174,10 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
@@ -185,8 +199,10 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
@@ -211,8 +227,10 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
+  '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
@@ -237,8 +255,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/sitemap.xml'
     | '/admin'
+    | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/checkups/'
     | '/chekapy/'
     | '/napravleniya/'
     | '/admin/branches'
@@ -260,8 +280,10 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/checkups'
     | '/chekapy'
     | '/napravleniya'
     | '/admin/branches'
@@ -285,8 +307,10 @@ export interface FileRouteTypes {
     | '/auth'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/checkups/$slug'
     | '/chekapy/$slug'
     | '/napravleniya/$slug'
+    | '/checkups/'
     | '/chekapy/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
@@ -310,8 +334,10 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
+  CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
@@ -359,6 +385,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/checkups/': {
+      id: '/checkups/'
+      path: '/checkups'
+      fullPath: '/checkups/'
+      preLoaderRoute: typeof CheckupsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkups/$slug': {
+      id: '/checkups/$slug'
+      path: '/checkups/$slug'
+      fullPath: '/checkups/$slug'
+      preLoaderRoute: typeof CheckupsSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/chekapy/': {
       id: '/chekapy/'
@@ -537,8 +577,10 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
+  CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
