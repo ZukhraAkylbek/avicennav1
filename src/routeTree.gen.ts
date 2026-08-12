@@ -23,6 +23,7 @@ import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authent
 import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
 import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
+import { Route as AuthenticatedAdminMediaRouteImport } from './routes/_authenticated/admin/media'
 import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
 import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
 import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
@@ -100,6 +101,11 @@ const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
   path: '/hero',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminMediaRoute = AuthenticatedAdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedAdminNapravleniyaRoute =
   AuthenticatedAdminNapravleniyaRouteImport.update({
     id: '/napravleniya',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/media': typeof AuthenticatedAdminMediaRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
@@ -148,6 +155,7 @@ export interface FileRoutesByTo {
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/media': typeof AuthenticatedAdminMediaRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/admin/services': typeof AuthenticatedAdminServicesRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/_authenticated/admin/media': typeof AuthenticatedAdminMediaRoute
   '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
@@ -188,6 +197,7 @@ export interface FileRouteTypes {
     | '/admin/diagnostics'
     | '/admin/doctors'
     | '/admin/hero'
+    | '/admin/media'
     | '/admin/napravleniya'
     | '/admin/pages'
     | '/admin/services'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/admin/diagnostics'
     | '/admin/doctors'
     | '/admin/hero'
+    | '/admin/media'
     | '/admin/napravleniya'
     | '/admin/pages'
     | '/admin/services'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/diagnostics'
     | '/_authenticated/admin/doctors'
     | '/_authenticated/admin/hero'
+    | '/_authenticated/admin/media'
     | '/_authenticated/admin/napravleniya'
     | '/_authenticated/admin/pages'
     | '/_authenticated/admin/services'
@@ -340,6 +352,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminHeroRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/media': {
+      id: '/_authenticated/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AuthenticatedAdminMediaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/napravleniya': {
       id: '/_authenticated/admin/napravleniya'
       path: '/napravleniya'
@@ -370,6 +389,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
   AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
+  AuthenticatedAdminMediaRoute: typeof AuthenticatedAdminMediaRoute
   AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
   AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
   AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
@@ -383,6 +403,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
     AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
     AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
+    AuthenticatedAdminMediaRoute: AuthenticatedAdminMediaRoute,
     AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
     AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
     AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
