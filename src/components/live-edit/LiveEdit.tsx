@@ -364,12 +364,14 @@ export function Editable({
   children,
 }: EditableProps) {
   const ctx = useLiveEdit();
+  const hydrated = useHydrated();
   const Tag = (as ?? "span") as ElementType;
-  const row = ctx?.content?.[ekey];
+  const row = hydrated ? ctx?.content?.[ekey] : undefined;
   const text = row?.value && row.value.trim().length > 0 ? row.value : fallback;
   const style = styleToCss(row?.style);
   const active = Boolean(ctx?.isAdmin && ctx?.editing);
   const isSelected = ctx?.selected?.key === ekey;
+
 
   return (
     <Tag
