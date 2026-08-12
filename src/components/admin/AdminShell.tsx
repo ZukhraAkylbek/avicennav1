@@ -19,7 +19,7 @@ import {
 
 import { cn } from "@/lib/utils";
 
-const NAV = [
+const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/pages", label: "Страницы", icon: FileText },
   { to: "/admin/napravleniya", label: "Направления", icon: Stethoscope },
