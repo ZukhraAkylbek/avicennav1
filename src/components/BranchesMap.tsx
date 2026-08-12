@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { CLINIC, doubleGisSearchUrl, googleMapsUrl } from "@/lib/clinic";
+import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl, googleMapsUrl } from "@/lib/clinic";
 
 type Branch = (typeof CLINIC.branches)[number];
 
@@ -14,8 +14,8 @@ const loadGoogleMapsScript = (() => {
   return function load(): Promise<typeof google.maps> {
     if (promise) return promise;
 
-    const key = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY;
-    const channel = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID;
+    const key = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"];
+    const channel = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID"];
 
     if (!key) {
       throw new Error("Google Maps browser key is not configured");
@@ -51,7 +51,7 @@ const loadGoogleMapsScript = (() => {
       script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&loading=async&callback=${callbackName}&channel=${channel}`;
       script.async = true;
       script.defer = true;
-      script.dataset.avicennaMaps = "true";
+      script.dataset["avicennaMaps"] = "true";
       script.onerror = () => reject(new Error("Failed to load Google Maps script"));
 
       document.head.appendChild(script);
@@ -244,8 +244,4 @@ function buildInfoWindowContent(branch: Branch): string {
       </div>
     </div>
   `;
-}
-
-function googleMapsDirectionsUrl(latitude: number, longitude: number) {
-  return `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 }
