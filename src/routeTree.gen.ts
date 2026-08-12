@@ -18,6 +18,7 @@ import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authentic
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
 import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
+import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -76,6 +77,11 @@ const CheckupsSlugRoute = CheckupsSlugRouteImport.update({
 const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
   id: '/chekapy/',
   path: '/chekapy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChekapySlugRoute = ChekapySlugRouteImport.update({
+  id: '/chekapy/$slug',
+  path: '/chekapy/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
@@ -193,6 +200,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
@@ -220,6 +228,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
+  '/chekapy/$slug': typeof ChekapySlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
@@ -247,6 +256,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/admin'
     | '/checkups/$slug'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/sitemap.xml'
     | '/checkups/$slug'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
     | '/checkups'
     | '/chekapy'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/checkups/$slug'
+    | '/chekapy/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
@@ -323,6 +335,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
+  ChekapySlugRoute: typeof ChekapySlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
@@ -392,6 +405,13 @@ declare module '@tanstack/react-router' {
       path: '/chekapy'
       fullPath: '/chekapy/'
       preLoaderRoute: typeof ChekapyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chekapy/$slug': {
+      id: '/chekapy/$slug'
+      path: '/chekapy/$slug'
+      fullPath: '/chekapy/$slug'
+      preLoaderRoute: typeof ChekapySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -558,6 +578,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
+  ChekapySlugRoute: ChekapySlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
