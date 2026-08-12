@@ -61,7 +61,7 @@ const isAbsolute = (value: string) => /^https?:\/\//i.test(value);
 export async function fetchSiteContent(): Promise<SiteContentMap> {
   const { data, error } = await supabase
     .from("site_content")
-    .select("key, value, image_path");
+    .select("key, value, image_path, style_json");
   if (error) throw error;
 
   const rows = (data ?? []) as SiteContentRow[];
@@ -83,6 +83,7 @@ export async function fetchSiteContent(): Promise<SiteContentMap> {
   for (const row of rows) {
     map[row.key] = {
       value: row.value ?? null,
+      style: (row.style_json as ElementStyle | null) ?? null,
       url: row.image_path
         ? isAbsolute(row.image_path)
           ? row.image_path
@@ -94,6 +95,22 @@ export async function fetchSiteContent(): Promise<SiteContentMap> {
 }
 
 const fallbackOf = (key: string) => CONTENT_FIELDS.find((f) => f.key === key)?.fallback ?? "";
+
+/** Превращает сохранённые настройки элемента в inline-стили. */
+export function styleToCss(style: ElementStyle | null | undefined): CSSProperties {
+  if (!style) return {};
+  const css: CSSProperties = {};
+  if (style.fontFamily) css.fontFamily = style.fontFamily;
+  if (style.fontSize) css.fontSize = `${style.fontSize}px`;
+  if (style.fontWeight) css.fontWeight = style.fontWeight;
+  if (style.color) css.color = style.color;
+  if (style.lineHeight) css.lineHeight = style.lineHeight;
+  if (style.letterSpacing !== undefined) css.letterSpacing = `${style.letterSpacing}px`;
+  if (style.textAlign) css.textAlign = style.textAlign;
+  if (style.textTransform) css.textTransform = style.textTransform;
+  if (style.italic) css.fontStyle = "italic";
+  return css;
+}
 
 /** Чтение редактируемого контента с фолбэком на значения из кода. */
 export function useSiteContent() {
@@ -110,5 +127,8 @@ export function useSiteContent() {
 
   const img = (key: string, fallback?: string) => data?.[key]?.url ?? fallback ?? null;
 
-  return { t, img, content: data };
+  const style = (key: string) => styleToCss(data?.[key]?.style);
+
+  return { t, img, style, content: data };
 }
+
