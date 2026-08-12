@@ -241,14 +241,22 @@ export function BranchesMap() {
           </div>
 
           <div className="order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2">
-            {error ? (
-              <div className="flex h-[320px] items-center justify-center bg-surface-soft px-6 text-center lg:h-full lg:min-h-[420px]">
-                <p className="text-muted-foreground text-sm">{error}</p>
+            {status === "error" ? (
+              <div className="flex h-[320px] flex-col items-center justify-center gap-4 bg-surface-soft px-6 text-center lg:h-full lg:min-h-[420px]">
+                <p className="text-muted-foreground max-w-xs text-sm">{errorMessage}</p>
+                <p className="text-muted-foreground text-xs">
+                  На рабочем домене карта отобразится автоматически.
+                </p>
+              </div>
+            ) : status === "loading" ? (
+              <div className="flex h-[320px] items-center justify-center bg-surface-soft px-6 lg:h-full lg:min-h-[420px]">
+                <div className="border-brand-green h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
               </div>
             ) : (
               <div ref={mapRef} className="h-[320px] w-full lg:h-full lg:min-h-[420px]" />
             )}
           </div>
+
         </div>
       </div>
     </section>
