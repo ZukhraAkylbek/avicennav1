@@ -99,15 +99,11 @@ function CheckupsPage() {
                 </p>
               )}
 
-              <div className="mt-10 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-6">
+              <div className="mt-10 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {cards.map((card, index) => {
-                  const wide = index < 2;
                   const arcRed = index % 2 === 1;
                   return (
-                    <Reveal
-                      key={card.id}
-                      className={`h-full ${wide ? "lg:col-span-3" : "lg:col-span-2"}`}
-                    >
+                    <Reveal key={card.id} className="h-full">
                       <Link
                         to="/checkups/$slug"
                         params={{ slug: card.slug }}
@@ -121,42 +117,51 @@ function CheckupsPage() {
                           }`}
                         />
 
-                        <div className="relative z-10 flex flex-1 gap-4">
-                          <div className="flex min-w-0 flex-1 flex-col">
-                            <h3 className="text-foreground text-[24px] leading-[1.1] font-extrabold tracking-tight break-words sm:text-[28px]">
-                              {card.title}
-                            </h3>
-                            {card.subtitle && (
-                              <p className="text-muted-foreground mt-3 text-[14px] leading-snug font-semibold">
-                                {card.subtitle}
-                              </p>
+                        <div className="relative z-10 flex flex-1 flex-col">
+                          {/* верхняя часть: текст + фото одинакового размера */}
+                          <div className="flex gap-4">
+                            <div className="flex min-w-0 flex-1 flex-col">
+                              <h3 className="text-foreground min-h-[2.2em] text-[22px] leading-[1.1] font-extrabold tracking-tight break-words sm:text-[26px]">
+                                {card.title}
+                              </h3>
+                              {card.subtitle && (
+                                <p className="text-muted-foreground mt-3 line-clamp-3 text-[14px] leading-snug font-semibold">
+                                  {card.subtitle}
+                                </p>
+                              )}
+                            </div>
+
+                            {card.image_url && (
+                              <div className="hidden h-[132px] w-[38%] max-w-[160px] shrink-0 items-end justify-center sm:flex">
+                                <img
+                                  src={card.image_url}
+                                  alt={card.title}
+                                  loading="lazy"
+                                  className="h-full w-full object-contain object-bottom"
+                                />
+                              </div>
                             )}
+                          </div>
+
+                          {/* нижняя часть: цена + кнопка всегда на одном уровне */}
+                          <div className="mt-auto pt-6">
                             {card.price && (
-                              <p className="text-foreground mt-2 text-[15px] font-extrabold">
+                              <p className="text-foreground text-[15px] font-extrabold">
                                 {card.price}
                               </p>
                             )}
-                            <span className="mt-6 flex flex-wrap items-center gap-3 pt-2">
+                            <span className="mt-3 flex flex-wrap items-center gap-3">
+                              <span className="bg-brand-green-dark text-brand-white inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-[13px] font-extrabold transition-transform group-hover:-translate-y-0.5">
+                                Подробнее
+                                <ArrowRight className="size-4" strokeWidth={2.4} />
+                              </span>
                               {card.badge && (
                                 <span className="text-muted-foreground text-[13px] font-semibold">
                                   {card.badge}
                                 </span>
                               )}
-                              <span className="bg-brand-green-dark text-brand-white inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-[13px] font-extrabold transition-transform group-hover:-translate-y-0.5">
-                                Подробнее
-                                <ArrowRight className="size-4" strokeWidth={2.4} />
-                              </span>
                             </span>
                           </div>
-
-                          {card.image_url && (
-                            <img
-                              src={card.image_url}
-                              alt={card.title}
-                              loading="lazy"
-                              className="relative -mr-2 -mb-8 hidden w-[42%] max-w-[220px] self-end object-contain sm:block"
-                            />
-                          )}
                         </div>
                       </Link>
                     </Reveal>
@@ -167,34 +172,34 @@ function CheckupsPage() {
           </div>
         </section>
 
-
-        {/* Остальные разделы страницы */}
+        {/* Остальные разделы страницы — раскрывающийся список вместо плашек */}
         <section>
-          <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:py-16">
+            <div className="divide-border border-border divide-y border-y">
               {rest.map((section) => (
-                <Reveal key={section.id} className="h-full">
-                  <article
-                    id={section.key}
-                    className="border-border bg-card h-full rounded-3xl border p-6"
-                  >
-                    <h2 className="text-foreground text-[20px] font-extrabold">{section.title}</h2>
-                    {section.subtitle && (
-                      <p className="text-muted-foreground mt-2 text-[15px] leading-relaxed">
-                        {section.subtitle}
-                      </p>
-                    )}
-                    {section.body && (
-                      <p className="text-muted-foreground mt-3 text-[15px] leading-relaxed whitespace-pre-line">
-                        {section.body}
-                      </p>
-                    )}
-                  </article>
-                </Reveal>
+                <details key={section.id} id={section.key} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <h2 className="text-foreground text-[20px] font-extrabold sm:text-[22px]">
+                      {section.title}
+                    </h2>
+                    <ChevronRight className="text-muted-foreground size-5 shrink-0 transition-transform group-open:rotate-90" />
+                  </summary>
+                  {section.subtitle && (
+                    <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed">
+                      {section.subtitle}
+                    </p>
+                  )}
+                  {section.body && (
+                    <p className="text-muted-foreground mt-3 text-[16px] leading-relaxed whitespace-pre-line">
+                      {section.body}
+                    </p>
+                  )}
+                </details>
               ))}
             </div>
           </div>
         </section>
+
       </main>
       <SiteFooter />
     </div>
