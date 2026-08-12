@@ -19,7 +19,7 @@ const ITEMS: QuickItem[] = [
 ];
 
 const CLASS =
-  "group card-lift bg-surface-soft hover:bg-surface-green flex min-h-[112px] flex-col justify-between gap-3 rounded-2xl p-4 text-[18px] leading-tight font-bold sm:p-5 sm:text-[21px]";
+  "group card-lift bg-surface-soft hover:bg-surface-green flex h-full min-h-[112px] flex-col justify-between gap-3 rounded-2xl p-4 text-[18px] leading-tight font-bold sm:p-5 sm:text-[21px]";
 
 function Inner({ label, index }: { label: string; index: number }) {
   return (
@@ -55,9 +55,10 @@ export function QuickAccess() {
           />
         </Reveal>
 
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-8 grid auto-rows-fr grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {ITEMS.map((item, index) => (
-            <Reveal key={item.label} delay={index * 60}>
+            <Reveal key={item.label} delay={index * 60} className="h-full">
+
               {item.slug ? (
                 <Link to="/napravleniya/$slug" params={{ slug: item.slug }} className={CLASS}>
                   <Inner label={item.label} index={index} />
