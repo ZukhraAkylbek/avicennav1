@@ -20,6 +20,7 @@ import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slu
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
+import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
 import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +78,12 @@ const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
   path: '/hero',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminNapravleniyaRoute =
+  AuthenticatedAdminNapravleniyaRouteImport.update({
+    id: '/napravleniya',
+    path: '/napravleniya',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminPagesRoute = AuthenticatedAdminPagesRouteImport.update({
   id: '/pages',
   path: '/pages',
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesByTo {
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -120,6 +129,7 @@ export interface FileRoutesById {
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/napravleniya/'
     | '/admin/content'
     | '/admin/hero'
+    | '/admin/napravleniya'
     | '/admin/pages'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -147,6 +158,7 @@ export interface FileRouteTypes {
     | '/napravleniya'
     | '/admin/content'
     | '/admin/hero'
+    | '/admin/napravleniya'
     | '/admin/pages'
     | '/admin'
   id:
@@ -161,6 +173,7 @@ export interface FileRouteTypes {
     | '/napravleniya/'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/hero'
+    | '/_authenticated/admin/napravleniya'
     | '/_authenticated/admin/pages'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminHeroRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/napravleniya': {
+      id: '/_authenticated/admin/napravleniya'
+      path: '/napravleniya'
+      fullPath: '/admin/napravleniya'
+      preLoaderRoute: typeof AuthenticatedAdminNapravleniyaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/pages': {
       id: '/_authenticated/admin/pages'
       path: '/pages'
@@ -267,6 +287,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
+  AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
   AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -275,6 +296,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
   {
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
     AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
+    AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
     AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   }
