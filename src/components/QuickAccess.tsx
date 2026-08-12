@@ -19,7 +19,7 @@ const ITEMS: QuickItem[] = [
 ];
 
 const CLASS =
-  "group card-lift bg-surface-soft hover:bg-surface-green flex min-h-[112px] flex-col justify-between gap-3 rounded-2xl p-4 text-[18px] leading-tight font-bold sm:p-5 sm:text-[21px]";
+  "group card-lift bg-surface-soft hover:bg-surface-green flex h-full min-h-[112px] flex-col justify-between gap-3 rounded-2xl p-4 text-[18px] leading-tight font-bold sm:p-5 sm:text-[21px]";
 
 function Inner({ label, index }: { label: string; index: number }) {
   return (
