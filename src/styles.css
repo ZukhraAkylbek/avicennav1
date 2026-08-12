@@ -82,7 +82,18 @@
   --color-surface-soft: var(--surface-soft);
   --color-surface-green: var(--surface-green);
   --color-surface-red: var(--surface-red);
+
+  /* Админка — premium healthcare SaaS палитра */
+  --color-admin-blue: var(--admin-blue);
+  --color-admin-blue-soft: var(--admin-blue-soft);
+  --color-admin-teal: var(--admin-teal);
+  --color-admin-teal-soft: var(--admin-teal-soft);
+  --color-admin-bg: var(--admin-bg);
+  --color-admin-line: var(--admin-line);
+  --color-admin-ink: var(--admin-ink);
+  --color-admin-muted: var(--admin-muted);
 }
+
 
 
 
