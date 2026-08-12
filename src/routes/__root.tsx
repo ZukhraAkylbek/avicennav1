@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { SiteTypography } from "@/components/SiteTypography";
+import { fetchSiteContent } from "@/lib/site-content";
 import appCss from "../styles.css?url";
 
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -76,6 +77,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  // Загружаем редактируемые тексты до рендера, чтобы сервер и браузер показывали одно и то же.
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData({
+      queryKey: ["site-content"],
+      queryFn: fetchSiteContent,
+      staleTime: 60_000,
+    });
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
