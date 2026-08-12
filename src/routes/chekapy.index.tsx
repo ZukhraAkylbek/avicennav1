@@ -116,12 +116,12 @@ function CheckupsPage() {
                         {/* декоративная дуга */}
                         <span
                           aria-hidden
-                          className={`pointer-events-none absolute bottom-[-30%] left-[8%] size-[70%] rounded-full border-[26px] ${
-                            arcRed ? "border-surface-red" : "border-brand-green/25"
+                          className={`pointer-events-none absolute bottom-[-38%] left-[-8%] z-0 size-[58%] rounded-full border-[22px] opacity-70 ${
+                            arcRed ? "border-surface-red" : "border-brand-green/30"
                           }`}
                         />
 
-                        <div className="relative flex flex-1 gap-4">
+                        <div className="relative z-10 flex flex-1 gap-4">
                           <div className="flex min-w-0 flex-1 flex-col">
                             <h3 className="text-foreground text-[24px] leading-[1.1] font-extrabold tracking-tight break-words sm:text-[28px]">
                               {card.title}
