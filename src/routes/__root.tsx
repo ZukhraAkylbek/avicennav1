@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
 import { SiteTypography } from "@/components/SiteTypography";
+import { fetchSiteContent } from "@/lib/site-content";
 import appCss from "../styles.css?url";
 
 import { reportLovableError } from "../lib/lovable-error-reporting";
