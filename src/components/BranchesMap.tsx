@@ -75,9 +75,10 @@ export function BranchesMap() {
   const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const hydrated = useHydrated();
 
   useEffect(() => {
-    if (typeof window === "undefined" || !mapRef.current) return;
+    if (!hydrated || typeof window === "undefined" || !mapRef.current) return;
 
     let cancelled = false;
     const timeoutId = setTimeout(() => {
@@ -86,6 +87,7 @@ export function BranchesMap() {
         setErrorMessage("Карта не загрузилась за отведённое время. Используйте список адресов слева.");
       }
     }, 8000);
+
 
     const handleAuthFailure = () => {
       clearTimeout(timeoutId);
