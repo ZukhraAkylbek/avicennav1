@@ -70,15 +70,24 @@ export function BranchesMap() {
   const [markers, setMarkers] = useState<google.maps.Marker[]>([]);
   const [activeBranch, setActiveBranch] = useState<Branch | null>(null);
   const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !mapRef.current) return;
 
     let cancelled = false;
+    const timeoutId = setTimeout(() => {
+      if (!cancelled && status === "loading") {
+        setStatus("error");
+        setErrorMessage("Карта не загрузилась за отведённое время. Используйте список адресов слева.");
+      }
+    }, 8000);
 
     const handleAuthFailure = () => {
-      setError(
+      clearTimeout(timeoutId);
+      setStatus("error");
+      setErrorMessage(
         "Карта не загрузилась из-за ограничения ключа Google Maps. В списке слева есть ссылки для построения маршрута.",
       );
     };
@@ -125,22 +134,28 @@ export function BranchesMap() {
           newMarkers.push(marker);
         });
 
+        clearTimeout(timeoutId);
         setMap(mapInstance);
         setMarkers(newMarkers);
         setInfoWindow(info);
+        setStatus("ready");
       })
       .catch((err) => {
+        clearTimeout(timeoutId);
         console.error("Google Maps error:", err);
-        setError("Карта временно недоступна. Используйте список адресов слева.");
+        setStatus("error");
+        setErrorMessage("Карта временно недоступна. Используйте список адресов слева.");
       });
 
     return () => {
       cancelled = true;
+      clearTimeout(timeoutId);
       markers.forEach((m) => m.setMap(null));
       infoWindow?.close();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
 
   const handleBranchClick = (branch: Branch) => {
