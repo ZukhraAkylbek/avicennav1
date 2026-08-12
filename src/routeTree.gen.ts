@@ -21,6 +21,7 @@ import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.ind
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
+import { Route as AuthenticatedAdminCheckupsRouteImport } from './routes/_authenticated/admin/checkups'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
 import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
 import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
@@ -92,6 +93,12 @@ const AuthenticatedAdminBranchesRoute =
     path: '/branches',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminCheckupsRoute =
+  AuthenticatedAdminCheckupsRouteImport.update({
+    id: '/checkups',
+    path: '/checkups',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminContentRoute =
   AuthenticatedAdminContentRouteImport.update({
     id: '/content',
@@ -160,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -182,6 +190,7 @@ export interface FileRoutesByTo {
   '/chekapy': typeof ChekapyIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -207,6 +216,7 @@ export interface FileRoutesById {
   '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
+  '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
   '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
@@ -232,6 +242,7 @@ export interface FileRouteTypes {
     | '/chekapy/'
     | '/napravleniya/'
     | '/admin/branches'
+    | '/admin/checkups'
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
@@ -254,6 +265,7 @@ export interface FileRouteTypes {
     | '/chekapy'
     | '/napravleniya'
     | '/admin/branches'
+    | '/admin/checkups'
     | '/admin/content'
     | '/admin/diagnostics'
     | '/admin/doctors'
@@ -278,6 +290,7 @@ export interface FileRouteTypes {
     | '/chekapy/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
+    | '/_authenticated/admin/checkups'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/diagnostics'
     | '/_authenticated/admin/doctors'
@@ -389,6 +402,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBranchesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/checkups': {
+      id: '/_authenticated/admin/checkups'
+      path: '/checkups'
+      fullPath: '/admin/checkups'
+      preLoaderRoute: typeof AuthenticatedAdminCheckupsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/content': {
       id: '/_authenticated/admin/content'
       path: '/content'
@@ -464,6 +484,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBranchesRoute: typeof AuthenticatedAdminBranchesRoute
+  AuthenticatedAdminCheckupsRoute: typeof AuthenticatedAdminCheckupsRoute
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
   AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
@@ -480,6 +501,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminBranchesRoute: AuthenticatedAdminBranchesRoute,
+    AuthenticatedAdminCheckupsRoute: AuthenticatedAdminCheckupsRoute,
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
     AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
     AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
