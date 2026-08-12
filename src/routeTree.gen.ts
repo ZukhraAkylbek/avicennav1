@@ -17,6 +17,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
+import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -70,6 +71,11 @@ const CheckupsIndexRoute = CheckupsIndexRouteImport.update({
 const CheckupsSlugRoute = CheckupsSlugRouteImport.update({
   id: '/checkups/$slug',
   path: '/checkups/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
+  id: '/chekapy/',
+  path: '/chekapy/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
+  '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByTo {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups': typeof CheckupsIndexRoute
+  '/chekapy': typeof ChekapyIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
+  '/chekapy/': typeof ChekapyIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
+    | '/chekapy/'
     | '/napravleniya/'
     | '/admin/branches'
     | '/admin/checkups'
@@ -263,6 +273,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/napravleniya/$slug'
     | '/checkups'
+    | '/chekapy'
     | '/napravleniya'
     | '/admin/branches'
     | '/admin/checkups'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/checkups/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
+    | '/chekapy/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
     | '/_authenticated/admin/checkups'
@@ -313,6 +325,7 @@ export interface RootRouteChildren {
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
+  ChekapyIndexRoute: typeof ChekapyIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
 
@@ -372,6 +385,13 @@ declare module '@tanstack/react-router' {
       path: '/checkups/$slug'
       fullPath: '/checkups/$slug'
       preLoaderRoute: typeof CheckupsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chekapy/': {
+      id: '/chekapy/'
+      path: '/chekapy'
+      fullPath: '/chekapy/'
+      preLoaderRoute: typeof ChekapyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -540,18 +560,9 @@ const rootRouteChildren: RootRouteChildren = {
   CheckupsSlugRoute: CheckupsSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
+  ChekapyIndexRoute: ChekapyIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
