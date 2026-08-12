@@ -30,7 +30,7 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin/media", label: "Медиа", icon: Images },
   { to: "/admin/seo", label: "SEO", icon: Search },
   { to: "/admin/settings", label: "Настройки", icon: Settings },
-] as const;
+];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
