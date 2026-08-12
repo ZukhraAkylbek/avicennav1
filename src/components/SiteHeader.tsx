@@ -2,7 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
+import logo from "@/assets/logo-avicenna.png.asset.json";
 import { BOOKING_URL } from "@/lib/site-config";
+
 import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
@@ -30,14 +32,16 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3.5 sm:px-6 lg:flex lg:gap-8">
         <div className="flex min-w-0 items-center gap-3">
-          <Link to="/" className="flex shrink-0 items-center gap-2">
-            <span className="bg-brand-green text-brand-white grid size-8 place-items-center rounded-full text-sm font-extrabold">
-              A
-            </span>
-            <span className="text-foreground text-lg font-extrabold tracking-tight">
-              Авиценна
-            </span>
+          <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
+            <img
+              src={logo.url}
+              alt="Клинико-диагностический центр «Авиценна»"
+              width={840}
+              height={393}
+              className="h-9 w-auto sm:h-11"
+            />
           </Link>
+
           {breadcrumb && (
             <span className="text-muted-foreground hidden truncate text-sm sm:block">
               / {breadcrumb}

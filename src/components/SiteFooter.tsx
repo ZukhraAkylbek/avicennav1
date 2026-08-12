@@ -1,17 +1,21 @@
+import logo from "@/assets/logo-avicenna.png.asset.json";
 import { CLINIC } from "@/lib/clinic";
-import { BOOKING_URL, SITE_NAME } from "@/lib/site-config";
+import { BOOKING_URL } from "@/lib/site-config";
 
 export function SiteFooter() {
   return (
     <footer id="contacts" className="border-border border-t">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="bg-brand-green text-brand-white grid size-8 place-items-center rounded-full text-sm font-extrabold">
-              A
-            </span>
-            <span className="text-foreground text-lg font-extrabold">{SITE_NAME}</span>
-          </div>
+          <img
+            src={logo.url}
+            alt="Клинико-диагностический центр «Авиценна»"
+            width={840}
+            height={393}
+            loading="lazy"
+            className="h-11 w-auto"
+          />
+
           <p className="text-muted-foreground mt-4 max-w-sm text-base">
             Сеть многопрофильных клиник в Бишкеке. Травмпункт и стационар — круглосуточно.
           </p>
