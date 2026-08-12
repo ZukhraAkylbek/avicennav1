@@ -20,11 +20,12 @@ const loadGoogleMapsScript = (() => {
     const key = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"];
     const channel = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID"];
 
-    if (!key) {
-      throw new Error("Google Maps browser key is not configured");
-    }
-
     promise = new Promise<typeof google.maps>((resolve, reject) => {
+      if (!key) {
+        reject(new Error("Google Maps browser key is not configured"));
+        return;
+      }
+
       const existing = document.querySelector(`script[data-avicenna-maps="true"]`);
       if (existing) {
         if (typeof google !== "undefined" && google.maps?.Map) {
