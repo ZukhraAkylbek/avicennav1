@@ -60,7 +60,7 @@ const loadGoogleMapsScript = (() => {
       script.dataset["avicennaMaps"] = "true";
       script.onerror = () => reject(new Error("Failed to load Google Maps script"));
 
-      document.head.appendChild(script);
+      document.body.appendChild(script);
     });
 
     return promise;
