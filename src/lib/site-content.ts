@@ -1,16 +1,34 @@
+import type { CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { supabase } from "@/integrations/supabase/client";
 
 export const SITE_IMAGES_BUCKET = "site-images";
 
+export type ElementStyle = {
+  fontFamily?: string;
+  fontSize?: number;
+  fontWeight?: number;
+  color?: string;
+  lineHeight?: number;
+  letterSpacing?: number;
+  textAlign?: "left" | "center" | "right";
+  textTransform?: "none" | "uppercase";
+  italic?: boolean;
+};
+
 export type SiteContentRow = {
   key: string;
   value: string | null;
   image_path: string | null;
+  style_json?: ElementStyle | null;
 };
 
-export type SiteContentMap = Record<string, { value: string | null; url: string | null }>;
+export type SiteContentMap = Record<
+  string,
+  { value: string | null; url: string | null; style: ElementStyle | null }
+>;
+
 
 /** Реестр редактируемых полей: админка строится автоматически из этого списка. */
 export type ContentField = {
