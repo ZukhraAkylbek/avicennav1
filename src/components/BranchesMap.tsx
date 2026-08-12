@@ -242,7 +242,10 @@ export function BranchesMap() {
             ))}
           </div>
 
-          <div className="order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2">
+          <div
+            ref={mapRef}
+            className="order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2"
+          >
             {status === "error" ? (
               <div className="flex h-[320px] flex-col items-center justify-center gap-3 bg-white px-6 text-center lg:h-full lg:min-h-[420px]">
                 <div className="bg-surface-green flex h-12 w-12 items-center justify-center rounded-full">
@@ -260,7 +263,7 @@ export function BranchesMap() {
                 <div className="border-brand-green h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
               </div>
             ) : (
-              <div ref={mapRef} className="h-[320px] w-full lg:h-full lg:min-h-[420px]" />
+              <div className="h-[320px] w-full lg:h-full lg:min-h-[420px]" />
             )}
           </div>
 
