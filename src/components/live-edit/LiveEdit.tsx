@@ -148,9 +148,10 @@ function StyleToolbar() {
 
   useEffect(() => setText(sel.text), [sel.key, sel.text]);
 
-  const patchStyle = (patch: Partial<ElementStyle>) => {
-    const next = { ...saved, ...patch };
-    void ctx.save(sel.key, { style_json: next }).then(() => setStatus("Сохранено"));
+  const patchStyle = (patch: Record<string, unknown>) => {
+    const next = { ...saved, ...patch } as Record<string, unknown>;
+    for (const k of Object.keys(next)) if (next[k] === undefined) delete next[k];
+    void ctx.save(sel.key, { style_json: next as ElementStyle }).then(() => setStatus("Сохранено"));
   };
 
   const saveText = () => {
