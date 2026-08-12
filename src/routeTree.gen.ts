@@ -19,6 +19,7 @@ import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.ind
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
+import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
 import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
 import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
@@ -73,6 +74,12 @@ const AuthenticatedAdminContentRoute =
     path: '/content',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminDoctorsRoute =
+  AuthenticatedAdminDoctorsRouteImport.update({
+    id: '/doctors',
+    path: '/doctors',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
   id: '/hero',
   path: '/hero',
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
@@ -128,6 +137,7 @@ export interface FileRoutesById {
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
+  '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
   '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/admin/content'
+    | '/admin/doctors'
     | '/admin/hero'
     | '/admin/napravleniya'
     | '/admin/pages'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya'
     | '/admin/content'
+    | '/admin/doctors'
     | '/admin/hero'
     | '/admin/napravleniya'
     | '/admin/pages'
@@ -172,6 +184,7 @@ export interface FileRouteTypes {
     | '/napravleniya/$slug'
     | '/napravleniya/'
     | '/_authenticated/admin/content'
+    | '/_authenticated/admin/doctors'
     | '/_authenticated/admin/hero'
     | '/_authenticated/admin/napravleniya'
     | '/_authenticated/admin/pages'
@@ -260,6 +273,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/doctors': {
+      id: '/_authenticated/admin/doctors'
+      path: '/doctors'
+      fullPath: '/admin/doctors'
+      preLoaderRoute: typeof AuthenticatedAdminDoctorsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/hero': {
       id: '/_authenticated/admin/hero'
       path: '/hero'
@@ -286,6 +306,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
+  AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
   AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
   AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
@@ -295,6 +316,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
+    AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
     AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
     AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
     AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
