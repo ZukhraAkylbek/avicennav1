@@ -77,6 +77,14 @@ export function BranchesMap() {
 
     let cancelled = false;
 
+    const handleAuthFailure = () => {
+      setError(
+        "Карта не загрузилась из-за ограничения ключа Google Maps. В списке слева есть ссылки для построения маршрута.",
+      );
+    };
+
+    (window as typeof window & { gm_authFailure?: () => void }).gm_authFailure = handleAuthFailure;
+
     loadGoogleMapsScript()
       .then((maps) => {
         if (cancelled || !mapRef.current) return;
@@ -123,7 +131,7 @@ export function BranchesMap() {
       })
       .catch((err) => {
         console.error("Google Maps error:", err);
-        setError("Карта временно недоступна. Используйте список адресов ниже.");
+        setError("Карта временно недоступна. Используйте список адресов слева.");
       });
 
     return () => {
@@ -133,6 +141,7 @@ export function BranchesMap() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const handleBranchClick = (branch: Branch) => {
     if (!map || !infoWindow) return;
