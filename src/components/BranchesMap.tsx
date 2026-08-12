@@ -240,22 +240,27 @@ export function BranchesMap() {
             ))}
           </div>
 
-          <div className="order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2">
-            {status === "error" ? (
-              <div className="flex h-[320px] flex-col items-center justify-center gap-4 bg-surface-soft px-6 text-center lg:h-full lg:min-h-[420px]">
-                <p className="text-muted-foreground max-w-xs text-sm">{errorMessage}</p>
-                <p className="text-muted-foreground text-xs">
-                  На рабочем домене карта отобразится автоматически.
+          <div className="relative order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2">
+            {status === "error" && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-surface-soft px-6 text-center">
+                <p className="text-foreground max-w-xs text-sm font-medium">{errorMessage}</p>
+                <p className="text-muted-foreground max-w-xs text-xs">
+                  На рабочем домене карта отобразится автоматически. Ссылки на маршруты — в списке слева.
                 </p>
               </div>
-            ) : status === "loading" ? (
-              <div className="flex h-[320px] items-center justify-center bg-surface-soft px-6 lg:h-full lg:min-h-[420px]">
+            )}
+            {status === "loading" && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-surface-soft px-6">
                 <div className="border-brand-green h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
               </div>
-            ) : (
-              <div ref={mapRef} className="h-[320px] w-full lg:h-full lg:min-h-[420px]" />
             )}
+            <div
+              ref={mapRef}
+              className="h-[320px] w-full lg:h-full lg:min-h-[420px]"
+              style={{ display: status === "error" ? "none" : "block" }}
+            />
           </div>
+
 
         </div>
       </div>
