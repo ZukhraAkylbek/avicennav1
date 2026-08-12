@@ -14,11 +14,21 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminBranchesRouteImport } from './routes/_authenticated/admin/branches'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin/content'
+import { Route as AuthenticatedAdminDiagnosticsRouteImport } from './routes/_authenticated/admin/diagnostics'
+import { Route as AuthenticatedAdminDoctorsRouteImport } from './routes/_authenticated/admin/doctors'
 import { Route as AuthenticatedAdminHeroRouteImport } from './routes/_authenticated/admin/hero'
+import { Route as AuthenticatedAdminMediaRouteImport } from './routes/_authenticated/admin/media'
+import { Route as AuthenticatedAdminNapravleniyaRouteImport } from './routes/_authenticated/admin/napravleniya'
 import { Route as AuthenticatedAdminPagesRouteImport } from './routes/_authenticated/admin/pages'
+import { Route as AuthenticatedAdminSeoRouteImport } from './routes/_authenticated/admin/seo'
+import { Route as AuthenticatedAdminServicesRouteImport } from './routes/_authenticated/admin/services'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -44,6 +54,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
   id: '/napravleniya/',
   path: '/napravleniya/',
@@ -54,33 +69,94 @@ const NapravleniyaSlugRoute = NapravleniyaSlugRouteImport.update({
   path: '/napravleniya/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminBranchesRoute =
+  AuthenticatedAdminBranchesRouteImport.update({
+    id: '/branches',
+    path: '/branches',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminContentRoute =
   AuthenticatedAdminContentRouteImport.update({
-    id: '/admin/content',
-    path: '/admin/content',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    id: '/content',
+    path: '/content',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminDiagnosticsRoute =
+  AuthenticatedAdminDiagnosticsRouteImport.update({
+    id: '/diagnostics',
+    path: '/diagnostics',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminDoctorsRoute =
+  AuthenticatedAdminDoctorsRouteImport.update({
+    id: '/doctors',
+    path: '/doctors',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminHeroRoute = AuthenticatedAdminHeroRouteImport.update({
-  id: '/admin/hero',
-  path: '/admin/hero',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  id: '/hero',
+  path: '/hero',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminMediaRoute = AuthenticatedAdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminNapravleniyaRoute =
+  AuthenticatedAdminNapravleniyaRouteImport.update({
+    id: '/napravleniya',
+    path: '/napravleniya',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminPagesRoute = AuthenticatedAdminPagesRouteImport.update({
-  id: '/admin/pages',
-  path: '/admin/pages',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  id: '/pages',
+  path: '/pages',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminSeoRoute = AuthenticatedAdminSeoRouteImport.update({
+  id: '/seo',
+  path: '/seo',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminServicesRoute =
+  AuthenticatedAdminServicesRouteImport.update({
+    id: '/services',
+    path: '/services',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
+  '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
+  '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/media': typeof AuthenticatedAdminMediaRoute
+  '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/admin/services': typeof AuthenticatedAdminServicesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -89,9 +165,18 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
+  '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
+  '/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/admin/media': typeof AuthenticatedAdminMediaRoute
+  '/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/admin/services': typeof AuthenticatedAdminServicesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -100,11 +185,21 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
+  '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
+  '/_authenticated/admin/diagnostics': typeof AuthenticatedAdminDiagnosticsRoute
+  '/_authenticated/admin/doctors': typeof AuthenticatedAdminDoctorsRoute
   '/_authenticated/admin/hero': typeof AuthenticatedAdminHeroRoute
+  '/_authenticated/admin/media': typeof AuthenticatedAdminMediaRoute
+  '/_authenticated/admin/napravleniya': typeof AuthenticatedAdminNapravleniyaRoute
   '/_authenticated/admin/pages': typeof AuthenticatedAdminPagesRoute
+  '/_authenticated/admin/seo': typeof AuthenticatedAdminSeoRoute
+  '/_authenticated/admin/services': typeof AuthenticatedAdminServicesRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -113,11 +208,21 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/admin'
     | '/napravleniya/$slug'
     | '/napravleniya/'
+    | '/admin/branches'
     | '/admin/content'
+    | '/admin/diagnostics'
+    | '/admin/doctors'
     | '/admin/hero'
+    | '/admin/media'
+    | '/admin/napravleniya'
     | '/admin/pages'
+    | '/admin/seo'
+    | '/admin/services'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -126,9 +231,18 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/napravleniya/$slug'
     | '/napravleniya'
+    | '/admin/branches'
     | '/admin/content'
+    | '/admin/diagnostics'
+    | '/admin/doctors'
     | '/admin/hero'
+    | '/admin/media'
+    | '/admin/napravleniya'
     | '/admin/pages'
+    | '/admin/seo'
+    | '/admin/services'
+    | '/admin/settings'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -136,11 +250,21 @@ export interface FileRouteTypes {
     | '/$'
     | '/auth'
     | '/sitemap.xml'
+    | '/_authenticated/admin'
     | '/napravleniya/$slug'
     | '/napravleniya/'
+    | '/_authenticated/admin/branches'
     | '/_authenticated/admin/content'
+    | '/_authenticated/admin/diagnostics'
+    | '/_authenticated/admin/doctors'
     | '/_authenticated/admin/hero'
+    | '/_authenticated/admin/media'
+    | '/_authenticated/admin/napravleniya'
     | '/_authenticated/admin/pages'
+    | '/_authenticated/admin/seo'
+    | '/_authenticated/admin/services'
+    | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -190,6 +314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/napravleniya/': {
       id: '/napravleniya/'
       path: '/napravleniya'
@@ -204,40 +335,135 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NapravleniyaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/branches': {
+      id: '/_authenticated/admin/branches'
+      path: '/branches'
+      fullPath: '/admin/branches'
+      preLoaderRoute: typeof AuthenticatedAdminBranchesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/content': {
       id: '/_authenticated/admin/content'
-      path: '/admin/content'
+      path: '/content'
       fullPath: '/admin/content'
       preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/diagnostics': {
+      id: '/_authenticated/admin/diagnostics'
+      path: '/diagnostics'
+      fullPath: '/admin/diagnostics'
+      preLoaderRoute: typeof AuthenticatedAdminDiagnosticsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/doctors': {
+      id: '/_authenticated/admin/doctors'
+      path: '/doctors'
+      fullPath: '/admin/doctors'
+      preLoaderRoute: typeof AuthenticatedAdminDoctorsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/hero': {
       id: '/_authenticated/admin/hero'
-      path: '/admin/hero'
+      path: '/hero'
       fullPath: '/admin/hero'
       preLoaderRoute: typeof AuthenticatedAdminHeroRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/media': {
+      id: '/_authenticated/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AuthenticatedAdminMediaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/napravleniya': {
+      id: '/_authenticated/admin/napravleniya'
+      path: '/napravleniya'
+      fullPath: '/admin/napravleniya'
+      preLoaderRoute: typeof AuthenticatedAdminNapravleniyaRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/pages': {
       id: '/_authenticated/admin/pages'
-      path: '/admin/pages'
+      path: '/pages'
       fullPath: '/admin/pages'
       preLoaderRoute: typeof AuthenticatedAdminPagesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/seo': {
+      id: '/_authenticated/admin/seo'
+      path: '/seo'
+      fullPath: '/admin/seo'
+      preLoaderRoute: typeof AuthenticatedAdminSeoRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/services': {
+      id: '/_authenticated/admin/services'
+      path: '/services'
+      fullPath: '/admin/services'
+      preLoaderRoute: typeof AuthenticatedAdminServicesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminBranchesRoute: typeof AuthenticatedAdminBranchesRoute
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
+  AuthenticatedAdminDiagnosticsRoute: typeof AuthenticatedAdminDiagnosticsRoute
+  AuthenticatedAdminDoctorsRoute: typeof AuthenticatedAdminDoctorsRoute
   AuthenticatedAdminHeroRoute: typeof AuthenticatedAdminHeroRoute
+  AuthenticatedAdminMediaRoute: typeof AuthenticatedAdminMediaRoute
+  AuthenticatedAdminNapravleniyaRoute: typeof AuthenticatedAdminNapravleniyaRoute
   AuthenticatedAdminPagesRoute: typeof AuthenticatedAdminPagesRoute
+  AuthenticatedAdminSeoRoute: typeof AuthenticatedAdminSeoRoute
+  AuthenticatedAdminServicesRoute: typeof AuthenticatedAdminServicesRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminBranchesRoute: AuthenticatedAdminBranchesRoute,
+    AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
+    AuthenticatedAdminDiagnosticsRoute: AuthenticatedAdminDiagnosticsRoute,
+    AuthenticatedAdminDoctorsRoute: AuthenticatedAdminDoctorsRoute,
+    AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
+    AuthenticatedAdminMediaRoute: AuthenticatedAdminMediaRoute,
+    AuthenticatedAdminNapravleniyaRoute: AuthenticatedAdminNapravleniyaRoute,
+    AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
+    AuthenticatedAdminSeoRoute: AuthenticatedAdminSeoRoute,
+    AuthenticatedAdminServicesRoute: AuthenticatedAdminServicesRoute,
+    AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
-  AuthenticatedAdminHeroRoute: AuthenticatedAdminHeroRoute,
-  AuthenticatedAdminPagesRoute: AuthenticatedAdminPagesRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -255,13 +481,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
