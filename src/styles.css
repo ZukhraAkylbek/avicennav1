@@ -60,11 +60,13 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Typography */
+  /* Typography — Gotham Pro / Segoe UI с системными и веб-фолбэками */
   --font-sans:
-    "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    "Segoe UI", "Gotham Pro", "Montserrat", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
   --font-display:
-    "Montserrat", "Futura", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
+    "Gotham Pro", "Segoe UI", "Montserrat", "Futura", ui-sans-serif, system-ui, sans-serif;
+
 
 
   /* Brand palette */
