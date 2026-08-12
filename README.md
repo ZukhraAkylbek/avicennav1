@@ -1,38 +1,43 @@
-# Theme Manager
+# Авиценна — сайт сети клиник
 
-Настрой цвета проекта как CSS-переменные (не хардкодь в компонентах):
+Современный сайт медицинского центра «Авиценна» (Бишкек), построенный на TanStack Start + React + Tailwind CSS.
 
-- Основной зелёный: #0F9247
+**Опубликованная версия в Lovable**: https://avicennav1.lovable.app
 
-- Акцент для CTA (приглушённый красный/терракотовый, вместо яркого красного): #C4574C
-
-- Чёрный: #000000 (только текст и инверсные плашки, не фон)
-
-- Белый — основной фон
-
-- Добавь один нейтральный серый для второстепенного текста, например #6B7280
-
-Примени эти переменные глобально в theme/tailwind config.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://avicennav1.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/267cbd0c-fd0c-4294-92cc-033ccd40b15d).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Разработка
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev
 ```
+
+## Самостоятельный деплой на Vercel
+
+Проект уже настроен для сборки под Vercel (`nitro: { preset: "vercel" }` в `vite.config.ts` и `vercel.json`).
+
+1. **Синхронизируйте код с GitHub** через встроенную интеграцию Lovable:
+   - В редакторе Lovable нажмите **+** → **GitHub** → **Connect project**.
+   - Выберите аккаунт/организацию и создайте/выберите репозиторий.
+   - Дождитесь синхронизации.
+
+2. **Импортируйте репозиторий в Vercel**:
+   - Dashboard Vercel → **Add New Project** → выберите репозиторий GitHub.
+   - Framework Preset оставьте на **Other** (контролируется `vercel.json`).
+   - Build Command: `vite build` (уже задано в `vercel.json`).
+
+3. **Добавьте переменные окружения** в Vercel (Project Settings → Environment Variables):
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`
+   - `VITE_SUPABASE_PROJECT_ID`
+   - `SUPABASE_URL`
+   - `SUPABASE_PUBLISHABLE_KEY`
+   - `SUPABASE_PROJECT_ID`
+   - `LOVABLE_API_KEY` — берётся из секретов проекта в Lovable.
+   - `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY` (если используется карта)
+   - `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID` (если используется карта)
+
+4. **Запустите деплой**. Vercel соберёт проект и создаст SSR-функции для всех маршрутов.
+
+## Почему раньше не отображалось на Vercel
+
+По умолчанию Lovable собирает TanStack Start под Cloudflare Workers. Для Vercel нужен Nitro-пресет `vercel`, который теперь задан в `vite.config.ts`.
