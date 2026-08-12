@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_authenticated/admin/branches")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  component: AdminBranches;
+  component: AdminBranches,
 });
 
 function AdminBranches() {
