@@ -114,6 +114,17 @@
   --surface-green: oklch(0.94 0.075 152);
   --surface-red: oklch(0.94 0.065 32);
 
+  /* Админка */
+  --admin-blue: oklch(0.55 0.15 245);
+  --admin-blue-soft: oklch(0.96 0.025 245);
+  --admin-teal: oklch(0.66 0.12 190);
+  --admin-teal-soft: oklch(0.96 0.03 190);
+  --admin-bg: oklch(0.985 0.004 240);
+  --admin-line: oklch(0.925 0.008 245);
+  --admin-ink: oklch(0.23 0.03 250);
+  --admin-muted: oklch(0.56 0.02 250);
+
+
 
 
 
