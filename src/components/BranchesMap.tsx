@@ -1,6 +1,9 @@
+/// <reference types="@types/google.maps" />
+
 import { useEffect, useRef, useState } from "react";
 
 import { CLINIC, doubleGisSearchUrl, googleMapsDirectionsUrl, googleMapsUrl } from "@/lib/clinic";
+
 
 type Branch = (typeof CLINIC.branches)[number];
 
