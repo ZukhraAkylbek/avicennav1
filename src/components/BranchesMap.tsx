@@ -242,7 +242,7 @@ export function BranchesMap() {
 
           <div className="relative order-1 overflow-hidden rounded-2xl border shadow-sm lg:order-2">
             {status === "error" && (
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-white px-6 text-center">
+              <div className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-3 bg-white px-6 text-center">
                 <div className="bg-surface-green flex h-12 w-12 items-center justify-center rounded-full">
                   <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.447-.894L15 7m0 13V7m0 0L9.553 4.553A1 1 0 009 4.118v0" />
@@ -255,10 +255,11 @@ export function BranchesMap() {
               </div>
             )}
             {status === "loading" && (
-              <div className="absolute inset-0 z-10 flex items-center justify-center bg-white px-6">
+              <div className="absolute inset-0 z-50 flex items-center justify-center bg-white px-6">
                 <div className="border-brand-green h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
               </div>
             )}
+
             <div
               ref={mapRef}
               className="h-[320px] w-full lg:h-full lg:min-h-[420px]"
