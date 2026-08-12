@@ -365,9 +365,10 @@ export function Editable({
   children,
 }: EditableProps) {
   const ctx = useLiveEdit();
-  const hydrated = useHydrated();
   const Tag = (as ?? "span") as ElementType;
-  const row = hydrated ? ctx?.content?.[ekey] : undefined;
+  // Никаких клиентских ветвлений: и на сервере, и при гидратации берём одни и те же данные
+  // из кэша запроса (он передаётся с SSR), иначе текст не совпадает и React ругается.
+  const row = ctx?.content?.[ekey];
   const text = row?.value && row.value.trim().length > 0 ? row.value : fallback;
   const style = styleToCss(row?.style);
   const active = Boolean(ctx?.isAdmin && ctx?.editing);
