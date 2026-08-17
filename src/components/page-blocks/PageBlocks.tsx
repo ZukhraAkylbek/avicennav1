@@ -54,7 +54,7 @@ export const BLOCK_ICONS: Record<string, LucideIcon> = {
 
 export const BLOCK_ICON_NAMES = Object.keys(BLOCK_ICONS);
 
-function Icon({ name, className }: { name?: string; className?: string }) {
+function Icon({ name, className }: { name?: string | undefined; className?: string }) {
   const Cmp = (name && BLOCK_ICONS[name]) || Sparkles;
   return <Cmp className={className} aria-hidden="true" />;
 }
