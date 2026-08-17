@@ -22,7 +22,7 @@ export function SymptomNavigator({
 
   return (
     <section id="navigator" className="border-border border-b">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
         <p className="text-accent text-[13px] font-extrabold tracking-[0.18em] uppercase">
           Навигатор
         </p>

@@ -81,7 +81,7 @@ function DiagnosticsPage() {
       <main>
         {hero && (
           <section className="border-border border-b">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+            <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
               <nav className="text-muted-foreground flex items-center gap-1.5 text-[13px] font-semibold">
                 <Link to="/" className="hover:text-foreground">
                   Главная
@@ -146,7 +146,7 @@ function DiagnosticsPage() {
 
         {catalog && (
           <section id="catalog" className="border-border border-b">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+            <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
               <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-[42px]">
                 {catalog.title}
               </h2>
@@ -249,7 +249,7 @@ function DiagnosticsPage() {
 
         {advantages && (
           <section className="border-border border-b">
-            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+            <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
               <div className="bg-surface-soft rounded-[2rem] px-6 py-10 sm:px-10 lg:py-14">
                 <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-[38px]">
                   {advantages.title}
@@ -266,7 +266,7 @@ function DiagnosticsPage() {
 
         {cta && (
           <section>
-            <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
+            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
               <h2 className="text-foreground text-3xl font-extrabold tracking-tight sm:text-[38px]">
                 {cta.title}
               </h2>
