@@ -12,6 +12,8 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteRefresh } from "@/lib/admin-refresh";
+import { BlocksEditor } from "@/components/admin/BlocksEditor";
+import { parseBlocks, type PageBlock } from "@/lib/page-blocks";
 
 export const Route = createFileRoute("/_authenticated/admin/pages")({
   head: () => ({
@@ -45,12 +47,13 @@ type PageRow = {
   meta_title: string | null;
   meta_description: string | null;
   body: string | null;
+  blocks: unknown;
   sort_order: number;
   is_published: boolean;
 };
 
 const SELECT =
-  "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, sort_order, is_published";
+  "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, blocks, sort_order, is_published";
 
 const slugify = (value: string) =>
   value
@@ -332,6 +335,12 @@ function AdminPages() {
                   placeholder="Текст страницы (абзацы разделяйте пустой строкой)"
                   onBlur={(e) => update.mutate({ id: page.id, values: { body: e.target.value } })}
                 />
+                <PageBlocksPanel
+                  page={page}
+                  onSave={(blocks) =>
+                    update.mutate({ id: page.id, values: { blocks } as Partial<PageRow> })
+                  }
+                />
                 <div className="flex flex-wrap items-center gap-4">
                   <div className="flex items-center gap-2">
                     <Label htmlFor={`order-${page.id}`} className="text-sm">
@@ -383,6 +392,41 @@ function AdminPages() {
             </details>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+/** Конструктор блоков конкретной страницы. */
+function PageBlocksPanel({
+  page,
+  onSave,
+}: {
+  page: PageRow;
+  onSave: (blocks: PageBlock[]) => void;
+}) {
+  const [blocks, setBlocks] = useState<PageBlock[]>(() => parseBlocks(page.blocks));
+
+  return (
+    <div className="border-border mt-4 rounded-xl border p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 className="text-foreground text-lg font-extrabold">Блоки страницы</h3>
+          <p className="text-muted-foreground text-sm">
+            Hero, текст, таймлайн, цифры, карточки, вопросы-ответы, филиалы, миссия и оффер.
+          </p>
+        </div>
+        <Button
+          onClick={() => {
+            onSave(blocks);
+            toast.success("Блоки сохранены");
+          }}
+        >
+          Сохранить блоки
+        </Button>
+      </div>
+      <div className="mt-4">
+        <BlocksEditor blocks={blocks} onChange={setBlocks} />
       </div>
     </div>
   );
