@@ -18,7 +18,7 @@ const NAV_ANCHORS = [
   { label: "Поликлиника", href: "/#napravleniya" },
   { label: "Услуги", href: "/#uslugi" },
   { label: "Диагностика", href: "/diagnostika" },
-  { label: "О нас", href: "/#faq" },
+  { label: "О нас", href: "/about" },
 ];
 
 
