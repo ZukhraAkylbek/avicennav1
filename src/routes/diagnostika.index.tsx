@@ -188,44 +188,55 @@ function DiagnosticsPage() {
                 </div>
               )}
 
-              <div className="mt-10 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid auto-rows-fr gap-4 sm:mt-10 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {filtered.map((item) => (
                   <Reveal key={item.id} className="h-full">
                     <Link
                       to="/diagnostika/$slug"
                       params={{ slug: item.slug }}
-                      className="group border-border bg-card hover:border-primary/40 flex h-full flex-col rounded-[1.75rem] border p-6 transition-all hover:shadow-xl"
+                      className="group border-border bg-card hover:border-primary/40 relative flex h-full flex-col overflow-hidden rounded-3xl border p-5 transition-all hover:shadow-xl sm:rounded-[1.75rem] sm:p-6"
                     >
-                      <div className="flex items-start justify-between gap-3">
+                      {item.image_url && (
+                        <img
+                          src={item.image_url}
+                          alt={item.title}
+                          loading="lazy"
+                          className="pointer-events-none absolute -top-2 right-0 h-32 w-[46%] object-contain opacity-90 transition-transform duration-500 group-hover:scale-105 sm:h-40"
+                        />
+                      )}
+                      <div className="relative flex items-start justify-between gap-3">
                         <DiagnosticsIcon
                           icon={item.icon}
-                          imageUrl={item.image_url}
                           title={item.title}
+                          className="size-10 rounded-xl sm:size-12 sm:rounded-2xl"
                         />
                         {item.badge && (
-                          <span className="bg-surface-red text-foreground rounded-full px-3 py-1 text-[12px] font-extrabold">
+                          <span className="bg-surface-red text-foreground rounded-full px-2.5 py-1 text-[11px] font-extrabold sm:px-3 sm:text-[12px]">
                             {item.badge}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-foreground mt-5 text-[21px] leading-tight font-extrabold tracking-tight">
+                      <h3 className="text-foreground relative mt-4 max-w-[54%] text-[18px] leading-tight font-extrabold tracking-tight sm:mt-5 sm:text-[21px]">
                         {item.title}
                       </h3>
                       {item.subtitle && (
-                        <p className="text-muted-foreground mt-2.5 text-[15px] leading-snug font-medium">
+                        <p className="text-muted-foreground relative mt-2 max-w-[56%] text-[14px] leading-snug font-medium sm:text-[15px]">
                           {item.subtitle}
                         </p>
                       )}
-                      <div className="mt-auto flex items-end justify-between gap-3 pt-6">
-                        <span className="text-primary text-[15px] font-extrabold">
+                      <div className="relative mt-auto flex items-end justify-between gap-3 pt-5 sm:pt-6">
+                        <span className="text-primary text-[14px] font-extrabold sm:text-[15px]">
                           {item.price ?? "Уточните стоимость"}
                         </span>
-                        <ArrowRight className="text-primary size-5 transition-transform group-hover:translate-x-1" />
+                        <span className="bg-primary/10 text-primary grid size-8 shrink-0 place-items-center rounded-full transition-transform group-hover:translate-x-1">
+                          <ArrowRight className="size-4" />
+                        </span>
                       </div>
                     </Link>
                   </Reveal>
                 ))}
               </div>
+
 
               {filtered.length === 0 && (
                 <p className="text-muted-foreground mt-10 text-[16px]">
