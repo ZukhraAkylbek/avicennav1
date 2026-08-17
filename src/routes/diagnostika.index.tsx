@@ -122,14 +122,16 @@ function DiagnosticsPage() {
                 </div>
 
                 {hero.image_url && (
-                  <div className="overflow-hidden rounded-[2rem]">
+                  <div className="overflow-hidden rounded-3xl sm:rounded-[2rem]">
                     <img
                       src={hero.image_url}
                       alt={hero.title}
-                      className="h-full w-full object-cover"
+                      loading="lazy"
+                      className="h-44 w-full object-cover sm:h-64 lg:h-full"
                     />
                   </div>
                 )}
+
               </div>
             </div>
           </section>
