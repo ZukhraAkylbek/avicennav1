@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/sheet";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export type CrudField = {
   name: string;
@@ -66,6 +67,7 @@ export function CrudManager({
   filter,
 }: CrudManagerProps) {
   const queryClient = useQueryClient();
+  const refreshSite = useSiteRefresh();
   const [search, setSearch] = useState("");
   const [draft, setDraft] = useState<Record<string, unknown> | null>(null);
 
@@ -82,7 +84,11 @@ export function CrudManager({
     },
   });
 
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: [queryKey] });
+  const invalidate = () => {
+    void queryClient.invalidateQueries({ queryKey: [queryKey] });
+    // Публичные страницы читают эти же таблицы под другими ключами — обновляем и их.
+    void refreshSite();
+  };
 
   const saveMutation = useMutation({
     mutationFn: async (values: Record<string, unknown>) => {

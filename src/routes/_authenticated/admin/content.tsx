@@ -15,6 +15,7 @@ import {
   fetchSiteContent,
   type ContentField,
 } from "@/lib/site-content";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/content")({
   head: () => ({
@@ -55,8 +56,8 @@ function AdminContent() {
     queryFn: fetchSiteContent,
   });
 
-  const invalidate = () =>
-    void queryClient.invalidateQueries({ queryKey: ["site-content"] });
+  const refreshSite = useSiteRefresh();
+  const invalidate = () => void refreshSite();
 
   const saveText = useMutation({
     mutationFn: async ({ key, value }: { key: string; value: string }) => {

@@ -21,6 +21,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { SITE_IMAGES_BUCKET } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/diagnostics")({
   head: () => ({
@@ -130,9 +131,10 @@ function AdminDiagnostics() {
   const itemFileRef = useRef<HTMLInputElement>(null);
   const heroFileRef = useRef<HTMLInputElement>(null);
 
+  const refreshSite = useSiteRefresh();
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["admin-diagnostics"] });
-    void queryClient.invalidateQueries({ queryKey: ["diagnostics"] });
+    void refreshSite();
   };
 
   const { data: sections } = useQuery({

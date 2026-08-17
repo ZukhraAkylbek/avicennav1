@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/settings")({
   head: () => ({
@@ -41,6 +42,7 @@ const FONTS = [
 
 function AdminSettings() {
   const queryClient = useQueryClient();
+  const refreshSite = useSiteRefresh();
   const [form, setForm] = useState({ heading_font: "Montserrat", body_font: "Manrope", font_scale: 1 });
 
   const { data } = useQuery({
@@ -88,7 +90,7 @@ function AdminSettings() {
     },
     onSuccess: () => {
       toast.success("Настройки сохранены");
-      void queryClient.invalidateQueries({ queryKey: ["site-settings"] });
+      void refreshSite();
     },
     onError: (error: Error) => toast.error(error.message),
   });

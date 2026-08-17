@@ -15,6 +15,7 @@ import {
   fetchAllHeroSlides,
   type HeroSlideWithUrl,
 } from "@/lib/hero-slides";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/hero")({
   head: () => ({
@@ -45,8 +46,10 @@ function AdminHero() {
     queryFn: fetchAllHeroSlides,
   });
 
+  const refreshSite = useSiteRefresh();
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["hero-slides"] });
+    void refreshSite();
   };
 
   const update = useMutation({

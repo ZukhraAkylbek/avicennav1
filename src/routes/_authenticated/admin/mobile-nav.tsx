@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchSiteContent } from "@/lib/site-content";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/mobile-nav")({
   head: () => ({
@@ -32,6 +33,7 @@ const ICON_HINT = ["Клиника", "Врачи", "Кнопка записи (�
 
 function AdminMobileNav() {
   const queryClient = useQueryClient();
+  const refreshSite = useSiteRefresh();
   const { data } = useQuery({ queryKey: ["site-content"], queryFn: fetchSiteContent });
   const [values, setValues] = useState<Record<string, string>>({});
 
@@ -54,7 +56,7 @@ function AdminMobileNav() {
     },
     onSuccess: () => {
       toast.success("Мобильное меню сохранено");
-      void queryClient.invalidateQueries({ queryKey: ["site-content"] });
+      void refreshSite();
     },
     onError: (error: Error) => toast.error(error.message),
   });

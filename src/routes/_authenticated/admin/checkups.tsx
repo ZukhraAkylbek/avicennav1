@@ -20,6 +20,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { SITE_IMAGES_BUCKET } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/checkups")({
   head: () => ({
@@ -84,10 +85,11 @@ function AdminCheckups() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
+  const refreshSite = useSiteRefresh();
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["admin-checkup-sections"] });
     void queryClient.invalidateQueries({ queryKey: ["admin-checkup-cards"] });
-    void queryClient.invalidateQueries({ queryKey: ["checkups"] });
+    void refreshSite();
   };
 
   const { data: sections, isLoading: loadingSections } = useQuery({
