@@ -20,6 +20,7 @@ import {
   type SiteContentMap,
 } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 const FONTS = [
   { label: "Как на сайте", value: "" },
@@ -53,6 +54,7 @@ export function useLiveEdit() {
 
 export function LiveEditProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
+  const refreshSite = useSiteRefresh();
   const [isAdmin, setIsAdmin] = useState(false);
   const [editing, setEditing] = useState(false);
   const [selected, setSelected] = useState<Selection | null>(null);
@@ -96,8 +98,9 @@ export function LiveEditProvider({ children }: { children: ReactNode }) {
         .from("site_content")
         .upsert({ key, ...patch, updated_at: new Date().toISOString() }, { onConflict: "key" });
       if (error) throw error;
+      await refreshSite();
     },
-    [queryClient],
+    [queryClient, refreshSite],
   );
 
   const value = useMemo<LiveEditCtx>(
