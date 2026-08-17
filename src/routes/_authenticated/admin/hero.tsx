@@ -11,11 +11,11 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import {
-import { useSiteRefresh } from "@/lib/admin-refresh";
   HERO_BUCKET,
   fetchAllHeroSlides,
   type HeroSlideWithUrl,
 } from "@/lib/hero-slides";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/hero")({
   head: () => ({

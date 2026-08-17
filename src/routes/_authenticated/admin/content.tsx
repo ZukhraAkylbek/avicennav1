@@ -10,12 +10,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import {
-import { useSiteRefresh } from "@/lib/admin-refresh";
   CONTENT_FIELDS,
   SITE_IMAGES_BUCKET,
   fetchSiteContent,
   type ContentField,
 } from "@/lib/site-content";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/content")({
   head: () => ({
