@@ -41,6 +41,15 @@ export type DiagnosticsItem = {
   body: string | null;
   includes: string | null;
   preparation: string | null;
+  hero_note: string | null;
+  advantages: string | null;
+  kinds: string | null;
+  offer_title: string | null;
+  offer_text: string | null;
+  schedule: string | null;
+  faq: string | null;
+  seo_heading: string | null;
+  seo_text: string | null;
   meta_title: string | null;
   meta_description: string | null;
   sort_order: number;
@@ -52,7 +61,7 @@ const SECTION_SELECT =
 const CATEGORY_SELECT = "id, key, name, sort_order";
 const SYMPTOM_SELECT = "id, name, recommendation, sort_order";
 const ITEM_SELECT =
-  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, meta_title, meta_description, sort_order, updated_at";
+  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, hero_note, advantages, kinds, offer_title, offer_text, schedule, faq, seo_heading, seo_text, meta_title, meta_description, sort_order, updated_at";
 
 export async function listDiagnosticsSections(): Promise<DiagnosticsSection[]> {
   const { data, error } = await publicClient()

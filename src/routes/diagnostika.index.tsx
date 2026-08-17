@@ -198,41 +198,33 @@ function DiagnosticsPage() {
                       params={{ slug: item.slug }}
                       className="group border-border bg-card hover:border-primary/40 relative flex h-full flex-col overflow-hidden rounded-3xl border p-5 transition-all hover:shadow-xl sm:rounded-[1.75rem] sm:p-6"
                     >
-                      {item.image_url && (
-                        <img
-                          src={item.image_url}
-                          alt={item.title}
-                          loading="lazy"
-                          className="pointer-events-none absolute -top-2 right-0 h-32 w-[46%] object-contain opacity-90 transition-transform duration-500 group-hover:scale-105 sm:h-40"
-                        />
-                      )}
                       <div className="relative flex items-start justify-between gap-3">
-                        <DiagnosticsIcon
-                          icon={item.icon}
-                          title={item.title}
-                          className="size-10 rounded-xl sm:size-12 sm:rounded-2xl"
-                        />
+                        <div className="flex items-center gap-2.5">
+                          <DiagnosticsIcon
+                            icon={item.icon}
+                            title={item.title}
+                            className="size-10 rounded-xl sm:size-12 sm:rounded-2xl"
+                          />
+                          {item.image_url && (
+                            <img
+                              src={item.image_url}
+                              alt={item.title}
+                              loading="lazy"
+                              className="bg-surface-soft size-10 shrink-0 rounded-xl object-contain p-1 transition-transform duration-300 group-hover:scale-105 sm:size-12 sm:rounded-2xl"
+                            />
+                          )}
+                        </div>
                         {item.badge && (
                           <span className="bg-surface-red text-foreground rounded-full px-2.5 py-1 text-[11px] font-extrabold sm:px-3 sm:text-[12px]">
                             {item.badge}
                           </span>
                         )}
                       </div>
-                      <h3
-                        className={cn(
-                          "text-foreground relative mt-4 text-[18px] leading-tight font-extrabold tracking-tight sm:mt-5 sm:text-[21px]",
-                          item.image_url && "max-w-[54%]",
-                        )}
-                      >
+                      <h3 className="text-foreground relative mt-4 text-[18px] leading-tight font-extrabold tracking-tight sm:mt-5 sm:text-[21px]">
                         {item.title}
                       </h3>
                       {item.subtitle && (
-                        <p
-                          className={cn(
-                            "text-muted-foreground relative mt-2 text-[14px] leading-snug font-medium sm:text-[15px]",
-                            item.image_url && "max-w-[56%]",
-                          )}
-                        >
+                        <p className="text-muted-foreground relative mt-2 text-[14px] leading-snug font-medium sm:text-[15px]">
                           {item.subtitle}
                         </p>
                       )}

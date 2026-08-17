@@ -94,6 +94,15 @@ type ItemRow = {
   body: string | null;
   includes: string | null;
   preparation: string | null;
+  hero_note: string | null;
+  advantages: string | null;
+  kinds: string | null;
+  offer_title: string | null;
+  offer_text: string | null;
+  schedule: string | null;
+  faq: string | null;
+  seo_heading: string | null;
+  seo_text: string | null;
   meta_title: string | null;
   meta_description: string | null;
   sort_order: number;
@@ -105,7 +114,7 @@ const SECTION_SELECT =
 const CATEGORY_SELECT = "id, key, name, sort_order, is_active";
 const SYMPTOM_SELECT = "id, name, recommendation, sort_order, is_active";
 const ITEM_SELECT =
-  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, meta_title, meta_description, sort_order, is_active";
+  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, hero_note, advantages, kinds, offer_title, offer_text, schedule, faq, seo_heading, seo_text, meta_title, meta_description, sort_order, is_active";
 
 const ICON_HINT = "Имя иконки lucide: Scan, HeartPulse, Waves, TestTube, Bone, Wind, Microscope…";
 
@@ -350,6 +359,15 @@ function AdminDiagnostics() {
         body: values.body ?? null,
         includes: values.includes ?? null,
         preparation: values.preparation ?? null,
+        hero_note: values.hero_note ?? null,
+        advantages: values.advantages ?? null,
+        kinds: values.kinds ?? null,
+        offer_title: values.offer_title ?? null,
+        offer_text: values.offer_text ?? null,
+        schedule: values.schedule ?? null,
+        faq: values.faq ?? null,
+        seo_heading: values.seo_heading ?? null,
+        seo_text: values.seo_text ?? null,
         meta_title: values.meta_title ?? null,
         meta_description: values.meta_description ?? null,
         is_active: values.is_active ?? true,
@@ -1017,6 +1035,79 @@ function AdminDiagnostics() {
                   rows={3}
                   value={itemDraft.preparation ?? ""}
                   onChange={(e) => setItemDraft({ ...itemDraft, preparation: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="Примечание под кнопкой (Hero)">
+                <Input
+                  value={itemDraft.hero_note ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, hero_note: e.target.value })}
+                  className="border-admin-line h-11 rounded-xl"
+                />
+              </Field>
+              <Field
+                label="Почему выбирают Авиценну"
+                hint="Каждая строка: Заголовок | описание. Пусто — покажем стандартные преимущества."
+              >
+                <Textarea
+                  rows={4}
+                  value={itemDraft.advantages ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, advantages: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="Виды исследования" hint="Каждая строка: Название | цена">
+                <Textarea
+                  rows={4}
+                  value={itemDraft.kinds ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, kinds: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Оффер: заголовок">
+                  <Input
+                    value={itemDraft.offer_title ?? ""}
+                    onChange={(e) => setItemDraft({ ...itemDraft, offer_title: e.target.value })}
+                    className="border-admin-line h-11 rounded-xl"
+                  />
+                </Field>
+                <Field label="Оффер: текст">
+                  <Input
+                    value={itemDraft.offer_text ?? ""}
+                    onChange={(e) => setItemDraft({ ...itemDraft, offer_text: e.target.value })}
+                    className="border-admin-line h-11 rounded-xl"
+                  />
+                </Field>
+              </div>
+              <Field label="График работы" hint="Каждая строка: Пн — Пт | 08:00 — 20:00">
+                <Textarea
+                  rows={3}
+                  value={itemDraft.schedule ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, schedule: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="FAQ" hint="Каждая строка: Вопрос | Ответ">
+                <Textarea
+                  rows={5}
+                  value={itemDraft.faq ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, faq: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="SEO-блок: заголовок">
+                <Input
+                  value={itemDraft.seo_heading ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, seo_heading: e.target.value })}
+                  className="border-admin-line h-11 rounded-xl"
+                />
+              </Field>
+              <Field label="SEO-блок: текст">
+                <Textarea
+                  rows={4}
+                  value={itemDraft.seo_text ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, seo_text: e.target.value })}
                   className="border-admin-line rounded-xl"
                 />
               </Field>

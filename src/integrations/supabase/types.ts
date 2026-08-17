@@ -127,19 +127,28 @@ export type Database = {
       }
       diagnostics_items: {
         Row: {
+          advantages: string | null
           badge: string | null
           body: string | null
           category_key: string | null
           created_at: string
+          faq: string | null
+          hero_note: string | null
           icon: string | null
           id: string
           image_url: string | null
           includes: string | null
           is_active: boolean
+          kinds: string | null
           meta_description: string | null
           meta_title: string | null
+          offer_text: string | null
+          offer_title: string | null
           preparation: string | null
           price: string | null
+          schedule: string | null
+          seo_heading: string | null
+          seo_text: string | null
           slug: string
           sort_order: number
           subtitle: string | null
@@ -147,19 +156,28 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          advantages?: string | null
           badge?: string | null
           body?: string | null
           category_key?: string | null
           created_at?: string
+          faq?: string | null
+          hero_note?: string | null
           icon?: string | null
           id?: string
           image_url?: string | null
           includes?: string | null
           is_active?: boolean
+          kinds?: string | null
           meta_description?: string | null
           meta_title?: string | null
+          offer_text?: string | null
+          offer_title?: string | null
           preparation?: string | null
           price?: string | null
+          schedule?: string | null
+          seo_heading?: string | null
+          seo_text?: string | null
           slug: string
           sort_order?: number
           subtitle?: string | null
@@ -167,19 +185,28 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          advantages?: string | null
           badge?: string | null
           body?: string | null
           category_key?: string | null
           created_at?: string
+          faq?: string | null
+          hero_note?: string | null
           icon?: string | null
           id?: string
           image_url?: string | null
           includes?: string | null
           is_active?: boolean
+          kinds?: string | null
           meta_description?: string | null
           meta_title?: string | null
+          offer_text?: string | null
+          offer_title?: string | null
           preparation?: string | null
           price?: string | null
+          schedule?: string | null
+          seo_heading?: string | null
+          seo_text?: string | null
           slug?: string
           sort_order?: number
           subtitle?: string | null
