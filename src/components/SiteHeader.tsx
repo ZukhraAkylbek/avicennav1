@@ -51,7 +51,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           )}
         </div>
 
-        <SiteSearch className="col-span-2 w-full lg:col-span-1 lg:max-w-xs" />
+        <SiteSearch className="order-last col-span-2 w-full lg:order-none lg:col-span-1 lg:max-w-xs" />
 
         <nav
           aria-label="Главное меню"
