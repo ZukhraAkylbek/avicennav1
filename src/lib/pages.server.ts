@@ -15,6 +15,7 @@ export type PageDetail = PageListItem & {
   meta_title: string | null;
   meta_description: string | null;
   body: string | null;
+  blocks: unknown;
   children: { path: string; title: string }[];
 };
 
@@ -41,7 +42,7 @@ export async function getPageByPath(path: string): Promise<PageDetail | null> {
   const { data: page, error } = await supabase
     .from("pages")
     .select(
-      "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, sort_order, updated_at",
+      "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, blocks, sort_order, updated_at",
     )
     .eq("path", path)
     .eq("is_published", true)
