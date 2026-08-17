@@ -12,8 +12,8 @@ export function DiagnosticsIcon({
   title,
   className,
 }: {
-  icon?: string | null;
-  imageUrl?: string | null;
+  icon?: string | null | undefined;
+  imageUrl?: string | null | undefined;
   title: string;
   className?: string;
 }) {
