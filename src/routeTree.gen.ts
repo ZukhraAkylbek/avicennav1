@@ -19,6 +19,8 @@ import { Route as CheckupsIndexRouteImport } from './routes/checkups.index'
 import { Route as CheckupsSlugRouteImport } from './routes/checkups.$slug'
 import { Route as ChekapyIndexRouteImport } from './routes/chekapy.index'
 import { Route as ChekapySlugRouteImport } from './routes/chekapy.$slug'
+import { Route as DiagnostikaIndexRouteImport } from './routes/diagnostika.index'
+import { Route as DiagnostikaSlugRouteImport } from './routes/diagnostika.$slug'
 import { Route as NapravleniyaIndexRouteImport } from './routes/napravleniya.index'
 import { Route as NapravleniyaSlugRouteImport } from './routes/napravleniya.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -83,6 +85,16 @@ const ChekapyIndexRoute = ChekapyIndexRouteImport.update({
 const ChekapySlugRoute = ChekapySlugRouteImport.update({
   id: '/chekapy/$slug',
   path: '/chekapy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnostikaIndexRoute = DiagnostikaIndexRouteImport.update({
+  id: '/diagnostika/',
+  path: '/diagnostika/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DiagnostikaSlugRoute = DiagnostikaSlugRouteImport.update({
+  id: '/diagnostika/$slug',
+  path: '/diagnostika/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NapravleniyaIndexRoute = NapravleniyaIndexRouteImport.update({
@@ -183,9 +195,11 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
+  '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
+  '/diagnostika/': typeof DiagnostikaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -209,9 +223,11 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
+  '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups': typeof CheckupsIndexRoute
   '/chekapy': typeof ChekapyIndexRoute
+  '/diagnostika': typeof DiagnostikaIndexRoute
   '/napravleniya': typeof NapravleniyaIndexRoute
   '/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -238,9 +254,11 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/checkups/$slug': typeof CheckupsSlugRoute
   '/chekapy/$slug': typeof ChekapySlugRoute
+  '/diagnostika/$slug': typeof DiagnostikaSlugRoute
   '/napravleniya/$slug': typeof NapravleniyaSlugRoute
   '/checkups/': typeof CheckupsIndexRoute
   '/chekapy/': typeof ChekapyIndexRoute
+  '/diagnostika/': typeof DiagnostikaIndexRoute
   '/napravleniya/': typeof NapravleniyaIndexRoute
   '/_authenticated/admin/branches': typeof AuthenticatedAdminBranchesRoute
   '/_authenticated/admin/checkups': typeof AuthenticatedAdminCheckupsRoute
@@ -267,9 +285,11 @@ export interface FileRouteTypes {
     | '/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
+    | '/diagnostika/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
+    | '/diagnostika/'
     | '/napravleniya/'
     | '/admin/branches'
     | '/admin/checkups'
@@ -293,9 +313,11 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/checkups/$slug'
     | '/chekapy/$slug'
+    | '/diagnostika/$slug'
     | '/napravleniya/$slug'
     | '/checkups'
     | '/chekapy'
+    | '/diagnostika'
     | '/napravleniya'
     | '/admin/branches'
     | '/admin/checkups'
@@ -321,9 +343,11 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/checkups/$slug'
     | '/chekapy/$slug'
+    | '/diagnostika/$slug'
     | '/napravleniya/$slug'
     | '/checkups/'
     | '/chekapy/'
+    | '/diagnostika/'
     | '/napravleniya/'
     | '/_authenticated/admin/branches'
     | '/_authenticated/admin/checkups'
@@ -349,9 +373,11 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CheckupsSlugRoute: typeof CheckupsSlugRoute
   ChekapySlugRoute: typeof ChekapySlugRoute
+  DiagnostikaSlugRoute: typeof DiagnostikaSlugRoute
   NapravleniyaSlugRoute: typeof NapravleniyaSlugRoute
   CheckupsIndexRoute: typeof CheckupsIndexRoute
   ChekapyIndexRoute: typeof ChekapyIndexRoute
+  DiagnostikaIndexRoute: typeof DiagnostikaIndexRoute
   NapravleniyaIndexRoute: typeof NapravleniyaIndexRoute
 }
 
@@ -425,6 +451,20 @@ declare module '@tanstack/react-router' {
       path: '/chekapy/$slug'
       fullPath: '/chekapy/$slug'
       preLoaderRoute: typeof ChekapySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostika/': {
+      id: '/diagnostika/'
+      path: '/diagnostika'
+      fullPath: '/diagnostika/'
+      preLoaderRoute: typeof DiagnostikaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diagnostika/$slug': {
+      id: '/diagnostika/$slug'
+      path: '/diagnostika/$slug'
+      fullPath: '/diagnostika/$slug'
+      preLoaderRoute: typeof DiagnostikaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/napravleniya/': {
@@ -601,9 +641,11 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CheckupsSlugRoute: CheckupsSlugRoute,
   ChekapySlugRoute: ChekapySlugRoute,
+  DiagnostikaSlugRoute: DiagnostikaSlugRoute,
   NapravleniyaSlugRoute: NapravleniyaSlugRoute,
   CheckupsIndexRoute: CheckupsIndexRoute,
   ChekapyIndexRoute: ChekapyIndexRoute,
+  DiagnostikaIndexRoute: DiagnostikaIndexRoute,
   NapravleniyaIndexRoute: NapravleniyaIndexRoute,
 }
 export const routeTree = rootRouteImport
