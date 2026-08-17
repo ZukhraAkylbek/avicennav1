@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import { LiveEditProvider } from "@/components/live-edit/LiveEdit";
+import { MobileNavBar } from "@/components/MobileNavBar";
 import { SiteTypography } from "@/components/SiteTypography";
 import { fetchSiteContent } from "@/lib/site-content";
 import appCss from "../styles.css?url";
@@ -144,7 +145,10 @@ function RootComponent() {
       <SiteTypography />
       <LiveEditProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
+        <div className="pb-[76px] lg:pb-0">
+          <Outlet />
+        </div>
+        <MobileNavBar />
       </LiveEditProvider>
     </QueryClientProvider>
   );

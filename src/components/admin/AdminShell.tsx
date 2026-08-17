@@ -12,6 +12,7 @@ import {
   Search,
   ClipboardList,
   Settings,
+  Smartphone,
   Menu,
   X,
   ExternalLink,
@@ -30,6 +31,7 @@ const NAV: { to: string; label: string; icon: typeof LayoutDashboard; exact?: bo
   { to: "/admin/diagnostics", label: "Диагностика", icon: Microscope },
   { to: "/admin/branches", label: "Филиалы", icon: MapPin },
   { to: "/admin/media", label: "Медиа", icon: Images },
+  { to: "/admin/mobile-nav", label: "Мобильное меню", icon: Smartphone },
   { to: "/admin/seo", label: "SEO", icon: Search },
   { to: "/admin/settings", label: "Настройки", icon: Settings },
 ];
