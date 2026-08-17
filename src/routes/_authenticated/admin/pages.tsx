@@ -125,8 +125,11 @@ function AdminPages() {
   });
 
   const update = useMutation({
-    mutationFn: async ({ id, values }: { id: string; values: Partial<PageRow> }) => {
-      const { error } = await supabase.from("pages").update(values).eq("id", id);
+    mutationFn: async ({ id, values }: { id: string; values: Record<string, unknown> }) => {
+      const { error } = await supabase
+        .from("pages")
+        .update(values as never)
+        .eq("id", id);
       if (error) throw error;
     },
     onSuccess: invalidate,
@@ -338,7 +341,7 @@ function AdminPages() {
                 <PageBlocksPanel
                   page={page}
                   onSave={(blocks) =>
-                    update.mutate({ id: page.id, values: { blocks } as Partial<PageRow> })
+                    update.mutate({ id: page.id, values: { blocks } })
                   }
                 />
                 <div className="flex flex-wrap items-center gap-4">
