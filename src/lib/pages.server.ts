@@ -1,3 +1,4 @@
+import { parseBlocks, type PageBlock } from "./page-blocks";
 import { publicClient } from "./specialties.server";
 
 export type PageListItem = {
@@ -15,6 +16,7 @@ export type PageDetail = PageListItem & {
   meta_title: string | null;
   meta_description: string | null;
   body: string | null;
+  blocks: PageBlock[];
   children: { path: string; title: string }[];
 };
 
@@ -41,7 +43,7 @@ export async function getPageByPath(path: string): Promise<PageDetail | null> {
   const { data: page, error } = await supabase
     .from("pages")
     .select(
-      "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, sort_order, updated_at",
+      "id, parent_id, slug, path, title, h1_title, meta_title, meta_description, body, blocks, sort_order, updated_at",
     )
     .eq("path", path)
     .eq("is_published", true)
@@ -57,7 +59,7 @@ export async function getPageByPath(path: string): Promise<PageDetail | null> {
     .eq("is_published", true)
     .order("sort_order", { ascending: true });
 
-  return { ...page, children: children ?? [] };
+  return { ...page, blocks: parseBlocks(page.blocks), children: children ?? [] };
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {

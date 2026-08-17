@@ -387,6 +387,7 @@ export type Database = {
       }
       pages: {
         Row: {
+          blocks: Json
           body: string | null
           created_at: string
           h1_title: string | null
@@ -402,6 +403,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          blocks?: Json
           body?: string | null
           created_at?: string
           h1_title?: string | null
@@ -417,6 +419,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          blocks?: Json
           body?: string | null
           created_at?: string
           h1_title?: string | null

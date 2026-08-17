@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { PageBlocks } from "@/components/page-blocks/PageBlocks";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
+import { parseBlocks } from "@/lib/page-blocks";
 import { pageQueryOptions } from "@/lib/pages.queries";
 
 export const Route = createFileRoute("/$")({
@@ -67,6 +69,21 @@ function CustomPage() {
   const { data: page } = useSuspenseQuery(pageQueryOptions(path));
   if (!page) return <PageShell title="Страница не найдена" />;
 
+  const blocks = parseBlocks(page.blocks);
+
+  if (blocks.length > 0) {
+    return (
+      <div className="bg-background min-h-screen">
+        <SiteHeader />
+        <main>
+          <PageBlocks blocks={blocks} />
+          {page.children.length > 0 && <ChildLinks children={page.children} />}
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
+
   const paragraphs = (page.body ?? "")
     .split(/\n{2,}/)
     .map((p) => p.trim())
@@ -82,22 +99,26 @@ function CustomPage() {
         ))}
       </div>
 
-      {page.children.length > 0 && (
-        <div className="mt-12">
-          <h2 className="text-foreground text-2xl font-extrabold">Подразделы</h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {page.children.map((child) => (
-              <a
-                key={child.path}
-                href={child.path}
-                className="bg-surface-green text-foreground hover:bg-surface-soft rounded-xl px-5 py-4 text-lg font-bold transition-colors"
-              >
-                {child.title}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+      {page.children.length > 0 && <ChildLinks children={page.children} />}
     </PageShell>
+  );
+}
+
+function ChildLinks({ children }: { children: { path: string; title: string }[] }) {
+  return (
+    <div className="mx-auto max-w-7xl px-4 pb-16 sm:px-6">
+      <h2 className="text-foreground text-2xl font-extrabold">Подразделы</h2>
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        {children.map((child) => (
+          <a
+            key={child.path}
+            href={child.path}
+            className="bg-surface-green text-foreground hover:bg-surface-soft rounded-xl px-5 py-4 text-lg font-bold transition-colors"
+          >
+            {child.title}
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }
