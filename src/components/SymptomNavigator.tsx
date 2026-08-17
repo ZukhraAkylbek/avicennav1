@@ -22,7 +22,7 @@ export function SymptomNavigator({
 
   return (
     <section id="navigator" className="border-border border-b">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-9 sm:px-6 sm:py-12 lg:py-16">
         <p className="text-accent text-[13px] font-extrabold tracking-[0.18em] uppercase">
           Навигатор
         </p>
@@ -35,7 +35,7 @@ export function SymptomNavigator({
           </p>
         )}
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-2 sm:mt-8 sm:gap-3">
           {symptoms.map((symptom) => {
             const isActive = symptom.id === activeId;
             return (
@@ -45,7 +45,8 @@ export function SymptomNavigator({
                 aria-pressed={isActive}
                 onClick={() => setActiveId(isActive ? null : symptom.id)}
                 className={cn(
-                  "rounded-full border px-5 py-3 text-[16px] font-semibold transition-colors sm:text-[17px]",
+                  "rounded-full border px-4 py-2.5 text-[14px] font-semibold transition-colors sm:px-5 sm:py-3 sm:text-[17px]",
+
                   isActive
                     ? "border-primary text-primary bg-primary/5"
                     : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground",
