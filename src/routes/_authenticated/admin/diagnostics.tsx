@@ -94,6 +94,15 @@ type ItemRow = {
   body: string | null;
   includes: string | null;
   preparation: string | null;
+  hero_note: string | null;
+  advantages: string | null;
+  kinds: string | null;
+  offer_title: string | null;
+  offer_text: string | null;
+  schedule: string | null;
+  faq: string | null;
+  seo_heading: string | null;
+  seo_text: string | null;
   meta_title: string | null;
   meta_description: string | null;
   sort_order: number;
