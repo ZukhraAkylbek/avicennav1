@@ -240,6 +240,45 @@ export type Database = {
           },
         ]
       }
+      popups: {
+        Row: {
+          body: string | null
+          button_text: string | null
+          button_url: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          button_text?: string | null
+          button_url?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_content: {
         Row: {
           image_path: string | null
