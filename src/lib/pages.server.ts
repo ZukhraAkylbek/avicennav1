@@ -1,3 +1,4 @@
+import { parseBlocks, type PageBlock } from "./page-blocks";
 import { publicClient } from "./specialties.server";
 
 export type PageListItem = {
@@ -15,7 +16,7 @@ export type PageDetail = PageListItem & {
   meta_title: string | null;
   meta_description: string | null;
   body: string | null;
-  blocks: unknown;
+  blocks: PageBlock[];
   children: { path: string; title: string }[];
 };
 
@@ -58,7 +59,7 @@ export async function getPageByPath(path: string): Promise<PageDetail | null> {
     .eq("is_published", true)
     .order("sort_order", { ascending: true });
 
-  return { ...page, children: children ?? [] };
+  return { ...page, blocks: parseBlocks(page.blocks), children: children ?? [] };
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {

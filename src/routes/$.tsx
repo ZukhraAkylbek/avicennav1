@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { PageBlocks } from "@/components/page-blocks/PageBlocks";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { absoluteUrl } from "@/lib/clinic";
+import { parseBlocks } from "@/lib/page-blocks";
 import { pageQueryOptions } from "@/lib/pages.queries";
 
 export const Route = createFileRoute("/$")({
