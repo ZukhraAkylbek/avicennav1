@@ -1038,6 +1038,79 @@ function AdminDiagnostics() {
                   className="border-admin-line rounded-xl"
                 />
               </Field>
+              <Field label="Примечание под кнопкой (Hero)">
+                <Input
+                  value={itemDraft.hero_note ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, hero_note: e.target.value })}
+                  className="border-admin-line h-11 rounded-xl"
+                />
+              </Field>
+              <Field
+                label="Почему выбирают Авиценну"
+                hint="Каждая строка: Заголовок | описание. Пусто — покажем стандартные преимущества."
+              >
+                <Textarea
+                  rows={4}
+                  value={itemDraft.advantages ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, advantages: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="Виды исследования" hint="Каждая строка: Название | цена">
+                <Textarea
+                  rows={4}
+                  value={itemDraft.kinds ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, kinds: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Оффер: заголовок">
+                  <Input
+                    value={itemDraft.offer_title ?? ""}
+                    onChange={(e) => setItemDraft({ ...itemDraft, offer_title: e.target.value })}
+                    className="border-admin-line h-11 rounded-xl"
+                  />
+                </Field>
+                <Field label="Оффер: текст">
+                  <Input
+                    value={itemDraft.offer_text ?? ""}
+                    onChange={(e) => setItemDraft({ ...itemDraft, offer_text: e.target.value })}
+                    className="border-admin-line h-11 rounded-xl"
+                  />
+                </Field>
+              </div>
+              <Field label="График работы" hint="Каждая строка: Пн — Пт | 08:00 — 20:00">
+                <Textarea
+                  rows={3}
+                  value={itemDraft.schedule ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, schedule: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="FAQ" hint="Каждая строка: Вопрос | Ответ">
+                <Textarea
+                  rows={5}
+                  value={itemDraft.faq ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, faq: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
+              <Field label="SEO-блок: заголовок">
+                <Input
+                  value={itemDraft.seo_heading ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, seo_heading: e.target.value })}
+                  className="border-admin-line h-11 rounded-xl"
+                />
+              </Field>
+              <Field label="SEO-блок: текст">
+                <Textarea
+                  rows={4}
+                  value={itemDraft.seo_text ?? ""}
+                  onChange={(e) => setItemDraft({ ...itemDraft, seo_text: e.target.value })}
+                  className="border-admin-line rounded-xl"
+                />
+              </Field>
               <Field label="SEO title">
                 <Input
                   value={itemDraft.meta_title ?? ""}
