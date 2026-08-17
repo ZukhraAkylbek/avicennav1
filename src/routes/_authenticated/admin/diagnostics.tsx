@@ -18,6 +18,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { PairRows } from "@/components/admin/PairRows";
 import { supabase } from "@/integrations/supabase/client";
 import { SITE_IMAGES_BUCKET } from "@/lib/site-content";
 import { cn } from "@/lib/utils";
