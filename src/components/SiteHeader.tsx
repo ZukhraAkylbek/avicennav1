@@ -7,7 +7,6 @@ import { BOOKING_URL } from "@/lib/site-config";
 
 import { Editable } from "@/components/live-edit/LiveEdit";
 import { SiteSearch } from "@/components/SiteSearch";
-import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
 const NAV = [
@@ -27,7 +26,6 @@ const NAV_ANCHORS = [
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
   const { t } = useSiteContent();
-  const phoneHuman = t("header.phone");
   const ctaLabel = t("header.cta");
 
   return (
@@ -51,17 +49,15 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
           )}
         </div>
 
-        <SiteSearch className="order-last w-full lg:order-none lg:w-auto lg:max-w-xs lg:flex-1" />
-
         <nav
           aria-label="Главное меню"
-          className="hidden items-center gap-7 lg:flex"
+          className="hidden items-center gap-5 lg:flex xl:gap-7"
         >
           {NAV.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-foreground hover:text-brand-green text-[15px] font-semibold transition-colors"
+              className="text-foreground hover:text-brand-green whitespace-nowrap text-[15px] font-semibold transition-colors"
               activeProps={{ className: "text-brand-green" }}
             >
               {item.label}
@@ -71,28 +67,25 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             <a
               key={item.href}
               href={item.href}
-              className="text-muted-foreground hover:text-foreground text-[15px] font-medium transition-colors"
+              className="text-muted-foreground hover:text-foreground whitespace-nowrap text-[15px] font-medium transition-colors"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 lg:gap-5">
-          <a
-            href={`tel:${CLINIC.phones[0]}`}
-            className="text-foreground hidden text-[15px] font-semibold sm:block"
-          >
-            {phoneHuman}
-          </a>
+        <SiteSearch className="order-last w-full min-w-0 lg:order-none lg:w-auto lg:min-w-[200px] lg:flex-1" />
+
+        <div className="ml-auto flex items-center gap-3 lg:gap-4">
           <a
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="gradient-accent text-accent-foreground hidden rounded-xl px-5 py-2.5 text-[15px] font-bold transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:inline-flex"
+            className="gradient-accent text-accent-foreground hidden whitespace-nowrap rounded-xl px-5 py-2.5 text-[15px] font-bold transition-transform duration-300 hover:-translate-y-0.5 hover:brightness-105 sm:inline-flex"
           >
             <Editable ekey="header.cta" label="Кнопка записи в хедере" fallback={ctaLabel} />
           </a>
+
           <button
             type="button"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
@@ -128,12 +121,6 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               </a>
             ))}
             <div className="flex flex-wrap items-center gap-3 py-4">
-              <a
-                href={`tel:${CLINIC.phones[0]}`}
-                className="border-border text-foreground rounded-md border px-5 py-3 text-base font-semibold"
-              >
-                {phoneHuman}
-              </a>
               <a
                 href={BOOKING_URL}
                 target="_blank"
