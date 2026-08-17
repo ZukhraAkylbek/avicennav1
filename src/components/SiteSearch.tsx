@@ -7,7 +7,7 @@ import { checkupPageQueryOptions } from "@/lib/checkups.queries";
 import { pagesQueryOptions } from "@/lib/pages.queries";
 import { specialtiesQueryOptions } from "@/lib/specialties.queries";
 
-type Hit = { title: string; subtitle?: string; group: string; to: string };
+type Hit = { title: string; subtitle?: string | undefined; group: string; to: string };
 
 const STATIC_HITS: Hit[] = [
   { title: "Направления", group: "Разделы", to: "/napravleniya" },
