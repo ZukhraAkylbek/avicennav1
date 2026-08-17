@@ -6,6 +6,7 @@ import logo from "@/assets/logo-avicenna.png.asset.json";
 import { BOOKING_URL } from "@/lib/site-config";
 
 import { Editable } from "@/components/live-edit/LiveEdit";
+import { SiteSearch } from "@/components/SiteSearch";
 import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
@@ -31,7 +32,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
 
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
-      <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3.5 sm:px-6 lg:flex lg:gap-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3.5 sm:px-6 lg:flex-nowrap lg:gap-8">
         <div className="flex min-w-0 items-center gap-3">
           <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
             <img
@@ -39,7 +40,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               alt="Клинико-диагностический центр «Авиценна»"
               width={840}
               height={393}
-              className="h-9 w-auto sm:h-11"
+              className="h-14 w-auto sm:h-16 lg:h-20"
             />
           </Link>
 
@@ -49,6 +50,8 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
             </span>
           )}
         </div>
+
+        <SiteSearch className="order-last w-full lg:order-none lg:w-auto lg:max-w-xs lg:flex-1" />
 
         <nav
           aria-label="Главное меню"
