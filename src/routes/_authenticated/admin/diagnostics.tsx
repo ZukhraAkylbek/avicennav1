@@ -1049,21 +1049,23 @@ function AdminDiagnostics() {
               </Field>
               <Field
                 label="Почему выбирают Авиценну"
-                hint="Каждая строка: Заголовок | описание. Пусто — покажем стандартные преимущества."
+                hint="Заголовок и описание для каждого преимущества. Пусто — покажем стандартные."
               >
-                <Textarea
-                  rows={4}
-                  value={itemDraft.advantages ?? ""}
-                  onChange={(e) => setItemDraft({ ...itemDraft, advantages: e.target.value })}
-                  className="border-admin-line rounded-xl"
+                <PairRows
+                  value={itemDraft.advantages}
+                  onChange={(v) => setItemDraft({ ...itemDraft, advantages: v })}
+                  titleLabel="Заголовок преимущества"
+                  textLabel="Описание"
+                  addLabel="Добавить преимущество"
                 />
               </Field>
-              <Field label="Виды исследования" hint="Каждая строка: Название | цена">
-                <Textarea
-                  rows={4}
-                  value={itemDraft.kinds ?? ""}
-                  onChange={(e) => setItemDraft({ ...itemDraft, kinds: e.target.value })}
-                  className="border-admin-line rounded-xl"
+              <Field label="Виды исследования" hint="Название и цена для каждого вида">
+                <PairRows
+                  value={itemDraft.kinds}
+                  onChange={(v) => setItemDraft({ ...itemDraft, kinds: v })}
+                  titleLabel="Название вида"
+                  textLabel="Цена, например от 1 200 сом"
+                  addLabel="Добавить вид"
                 />
               </Field>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -1082,20 +1084,23 @@ function AdminDiagnostics() {
                   />
                 </Field>
               </div>
-              <Field label="График работы" hint="Каждая строка: Пн — Пт | 08:00 — 20:00">
-                <Textarea
-                  rows={3}
-                  value={itemDraft.schedule ?? ""}
-                  onChange={(e) => setItemDraft({ ...itemDraft, schedule: e.target.value })}
-                  className="border-admin-line rounded-xl"
+              <Field label="График работы" hint="Дни и часы проведения исследования">
+                <PairRows
+                  value={itemDraft.schedule}
+                  onChange={(v) => setItemDraft({ ...itemDraft, schedule: v })}
+                  titleLabel="Дни, например Пн — Пт"
+                  textLabel="Часы, например 08:00 — 20:00"
+                  addLabel="Добавить строку графика"
                 />
               </Field>
-              <Field label="FAQ" hint="Каждая строка: Вопрос | Ответ">
-                <Textarea
-                  rows={5}
-                  value={itemDraft.faq ?? ""}
-                  onChange={(e) => setItemDraft({ ...itemDraft, faq: e.target.value })}
-                  className="border-admin-line rounded-xl"
+              <Field label="FAQ" hint="Отдельные поля: вопрос и ответ">
+                <PairRows
+                  value={itemDraft.faq}
+                  onChange={(v) => setItemDraft({ ...itemDraft, faq: v })}
+                  titleLabel="Вопрос"
+                  textLabel="Ответ"
+                  addLabel="Добавить вопрос"
+                  multilineText
                 />
               </Field>
               <Field label="SEO-блок: заголовок">
