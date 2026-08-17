@@ -6,6 +6,7 @@ import logo from "@/assets/logo-avicenna.png.asset.json";
 import { BOOKING_URL } from "@/lib/site-config";
 
 import { Editable } from "@/components/live-edit/LiveEdit";
+import { SiteSearch } from "@/components/SiteSearch";
 import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
