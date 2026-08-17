@@ -33,14 +33,14 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   return (
     <header className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3.5 sm:px-6 lg:flex-nowrap lg:gap-8">
-        <div className="flex min-w-0 flex-1 items-center gap-3 lg:flex-none">
+        <div className="flex min-w-0 items-center gap-3">
           <Link to="/" className="flex shrink-0 items-center" aria-label="Авиценна — на главную">
             <img
               src={logo.url}
               alt="Клинико-диагностический центр «Авиценна»"
               width={840}
               height={393}
-              className="h-12 w-auto sm:h-14 lg:h-16"
+              className="h-14 w-auto sm:h-16 lg:h-20"
             />
           </Link>
 
