@@ -69,6 +69,19 @@ export const CONTENT_FIELDS: ContentField[] = [
   { key: "quick.eyebrow", label: "Надзаголовок", group: "Быстрый доступ", kind: "text", fallback: "Быстрый доступ" },
   { key: "quick.title", label: "Заголовок", group: "Быстрый доступ", kind: "text", fallback: "Разделы клиники" },
 
+
+  // Мобильное меню (нижняя панель)
+  { key: "mobilenav.1.label", label: "Пункт 1 — название", group: "Мобильное меню", kind: "text", fallback: "О нас" },
+  { key: "mobilenav.1.href", label: "Пункт 1 — адрес", group: "Мобильное меню", kind: "text", fallback: "/#faq" },
+  { key: "mobilenav.2.label", label: "Пункт 2 — название", group: "Мобильное меню", kind: "text", fallback: "Врачи" },
+  { key: "mobilenav.2.href", label: "Пункт 2 — адрес", group: "Мобильное меню", kind: "text", fallback: "/#vrachi" },
+  { key: "mobilenav.3.label", label: "Пункт 3 — название", group: "Мобильное меню", kind: "text", fallback: "Записаться" },
+  { key: "mobilenav.3.href", label: "Пункт 3 — адрес", group: "Мобильное меню", kind: "text", fallback: "https://alteg.io/" },
+  { key: "mobilenav.4.label", label: "Пункт 4 — название", group: "Мобильное меню", kind: "text", fallback: "Услуги" },
+  { key: "mobilenav.4.href", label: "Пункт 4 — адрес", group: "Мобильное меню", kind: "text", fallback: "/#uslugi" },
+  { key: "mobilenav.5.label", label: "Пункт 5 — название", group: "Мобильное меню", kind: "text", fallback: "Контакты" },
+  { key: "mobilenav.5.href", label: "Пункт 5 — адрес", group: "Мобильное меню", kind: "text", fallback: "/#filialy" },
+
   // Картинки
   { key: "image.about", label: "Фото блока «О клинике»", group: "Изображения", kind: "image" },
   { key: "image.cta", label: "Фото блока записи", group: "Изображения", kind: "image" },
