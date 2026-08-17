@@ -7,7 +7,6 @@ import { BOOKING_URL } from "@/lib/site-config";
 
 import { Editable } from "@/components/live-edit/LiveEdit";
 import { SiteSearch } from "@/components/SiteSearch";
-import { CLINIC } from "@/lib/clinic";
 import { useSiteContent } from "@/lib/site-content";
 
 const NAV = [
@@ -27,7 +26,6 @@ const NAV_ANCHORS = [
 export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
   const [open, setOpen] = useState(false);
   const { t } = useSiteContent();
-  const phoneHuman = t("header.phone");
   const ctaLabel = t("header.cta");
 
   return (
@@ -78,7 +76,7 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
 
         <SiteSearch className="order-last w-full min-w-0 lg:order-none lg:w-auto lg:min-w-[200px] lg:flex-1" />
 
-        <div className="flex items-center gap-3 lg:gap-4">
+        <div className="ml-auto flex items-center gap-3 lg:gap-4">
           <a
             href={BOOKING_URL}
             target="_blank"
@@ -123,12 +121,6 @@ export function SiteHeader({ breadcrumb }: { breadcrumb?: string }) {
               </a>
             ))}
             <div className="flex flex-wrap items-center gap-3 py-4">
-              <a
-                href={`tel:${CLINIC.phones[0]}`}
-                className="border-border text-foreground rounded-md border px-5 py-3 text-base font-semibold"
-              >
-                {phoneHuman}
-              </a>
               <a
                 href={BOOKING_URL}
                 target="_blank"
