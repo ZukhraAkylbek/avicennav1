@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import {
+import { useSiteRefresh } from "@/lib/admin-refresh";
   HERO_BUCKET,
   fetchAllHeroSlides,
   type HeroSlideWithUrl,
@@ -45,8 +46,10 @@ function AdminHero() {
     queryFn: fetchAllHeroSlides,
   });
 
+  const refreshSite = useSiteRefresh();
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["hero-slides"] });
+    void refreshSite();
   };
 
   const update = useMutation({

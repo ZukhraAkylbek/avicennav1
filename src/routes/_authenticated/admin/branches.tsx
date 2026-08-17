@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { CLINIC, doubleGisSearchUrl } from "@/lib/clinic";
 import { fetchSiteContent } from "@/lib/site-content";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/branches")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/_authenticated/admin/branches")({
 
 function AdminBranches() {
   const queryClient = useQueryClient();
+  const refreshSite = useSiteRefresh();
   const { data } = useQuery({ queryKey: ["site-content"], queryFn: fetchSiteContent });
   const [values, setValues] = useState<Record<string, string>>({});
 
@@ -48,7 +50,7 @@ function AdminBranches() {
     },
     onSuccess: () => {
       toast.success("Адреса сохранены");
-      void queryClient.invalidateQueries({ queryKey: ["site-content"] });
+      void refreshSite();
     },
     onError: (error: Error) => toast.error(error.message),
   });

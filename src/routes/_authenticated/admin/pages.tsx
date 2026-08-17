@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteRefresh } from "@/lib/admin-refresh";
 
 export const Route = createFileRoute("/_authenticated/admin/pages")({
   head: () => ({
@@ -89,9 +90,10 @@ function AdminPages() {
     },
   });
 
+  const refreshSite = useSiteRefresh();
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["admin-pages"] });
-    void queryClient.invalidateQueries({ queryKey: ["pages"] });
+    void refreshSite();
   };
 
   const create = useMutation({
