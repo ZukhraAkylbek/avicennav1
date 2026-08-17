@@ -114,7 +114,7 @@ const SECTION_SELECT =
 const CATEGORY_SELECT = "id, key, name, sort_order, is_active";
 const SYMPTOM_SELECT = "id, name, recommendation, sort_order, is_active";
 const ITEM_SELECT =
-  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, meta_title, meta_description, sort_order, is_active";
+  "id, slug, title, subtitle, category_key, icon, image_url, price, badge, body, includes, preparation, hero_note, advantages, kinds, offer_title, offer_text, schedule, faq, seo_heading, seo_text, meta_title, meta_description, sort_order, is_active";
 
 const ICON_HINT = "Имя иконки lucide: Scan, HeartPulse, Waves, TestTube, Bone, Wind, Microscope…";
 
