@@ -216,14 +216,25 @@ function DiagnosticsPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="text-foreground relative mt-4 max-w-[54%] text-[18px] leading-tight font-extrabold tracking-tight sm:mt-5 sm:text-[21px]">
+                      <h3
+                        className={cn(
+                          "text-foreground relative mt-4 text-[18px] leading-tight font-extrabold tracking-tight sm:mt-5 sm:text-[21px]",
+                          item.image_url && "max-w-[54%]",
+                        )}
+                      >
                         {item.title}
                       </h3>
                       {item.subtitle && (
-                        <p className="text-muted-foreground relative mt-2 max-w-[56%] text-[14px] leading-snug font-medium sm:text-[15px]">
+                        <p
+                          className={cn(
+                            "text-muted-foreground relative mt-2 text-[14px] leading-snug font-medium sm:text-[15px]",
+                            item.image_url && "max-w-[56%]",
+                          )}
+                        >
                           {item.subtitle}
                         </p>
                       )}
+
                       <div className="relative mt-auto flex items-end justify-between gap-3 pt-5 sm:pt-6">
                         <span className="text-primary text-[14px] font-extrabold sm:text-[15px]">
                           {item.price ?? "Уточните стоимость"}
