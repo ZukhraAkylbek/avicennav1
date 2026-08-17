@@ -25,7 +25,7 @@ export function MobileNavBar() {
   const items = MOBILE_NAV_SLOTS.map((slot, i) => ({
     label: t(`mobilenav.${i + 1}.label`, slot.label),
     href: t(`mobilenav.${i + 1}.href`, slot.href),
-    Icon: ICONS[i],
+    Icon: ICONS[i] ?? Hospital,
     center: i === 2,
   }));
 
