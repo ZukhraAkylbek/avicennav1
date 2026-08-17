@@ -95,6 +95,180 @@ export type Database = {
         }
         Relationships: []
       }
+      diagnostics_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          key: string
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          key: string
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          key?: string
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      diagnostics_items: {
+        Row: {
+          badge: string | null
+          body: string | null
+          category_key: string | null
+          created_at: string
+          icon: string | null
+          id: string
+          image_url: string | null
+          includes: string | null
+          is_active: boolean
+          meta_description: string | null
+          meta_title: string | null
+          preparation: string | null
+          price: string | null
+          slug: string
+          sort_order: number
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          badge?: string | null
+          body?: string | null
+          category_key?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          includes?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          preparation?: string | null
+          price?: string | null
+          slug: string
+          sort_order?: number
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          badge?: string | null
+          body?: string | null
+          category_key?: string | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          image_url?: string | null
+          includes?: string | null
+          is_active?: boolean
+          meta_description?: string | null
+          meta_title?: string | null
+          preparation?: string | null
+          price?: string | null
+          slug?: string
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      diagnostics_sections: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          key: string
+          primary_label: string | null
+          primary_url: string | null
+          secondary_label: string | null
+          secondary_url: string | null
+          sort_order: number
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          key?: string
+          primary_label?: string | null
+          primary_url?: string | null
+          secondary_label?: string | null
+          secondary_url?: string | null
+          sort_order?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      diagnostics_symptoms: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          recommendation: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          recommendation: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          recommendation?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       doctors: {
         Row: {
           bio: string | null
