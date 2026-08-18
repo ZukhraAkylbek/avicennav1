@@ -13,9 +13,9 @@ type CountUpProps = {
 const formatter = new Intl.NumberFormat("ru-RU");
 
 /** Анимированный счётчик: считает от 0 до значения, когда попадает во вьюпорт. */
-export function CountUp({ value, suffix = "", duration = 1600, className }: CountUpProps) {
+export function CountUp({ value, suffix = "", duration = 800, className }: CountUpProps) {
   const target = Number(String(value).replace(/[^\d.]/g, "")) || 0;
-  const { ref, inView } = useInView<HTMLSpanElement>(0.4);
+  const { ref, inView } = useInView<HTMLSpanElement>();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
