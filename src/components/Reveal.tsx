@@ -17,10 +17,10 @@ export function Reveal({ children, className, delay = 0, as: Tag = "div" }: Reve
   return (
     <Tag
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${Math.min(delay, 120)}ms` }}
       className={cn(
-        "transition-all duration-700 ease-out motion-reduce:transition-none",
-        inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+        "transition-all duration-300 ease-out motion-reduce:transition-none",
+        inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
         className,
       )}
     >

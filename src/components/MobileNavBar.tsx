@@ -32,10 +32,10 @@ export function MobileNavBar() {
   return (
     <nav
       aria-label="Мобильное меню"
-      className="border-border bg-background fixed inset-x-0 bottom-0 z-50 border-t lg:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="border-border bg-background/95 fixed inset-x-0 bottom-0 z-50 border-t shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur lg:hidden"
+      style={{ paddingBottom: "max(env(safe-area-inset-bottom), 6px)" }}
     >
-      <ul className="mx-auto grid max-w-lg grid-cols-5 items-end">
+      <ul className="mx-auto grid max-w-lg grid-cols-5 items-end px-1">
         {items.map(({ label, href, Icon, center }) => {
           const external = isExternal(href);
           return (
@@ -45,18 +45,20 @@ export function MobileNavBar() {
                 {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={
                   center
-                    ? "-mt-6 flex flex-col items-center gap-1.5 px-1 pb-2"
-                    : "text-foreground flex flex-col items-center gap-1.5 px-1 pb-2 pt-2.5"
+                    ? "-mt-5 flex min-h-11 flex-col items-center gap-1 px-0.5 pb-1"
+                    : "text-foreground flex min-h-11 flex-col items-center gap-1 px-0.5 pb-1 pt-2"
                 }
               >
                 {center ? (
-                  <span className="bg-brand-green ring-background grid size-14 place-items-center rounded-full text-white shadow-lg ring-4">
-                    <Icon className="size-6" strokeWidth={2} />
+                  <span className="bg-brand-green ring-background grid size-12 shrink-0 place-items-center rounded-full text-white shadow-lg ring-4">
+                    <Icon className="size-[22px]" strokeWidth={2} />
                   </span>
                 ) : (
-                  <Icon className="size-6 shrink-0" strokeWidth={1.7} />
+                  <Icon className="size-[22px] shrink-0" strokeWidth={1.8} />
                 )}
-                <span className="w-full truncate text-center text-[12.5px] font-bold">{label}</span>
+                <span className="w-full truncate text-center text-[11px] font-bold leading-tight">
+                  {label}
+                </span>
               </a>
             </li>
           );
